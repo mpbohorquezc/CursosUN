@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Cuadernos de Estadística Espacial"
+  subtitle: "Martha Patricia Bohorquez Castañeda"
+
+  chapters:
+    - part: "<span style='color: #38AFC9 !important;'>Estadística Espacial Funcional</span>"
+      chapters:
+        - text: "<span style='color: #728387 !important;'>Definición</span>"
+          file: index.qmd
+        - text: "<span style='color: #728387 !important;'>Paquete </span>"
+          file: intro.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    toc: true
+    number-sections: true
+    css: custom.css
+
+editor: visual

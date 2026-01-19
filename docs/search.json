@@ -1,0 +1,46 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cuadernos de Estadística Espacial",
+    "section": "",
+    "text": "Definición\nLa geoestadística funcional es una extensión del marco teórico de la geoestadística tradicional, que permite el análisis y modelado de datos funcionales correlacionados espacialmente, tanto univariados como multivariados. Este enfoque incluye herramientas exploratorias, predicción espacial mediante kriging y cokriging, muestreo óptimo, clasificación supervisada y simulación. A través de este enfoque, se modela la estructura de dependencia espacial entre curvas, lo que permite realizar predicciones en ubicaciones no muestreadas utilizando predictores funcionales que minimizan las varianzas del error de predicción. Además, se ofrece la optimización de la configuración de las ubicaciones de muestreo para mejorar la predicción espacial funcional.\nLas herramientas disponibles también permiten la representación gráfica de las curvas predichas en cada ubicación y el mapeo de las superficies en cada punto temporal. La clasificación supervisada integra la correlación espacial, y se extiende a escenarios con medidas funcionales repetidas en cada localización. Finalmente, la simulación de datos funcionales correlacionados espacialmente puede ser tanto condicional como incondicional, y se fundamenta en el supuesto de espacios de Hilbert conjuntos gaussianos.",
+    "crumbs": [
+      "<span style='color: #38AFC9 !important;'>Estadística Espacial Funcional</span>",
+      "<span style='color: #728387 !important;'>Definición</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#datos-funcionales",
+    "href": "index.html#datos-funcionales",
+    "title": "Cuadernos de Estadística Espacial",
+    "section": "Datos Funcionales",
+    "text": "Datos Funcionales\nImaginemos que estamos interesados en estudiar cómo varía la temperatura en diferentes ciudades del mundo durante un año completo. Para hacerlo, en lugar de tomar una sola medida de la temperatura, registramos el promedio mensual de la termperatura durante todo un año.\nEn lugar de analizar cada punto de temperatura de manera independiente, podemos ver la temperatura a lo largo del añi como una función continua del tiempo. Esta función nos describe cómo la temperatura cambia en cada instante del día, lo cual permite realizar análisis mucho más precisos.\n\n\n\n\nPZmaps, CC BY-SA 3.0, via Wikimedia Commons\n\n\n\nLos datos funcionales son los que en lugar de contemplar cada dato como una observación puntual, se consideran como funciones continuas observadas en un conjunto de puntos. Los datos funcionales permiten capturar mejor la complejidad de fenómenos que además de variar en el espacio, varían en dominios continuos como el tiempo o la altitud, además de facilitar la detección de tendencias o anomalías teniendo en cuenta múltiples dimensiones de variación.",
+    "crumbs": [
+      "<span style='color: #38AFC9 !important;'>Estadística Espacial Funcional</span>",
+      "<span style='color: #728387 !important;'>Definición</span>"
+    ]
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Paquete",
+    "section": "",
+    "text": "Paquete\nSpatFD es un paquete en R diseñado para facilitar el análisis de datos espaciales con componentes funcionales. Proporciona herramientas para manejar datos funcionales espaciales, permitiendo a investigadores y analistas explorar, modelar y visualizar de manera eficiente la variabilidad y dependencias espaciales en conjuntos de datos complejos.\nNuestro paquete está pensado para soportar una amplia gama de aplicaciones, desde estudios ambientales hasta econometría, ofreciendo métodos adaptables a diversos dominios. Ya sea que estés trabajando con tendencias geoespaciales, dinámicas temporales o relaciones funcionales, SpatFD te brinda la flexibilidad y las herramientas necesarias para extraer conclusiones significativas.\nSpatFD ha sido desarrollado con un enfoque en la usabilidad y el rendimiento, asegurando que tanto usuarios novatos como experimentados de R puedan aprovechar sus capacidades para realizar investigaciones avanzadas en estadística espacial. Únete a nuestra creciente comunidad de usuarios y explora el potencial de los datos funcionales espaciales con SpatFD.",
+    "crumbs": [
+      "<span style='color: #38AFC9 !important;'>Estadística Espacial Funcional</span>",
+      "<span style='color: #728387 !important;'>Paquete </span>"
+    ]
+  },
+  {
+    "objectID": "intro.html#referencias",
+    "href": "intro.html#referencias",
+    "title": "Paquete",
+    "section": "Referencias",
+    "text": "Referencias\n\nBohorquez, M., Giraldo, R., & Mateu, J. (2016). Optimal sampling for spatial prediction of functional data. Statistical Methods & Applications, 25(1), 39-54.\nBohorquez, M., Giraldo, R., & Mateu, J. (2016). Multivariate functional random fields: prediction and optimal sampling. Stochastic Environmental Research and Risk Assessment, 31, pages53–70 (2017).\nBohorquez M., Giraldo R. and Mateu J. (2021). Spatial prediction and optimal sampling of functional data in Geostatistical Functional Data Analysis: Theory and Methods. John Wiley Sons, Chichester, UK. ISBN: 978-1-119-38784-8. https://www.wiley.com/en-us/Geostatistical+Functional+Data+Analysis-p-9781119387848.",
+    "crumbs": [
+      "<span style='color: #38AFC9 !important;'>Estadística Espacial Funcional</span>",
+      "<span style='color: #728387 !important;'>Paquete </span>"
+    ]
+  }
+]

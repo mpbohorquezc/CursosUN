@@ -1,0 +1,28 @@
+/* Ocultar título grande del index */
+.quarto-title-banner,
+.quarto-title {
+  display: none;
+}
+
+/* ===== BOTONES DE NAVEGACIÓN VERDE MENTA ===== */
+
+.nav-page {
+  background-color: #cfe9e3;   /* verde menta suave */
+  color: #1f4f47 !important;   /* texto oscuro */
+  border-radius: 22px;
+  padding: 16px 30px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+  border: 2px solid #8fcfc3;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px rgba(143, 207, 195, 0.45);
+}
+
+/* hover */
+.nav-page:hover {
+  background-color: #a7d8cc;
+  color: #143c35 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(143, 207, 195, 0.65);
+}
