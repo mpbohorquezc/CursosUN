@@ -320,9 +320,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#geoestadística-con-sgeostat" id="toc-geoestadística-con-sgeostat" class="nav-link active" data-scroll-target="#geoestadística-con-sgeostat"><span style="color:#FF8000;">Geoestadística con sgeostat</span></a>
   <ul class="collapse">
-  <li><a href="#data-load" id="toc-data-load" class="nav-link" data-scroll-target="#data-load">Data Load</a></li>
-  <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries">Libraries</a></li>
-  <li><a href="#including-plots" id="toc-including-plots" class="nav-link" data-scroll-target="#including-plots">Including Plots</a></li>
+  <li><a href="#carga-de-los-datos" id="toc-carga-de-los-datos" class="nav-link" data-scroll-target="#carga-de-los-datos">Carga de los datos</a></li>
+  <li><a href="#librerias" id="toc-librerias" class="nav-link" data-scroll-target="#librerias">Librerias</a></li>
+  <li><a href="#incluyendo-graficos" id="toc-incluyendo-graficos" class="nav-link" data-scroll-target="#incluyendo-graficos">Incluyendo Graficos</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -351,8 +351,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="geoestadística-con-sgeostat" class="level1">
 <h1><span style="color:#FF8000;">Geoestadística con sgeostat</span></h1>
-<section id="data-load" class="level2">
-<h2 class="anchored" data-anchor-id="data-load">Data Load</h2>
+<section id="carga-de-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="carga-de-los-datos">Carga de los datos</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"data/aquifer.txt"</span>,<span class="at">head=</span>T,<span class="at">dec=</span><span class="st">","</span>)</span>
@@ -368,8 +368,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="libraries" class="level2">
-<h2 class="anchored" data-anchor-id="libraries">Libraries</h2>
+<section id="librerias" class="level2">
+<h2 class="anchored" data-anchor-id="librerias">Librerias</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -377,8 +377,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sgeostat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="including-plots" class="level2">
-<h2 class="anchored" data-anchor-id="including-plots">Including Plots</h2>
+<section id="incluyendo-graficos" class="level2">
+<h2 class="anchored" data-anchor-id="incluyendo-graficos">Incluyendo Graficos</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g1<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Este)) <span class="sc">+</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>

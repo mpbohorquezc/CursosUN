@@ -10,7 +10,7 @@ aquifer=read.table("data/aquifer.txt",head=T,dec=",")
 head(aquifer)
 ```
 
-## Librerias 
+## Librerias
 
 ```{r}
 #| warning: false
