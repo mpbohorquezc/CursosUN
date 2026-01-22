@@ -1,3 +1,477 @@
 ## Implementación de los modelos {.unnumbered}
 
-# [Implementación de los modelos ]{style="color:#FF8000;"}
+# [Implementación de los modelos]{style="color:#FF8000;"}
+
+## Estudio de Mercadeo
+
+En este apartado se comparan varios tipos de modelos de regresión espacial para ver con cuál se obtiene el mejor ajuste. Se consideran modelos autoregresivos y de medias móviles así como su combinación.
+
+## Preparación
+
+### Paquetes
+
+```{r}
+#| warning: false
+library(ggplot2)    # Graphics library
+library(sf)         # Spatial data types and handling
+```
+
+```{r}
+#| warning: false
+
+library(mapview)    # Visualize spatial data
+library(spdep)      # Diagnosing spatial dependence
+```
+
+```{r}
+#| warning: false
+library(spatialreg) # Spatial lag and spatial error model
+```
+
+```{r}
+#| warning: false
+
+library(readxl)
+library(sp)
+library(openxlsx)
+library(dplyr)
+```
+
+```{r}
+#| warning: false
+library(GISTools)
+library(spdep)
+library(car)
+```
+
+```{r}
+#| warning: false
+library(psych)
+```
+
+```{r}
+#| warning: false
+library(FactoClass)
+```
+
+```{r}
+#| warning: false
+require("GWmodel")
+```
+
+```{r}
+#| warning: false
+library(viridis)
+
+```
+
+```{r}
+#| warning: false
+library(SpatFD)
+library(ggspatial)
+```
+
+En este paso, se cargan los datos principales desde un archivo Excel (BASE.xlsx) y se leen las fronteras geográficas de Colombia por departamentos usando un archivo shapefile. Los datos espaciales en formato shapefile son cargados con la función st_read de la librería sf.
+
+```{r}
+# Lectura de Datos
+BASE <- read_excel("data/BASE.xlsx")
+# Lectura del Shape de Colombia por Departamentos
+Colombia = st_read(dsn = "data/Geodatabase Colombia", 
+                   layer = "departamentos")
+```
+
+### **Cruce de información y arreglo de coordenada**
+
+Realizamos un cruce de los datos de los departamentos de Colombia con los datos de mercado. Además, se transforma el sistema de coordenadas geográficas de los datos al sistema UTM (Universal Transverse Mercator) para mejorar la precisión en los cálculos espaciales. Esto es especialmente relevante en análisis de distancias y vecindades.
+
+```{r}
+Insumo = merge(Colombia, BASE, by.x="COD_DANE", by.y="Cod")
+Insumo = subset(Insumo[c(1:31,33),])
+# Conversión a Coordenadas UTM
+Crs.geo <- "+proj=tmerc +lat_0=4.599047222222222 +lon_0=-74.08091666666667 +k=1 +x_0=1000000 +y_0=1000000 +ellps=intl +towgs84=307,304,-318,0,0,0,0 +units=m +no_defs"
+st_crs(Insumo) <- Crs.geo
+Insumo.utm <- st_transform(Insumo, crs = 3724)
+```
+
+## **Mapa de valores observados**
+
+```{r}
+#  Mapa de Valores Observados
+#dev.new() #windows()
+ggplot(Insumo) +
+  geom_sf(aes(fill = CAP_BAC)) +
+  
+  scale_fill_viridis_c(option='viridis') +  # Escala de colores para la variable
+  labs(fill = "Valores Locales") +
+  theme_minimal() +
+  ggtitle("Valores Observados para las captaciones del banco agrario\nen Colombia, cuarto trimestre 2020") +
+  
+  # Añadir la leyenda personalizada
+  theme(legend.position = "right") +
+  
+  # Añadir escala
+  annotation_scale(location = "bl", width_hint = 0.15) +
+  annotation_north_arrow(location = "tr", which_north = "true", height = unit(1, "cm"), width = unit(1, "cm"))
+```
+
+## **Matriz de vecindades**
+
+En el análisis espacial, las matrices de vecindad son estructuras que definen las relaciones espaciales entre las unidades de observación. En este caso, cada departamento de Colombia tiene una “vecindad” que se define por su proximidad a otros departamentos.
+
+Centroides de las Áreas: Primero, calculamos los centroides de cada uno de los polígonos (departamentos) usando `st_centroid()`. Los centroides son los puntos centrales de los polígonos, lo que nos permite calcular distancias entre ellos.
+
+Matriz de Distancias: Usamos `st_distance()` para calcular la matriz de distancias entre los centroides de los departamentos. Esto nos da una medida de la cercanía geográfica entre las unidades.
+
+Matriz de Vecindades (Insumo.nb): Se utiliza la función `poly2nb()` del paquete spdep para crear una lista de vecinos basada en la geometría de los departamentos. El parámetro `queen = TRUE` asegura que un departamento se considere vecino de otro si comparten una frontera común o un vértice.
+
+```{r}
+## Centroides de las Áreas
+Centroids <- st_centroid(Insumo.utm)
+```
+
+```{r}
+# Matriz de Distancias entre los Centroides
+Wdist <- st_distance(Centroids)
+
+# Matriz W de vecindades
+Insumo.nb <- poly2nb(Insumo.utm, queen = TRUE)
+```
+
+### **Tipos de Matrices de Vecindad**
+
+Las matrices de vecindad pueden definirse de diferentes maneras. Aquí se muestran algunas opciones comunes:
+
+Matriz binaria de vecindad: Una matriz donde los valores son 1 si los departamentos son vecinos (según la geometría), y 0 si no lo son. Esto es útil para análisis como los modelos de regresión espacial, donde la vecindad puede influir en la variable dependiente.
+
+```{r}
+Departamentos <- Insumo$Departamento
+
+n <- length(Insumo.nb)
+MatW <- matrix(0, n, n, dimnames = list(Departamentos, Departamentos))
+
+for (i in 1:n) {
+  vecinos <- Insumo.nb[[i]]
+  MatW[i, vecinos] <- 1
+}
+```
+
+#### Matrices de Vecindad Ponderadas
+
+ Existen varios tipos de ponderación para las matrices de vecindad, que reflejan diferentes grados de proximidad entre los departamentos. Estas ponderaciones pueden basarse en distancias o en relaciones de contigüidad. Los estilos más comunes son:
+
+-   Estilo “B” (Binary): Simplemente indica si dos departamentos son vecinos o no (como la matriz binaria).
+
+-   Estilo “C” (Contiguity): Se utiliza cuando los vecinos comparten una frontera común.
+
+-   Estilo “W” (Weights): Utiliza una matriz de pesos basada en distancias, donde los vecinos más cercanos tienen mayor peso
+
+-   Estilo “U”(Unweighted): En este estilo, los vecinos se definen de forma binaria (con un valor de 1 si hay vecindad y 0 si no la hay), pero a diferencia de otros estilos, no se toma en cuenta el tipo de vecindad exacta (como si comparten frontera o vértice).
+
+    ```{r}
+    #---
+    # MATRIZ DE VECINDADES (W)
+    #---
+
+    # Opcional: convierte la lista de vecinos en una matriz binaria de vecindades si se necesita
+    Departamentos <- Insumo$Departamento
+    n <- length(Insumo.nb)
+    MatW <- matrix(0, n, n, dimnames = list(Departamentos, Departamentos))
+
+    for (i in 1:n) {
+      vecinos <- Insumo.nb[[i]]
+      MatW[i, vecinos] <- 1
+    }
+
+    # Alternativamente, usa diferentes estilos de ponderación
+    Insumo.lw <- nb2listw(Insumo.nb, zero.policy = TRUE )
+    Insumo.lwb <- nb2listw(Insumo.nb, style = "B",zero.policy = TRUE)
+    Insumo.lwc <- nb2listw(Insumo.nb, style = "C",zero.policy = TRUE)
+    Insumo.lwu <- nb2listw(Insumo.nb, style = "U",zero.policy = TRUE)
+    Insumo.lww <- nb2listw(Insumo.nb, style = "W",zero.policy = TRUE)
+
+    ```
+
+## Pruebas de Autocorrelación
+
+### Índice de Moran
+
+El índice de Moran es una medida global utilizada para cuantificar la autocorrelación espacial en un conjunto de datos geoespaciales. Este índice evalúa si los valores de una variable en una región tienden a estar agrupados en áreas vecinas o, por el contrario, dispersos. Se calcula comparando el valor de la variable en cada unidad espacial con los valores en sus vecinas, ponderados por la distancia o vecindad. El índice varía entre -1 y 1: un valor cercano a 1 indica que los valores de la variable están positivamente autocorrelacionados, es decir, las unidades cercanas tienen valores similares; un valor cercano a -1 sugiere autocorrelación negativa, donde las unidades cercanas tienen valores opuestos; y un valor cercano a 0 implica ausencia de autocorrelación espacial, lo que significa que los valores están distribuidos aleatoriamente.
+
+```{r}
+moran.test(Insumo$CAP_BAC, Insumo.lw)
+```
+
+El resultado del test de Moran que se presenta indica lo siguiente:
+
+#### Moran I statistic
+
+```{r}
+#| eval: false
+#| include: false
+#| fold: true
+En este caso, el valor de 0.1404 sugiere una autocorrelación espacial positiva débil, lo que implica que los valores cercanos de la variable CAP_BAC podrían presentar una ligera tendencia a estar agrupados.
+```
+
+#### Expectation (Esperanza)
+
+La esperanza teórica del índice de Moran bajo la hipótesis nula es -0.0333. Este valor refleja la media esperada del índice de Moran si no existiera autocorrelación espacial (es decir, si los valores de la variable se distribuyeran aleatoriamente).
+
+#### **Variance (Varianza)**
+
+La varianza de la estadística de Moran es 0.0091. La varianza describe la dispersión de los valores observados del índice de Moran respecto a su valor esperado bajo la hipótesis nula.
+
+#### Moran I statistic standard deviate
+
+La desviación estándar de la estadística de Moran es 1.8248. p-value: El valor p es 0.03401. Esto indica que la probabilidad de observar una estadística de Moran igual o más extrema que la observada bajo la hipótesis nula (sin autocorrelación espacial) es de aproximadamente 3.4%. Dado que este valor p es menor que el umbral común de 0.05, podemos rechazar la hipótesis nula de que no hay autocorrelación espacial significativa y concluir que hay evidencia estadística de autocorrelación espacial positiva en los datos de la variable CAP_BAC.
+
+```{r}
+moran.plot(Insumo$CAP_BAC, 
+           Insumo.lw, 
+           labels=as.character(Insumo$Departamento), 
+           xlab="Captaciones BAC", 
+           ylab="Captaciones BAC rezagado", 
+           las=1, 
+           pch=16, 
+           cex=0.5)
+
+legend("bottomright", 
+       legend=c("I de Moran: 0.1530", "Valor P:      0.02262"), 
+       cex=1,
+       bg='lightgreen')
+
+title("Dispersograma de Moran para las captaciones del banco agrario en 
+los Departamentos de Colombia, cuarto trimestre 2020", cex.main=1)
+```
+
+### **Local G**
+
+El Local G es un índice de autocorrelación espacial que complementa el índice de Moran al permitir la identificación de patrones locales de agrupamiento o dispersión en los datos. Mientras que el índice de Moran proporciona una medida global de la autocorrelación espacial, el Local G permite detectar si ciertas áreas específicas presentan una concentración significativa de valores similares (o diferentes). Este índice se calcula para cada unidad espacial, tomando en cuenta los valores en sus vecinas más cercanas. Los valores de Local G más altos indican áreas de alta concentración de valores similares, mientras que los valores negativos o bajos indican zonas de baja concentración o patrones de dispersión. Es útil para identificar clústeres locales de alta o baja intensidad, lo que permite un análisis más detallado de las estructuras espaciales en los datos.
+
+```{r}
+nearng = dnearneigh(st_coordinates(Insumo.utm)[, 1:2], 0, 550)
+Insumo.lw.g = nb2listw(nearng, style="B", zero.policy = T)
+```
+
+-   `dnearneigh:`Esta función calcula las vecindades entre los elementos espaciales según una distancia determinada. En este caso, se utiliza st_coordinates(Insumo.utm)\[, 1:2\] para obtener las coordenadas de los departamentos en el sistema de referencia espacial UTM, y se establecen dos parámetros: 0 (distancia mínima) y 550 (distancia máxima) para definir qué unidades espaciales están cerca entre sí.
+
+-   `nb2listw`Convierte la vecindad obtenida (nearng) en una lista de pesos espaciales, donde style=“B” indica que la matriz de vecindad será binaria (vecinos cercanos reciben un valor de 1, y los demás reciben 0). Además, zero.policy = T indica que se manejan correctamente los casos en los que algunas unidades no tienen vecinos (se asigna un valor de 0).
+
+-   `localG:`Esta función calcula el índice Local G para la variable CAP_BAC, utilizando la matriz de vecindad definida anteriormente. El resultado muestra el valor de Local G para cada unidad espacial (departamento), lo que permite identificar los clústeres locales de valores similares en CAP_BAC.
+
+    ```{r}
+    # Local G
+    localG = localG(Insumo$CAP_BAC, Insumo.lw); localG
+    ```
+
+**Simulación Monte Carlo:**\
+Para evaluar la significancia de los resultados obtenidos con el índice Local G, se realizan 1000 simulaciones donde se barajan aleatoriamente los valores de CAP_BAC y se vuelve a calcular el índice Local G para cada permutación. Esto permite comparar los valores observados de Local G con una distribución aleatoria. **sweep(sim.G, 2, localG, “\>=”)**: Compara los valores de localGobservados con los valores simulados. Elsweepcompara cada valor desim.Gcon el valor correspondiente delocalG\` para cada unidad espacial. Si el valor simulado es mayor o igual que el valor observado, se cuenta como un 1, lo que indica que el valor simulado es al menos tan grande como el observado. colSums(…)+1: Suma cuántos de los valores simulados son mayores o iguales a los valores observados de Local G, añadiendo 1 para evitar valores p de 0. (nrow(sim.G)+1): Se normaliza por el número total de simulaciones (1000), de manera que se obtiene un valor p para cada unidad espacial, indicando la probabilidad de obtener un valor de Local G tan extremo como el observado bajo la distribución aleatoria.
+
+```{r}
+# Simulaci?n montecarlo
+sim.G = matrix(0,1000,32)
+for(i in 1:1000) sim.G[i,] = localG(sample(Insumo$CAP_BAC),Insumo.lw)
+mc.pvalor.G = (colSums(sweep(sim.G,2,localG,">="))+1)/(nrow(sim.G)+1)
+mc.pvalor.G
+```
+
+Los valores p calculados (mc.pvalor.G) indican la significancia estadística de los patrones espaciales observados. Un valor p bajo (generalmente menor que 0.05) sugiere que la autocorrelación espacial observada en un departamento es significativamente diferente de la aleatoriedad, lo que indica un clúster local de alta o baja concentración de valores. Los departamentos con valores p bajos pueden considerarse como áreas con patrones espaciales significativos, lo cual es útil para identificar zonas con características especiales en la variable de interés.
+
+#### Mapas
+
+```{r}
+library(ggplot2)
+localG= as.numeric(localG)
+# Mapa de G
+ggplot(Insumo.utm) + 
+  geom_sf(aes(fill = localG)) +
+  scale_fill_viridis_c() +
+  ggtitle("G Getis Ord Local para las captaciones del banco agrario en Colombia, cuarto trimestre 2020") +
+  theme_minimal()
+```
+
+```{r}
+# Mapa de p-valor
+ggplot(Insumo.utm) + 
+  geom_sf(aes(fill = mc.pvalor.G)) +
+  scale_fill_viridis_c() +
+  ggtitle("P-Valor de G Getis Ord Local para las captaciones del banco agrario en Colombia, cuarto trimestre 2020") +
+  theme_minimal()
+```
+
+## Regresión Espacial
+
+Los modelos de regresión espacial son fundamentales para capturar la dependencia espacial entre observaciones, un fenómeno común en datos geoespaciales. 
+
+### OLS
+
+$$
+y = \mathbf{X}\beta + \epsilon
+$$
+
+El modelo OLS es la regresión lineal clásica, donde $y$ es la variable dependiente, $\mathbf{X}$ es la matriz de covariables, $\beta$ son los coeficientes a estimar y $\varepsilon$ es el término del error. Este modelo no captura ninguna dependencia espacial de los errores, lo que puede ser una limitación cuando hay correlación espacial entre las observaciones.
+
+```{r}
+reg.eq1=CAP_BAC ~ PIB + NBI + CAP_BOG+CAP_BC + CAP_OCC + CAP_CS+ Población
+reg1=lm(reg.eq1,data=Insumo)                                     #OLS            y=XB+e,    
+summary(reg1)
+```
+
+### **SLX (Spatial Lag of X)**
+
+El modelo SLX (Spatial Lag of X) extiende el OLS al incluir el "lag" espacial de las variables explicativas ($\mathbf{WX\theta}$), donde $\mathbf{W}$ es la matriz de vecindad y $\theta$ es el vector de coeficientes correspondientes a las variables explicativas laggeadas. Este modelo captura la influencia de los valores de las covariables de los vecinos en la variable dependiente.
+
+```{r}
+reg2=lmSLX(reg.eq1,data=Insumo, Insumo.lw,, zero.policy = TRUE)                       #SLX            y=XB+WxT+e
+summary(reg2)
+```
+
+### Modelo Lag (SAR - Spatial Autoregressive)
+
+$y = \mathbf{X}\beta + \rho\mathbf{Wy} + u$ y $u=\lambda W u + \varepsilon$
+
+El modelo SAR (Spatial Autoregressive) inlcluye un término de "lag" en la variable dependiente ($\mathbf{W}y$), donde ($\mathbf{rho}$) es el coeficiente asociado al lag espacial. Este modelo captura la dependencia espacial en los valores de la variable dependiente entre vecinos.\
+El término del error ($u$) también esta modelado como un proceso autoregresivo espacial ,es decir, $u = \lambda W u + \varepsilon$ lo que significa que el error de una observación también depende de los errores de sus vecinos.
+
+```{r}
+reg3 = lagsarlm(reg.eq1, data = Insumo, Insumo.lw, zero.policy = TRUE)
+```
+
+```{r}
+summary(reg3)
+```
+
+### 
+
+### **Modelo de Error Espacial (SEM - Spatial Error Model)**
+
+$y = X\beta + \varepsilon$ y $\varepsilon = \lambda \varepsilon + u$
+
+El **Modelo de Error Espacial (SEM)** incluye una corrección para la dependencia espacial en los errores $(\varepsilon)$, donde $\lambda$ es el coeficiente que mide la fuerza de la correlación espacial en el término de error. El modelo SEM no incorpora un "lag" espacial en la variable dependiente, sino que captura la dependencia espacial únicamente a través del componente del error.
+
+```{r}
+reg4 = errorsarlm(reg.eq1, data = Insumo, Insumo.lw, zero.policy = TRUE)
+```
+
+```{r}
+summary(reg4)
+```
+
+### **Modelo de Durbin Espacial con Error (SDEM - Spatial Durbin Error Model)**
+
+$y = X \beta + WX \theta + u$ y $u = \lambda W u + \varepsilon$
+
+El **Modelo de Durbin Espacial con Error (SDEM)** es una combinación del modelo de error espacial y el modelo de regresión espacial Durbin. En este modelo, no solo se incluye un término de “lag” espacial para la variable dependiente, sino también para las variables explicativas. El término de error ($u$ ) sigue un proceso autoregresivo espacial. Este modelo captura tanto la dependencia espacial en las variables dependientes como en las explicativas.
+
+```{r}
+reg5 = errorsarlm(reg.eq1, data = Insumo, Insumo.lw, etype = "emixed", zero.policy = TRUE)
+```
+
+```{r}
+summary(reg5)
+```
+
+### Modelo Durbin Espacial (SDM - Spatial Durbin Model)
+
+$$
+y = X \beta + Wy\rho + WX\theta + \varepsilon
+$$
+
+El **Modelo Durbin Espacial (SDM)** es una extensión del modelo SAR que incluye tanto un “lag” espacial de la variable dependiente como un “lag” espacial de las variables explicativas. Este modelo permite que las variables explicativas influyan tanto directamente como a través de sus efectos espaciales en la variable dependiente.
+
+```{r}
+reg6 = lagsarlm(reg.eq1, data = Insumo, Insumo.lw, type = "mixed", zero.policy = TRUE)
+```
+
+```{r}
+summary(reg6)
+```
+
+### **Modelo Manski (Manski Model)**
+
+El **Modelo Manski** es similar al modelo SDM, pero tiene una estructura más compleja en cuanto a la autocorrelación espacial de los errores. Este modelo incluye tanto el “lag” espacial de la variable dependiente, como los “lags” espaciales de las variables explicativas. La diferencia principal con el modelo SDM es el tratamiento más complejo de los términos de error.
+
+```{r}
+reg7 = sacsarlm(reg.eq1, data = Insumo, Insumo.lw, type = "sacmixed", zero.policy = TRUE)
+```
+
+```{r}
+summary(reg7)
+```
+
+### **Modelo SARAR (Kelejian-Prucha, Cliff-Ord, SAC)**
+
+$$
+y = X\beta + \rho W y + u 
+$$
+
+y
+
+$$
+u = \lambda W u + \varepsilon
+$$
+
+El **Modelo SARAR** (también conocido como modelo Kelejian-Prucha o Cliff-Ord) es un modelo que combina características del modelo SAR y SEM. Este modelo tiene un término de “lag” espacial en la variable dependiente y un término de error espacial autoregresivo, lo que permite capturar tanto la dependencia espacial en la variable dependiente como en el error.
+
+```{r}
+reg8 = sacsarlm(reg.eq1, data = Insumo, Insumo.lw, type = "sac", zero.policy = TRUE)
+```
+
+```{r}
+summary(reg8)
+```
+
+### **Cálculo de variables significativas**
+
+Pueden calcularse las variables significativas de cada modelo de regresión, proporcionando los coeficientes estimados y los valores p asociados.
+
+```{r}
+#Calculo de variables significativas
+reg.eq2=CAP_BAC ~ PIB + CAP_BOG+CAP_BC + CAP_OCC + CAP_CS+ Población
+reg4=errorsarlm(reg.eq2,data=Insumo, Insumo.lw, zero.policy = TRUE)
+```
+
+```{r}
+s = summary
+s(reg4)#Lag Error (SEM)
+```
+
+```{r}
+reg.eq3=CAP_BAC ~ PIB + CAP_BOG + CAP_OCC + CAP_CS+ Población
+reg4=errorsarlm(reg.eq3,data=Insumo, Insumo.lw, zero.policy = TRUE)
+```
+
+```{r}
+s(reg4)#Lag Error (SEM)
+```
+
+```{r}
+reg.eq4=CAP_BAC ~ PIB + CAP_OCC + CAP_CS+ Población
+reg4=errorsarlm(reg.eq4,data=Insumo, Insumo.lw, zero.policy = TRUE)
+```
+
+```{r}
+s(reg4)#Lag Error (SEM)
+```
+
+```{r}
+reg.eq5=CAP_BAC ~ PIB + CAP_OCC + CAP_CS
+reg4=errorsarlm(reg.eq5,data=Insumo, Insumo.lw, zero.policy = TRUE)
+s(reg4)#Lag Error (SEM)
+```
+
+### Mapa estimado
+
+```{r}
+fit <- reg2$fitted.values
+ggplot(Insumo.utm) +
+  geom_sf(aes(fill = fit)) +
+  scale_fill_viridis_c() +
+  ggtitle("Valores ajustados mediante el modelo SEM para las captaciones del banco agrario en Colombia, cuarto trimestre 2020") +
+  theme_minimal()
+```
+
+```{r}
+###Test de moran residuales modelo SEM
+moran.test(reg4$residuals, Insumo.lw)
+```

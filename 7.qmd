@@ -2,7 +2,7 @@
 
 # [Geoestadística con sgeostat]{style="color:#FF8000;"}
 
-## Carga de los datos 
+## Carga de los datos
 
 ```{r}
 rm(list=ls())
@@ -23,28 +23,30 @@ library(sgeostat)
 ## Gráficos
 
 ```{r}
-g1=ggplot(aquifer, aes(Profundidad, Este)) + 
-  geom_point() + 
+
+
+g1 <- ggplot(aquifer, aes(x = Este, y = Profundidad)) +
+  geom_point() +
   geom_line() +
-  xlab("Este") + 
+  xlab("Este") +
   ylab("Profundidad")
 
-g2=ggplot(aquifer, aes(Profundidad, Norte)) + 
-  geom_point() + 
+g2 <- ggplot(aquifer, aes(x = Norte, y = Profundidad)) +
+  geom_point() +
   geom_line() +
-  xlab("Norte") + 
+  xlab("Norte") +
   ylab("Profundidad")
 
-g3=ggplot(aquifer, aes(Profundidad, Este*Norte)) + 
-  geom_point() + 
+g3 <- ggplot(aquifer, aes(x = Este * Norte, y = Profundidad)) +
+  geom_point() +
   geom_line() +
-  xlab("Interacción este,norte") + 
+  xlab("Interacción este, norte") +
   ylab("Profundidad")
-```
 
-```{r}
 plot_grid(g1,g2,g3)
 ```
+
+
 
 ```{r}
 cor(aquifer)
@@ -100,19 +102,21 @@ aquifer.v<-est.variogram(aquifer_points,aquifer_pair,'resi')
 ```
 
 ```{r}
-g4=ggplot(aquifer, aes(resi, Este)) + 
+
+g4 <- ggplot(aquifer, aes(x = Este, y = resi)) + 
   geom_point() + 
   geom_line() +
   xlab("Este") + 
   ylab("residuales2")
 
-g5=ggplot(aquifer, aes(resi, Norte)) + 
+g5 <- ggplot(aquifer, aes(x = Norte, y = resi)) + 
   geom_point() + 
   geom_line() +
   xlab("Norte") + 
   ylab("residuales2")
 
-plot_grid(g4,g5)
+
+plot_grid(g4, g5)
 ```
 
 ```{r}
@@ -121,31 +125,33 @@ fit.trend(aquifer_points,at="Profundidad", np=2, plot.it=TRUE)
 ```
 
 ```{r}
-g6=ggplot(aquifer.v, aes(resi, Norte)) + 
-  geom_point() + 
+
+g_resi <- ggplot(aquifer.v, aes(x = Norte, y = resi)) +  
+  geom_point() +  
   geom_line() +
-  xlab("Norte") + 
+  xlab("Norte") +  
   ylab("residuales2")
 
-g6=ggplot(aquifer.v, aes(bins, classic)) + 
-  geom_point() + 
+g6 <- ggplot(aquifer.v, aes(x = bins, y = classic)) +  
+  geom_point() +  
   geom_line() +
-  xlab("Rezago espacial, h") + 
+  xlab("Rezago espacial, h") +  
   ylab("Estimador clásico del variograma")
 
-g7=ggplot(aquifer.v, aes(bins, robust)) + 
-  geom_point() + 
+g7 <- ggplot(aquifer.v, aes(x = bins, y = robust)) +  
+  geom_point() +  
   geom_line() +
-  xlab("Rezago espacial, h") + 
+  xlab("Rezago espacial, h") +  
   ylab("Estimador robusto 1 del variograma")
 
-g8=ggplot(aquifer.v, aes(bins, med)) + 
-  geom_point() + 
+g8 <- ggplot(aquifer.v, aes(x = bins, y = med)) +  
+  geom_point() +  
   geom_line() +
-  xlab("Rezago espacial, h") + 
+  xlab("Rezago espacial, h") +  
   ylab("Estimador robusto 2 del variograma")
 
-plot_grid(g6,g7,g8,nrow=1,ncol=3)
+
+plot_grid(g6, g7, g8, nrow = 1, ncol = 3)
 ```
 
 ```{r}
@@ -285,7 +291,7 @@ contour(grid$x,grid$y,matrix(grid$krige$zhat,length(grid$x),length(grid$y)),add=
 ```
 
 ```{r}
-x11()
+
 op <- par(no.readonly = TRUE)
 par(pty="s")
 plot(grid$xy, type="n", xlim=c(grid$xr[1], grid$xr[1]+grid$max),ylim=c(grid$yr[1], grid$yr[1]+grid$max))

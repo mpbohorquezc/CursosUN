@@ -194,28 +194,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional </span></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
-          <li class="sidebar-item">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></span>
+  </li>
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span style="color: #728387 !important;">Definición</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Paquete </span></span></a>
   </div>
 </li>
-      </ul>
-  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
@@ -365,36 +352,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="gráficos" class="level2">
 <h2 class="anchored" data-anchor-id="gráficos">Gráficos</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g1<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Este)) <span class="sc">+</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(<span class="at">x =</span> Este, <span class="at">y =</span> Profundidad)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Este"</span>) <span class="sc">+</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Este"</span>) <span class="sc">+</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Profundidad"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>g2<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Norte)) <span class="sc">+</span> </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(<span class="at">x =</span> Norte, <span class="at">y =</span> Profundidad)) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Norte"</span>) <span class="sc">+</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Norte"</span>) <span class="sc">+</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Profundidad"</span>)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>g3<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(Profundidad, Este<span class="sc">*</span>Norte)) <span class="sc">+</span> </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(<span class="at">x =</span> Este <span class="sc">*</span> Norte, <span class="at">y =</span> Profundidad)) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Interacción este,norte"</span>) <span class="sc">+</span> </span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Profundidad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1,g2,g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Interacción este, norte"</span>) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Profundidad"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1,g2,g3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(aquifer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(aquifer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  Este      Norte Profundidad
 Este         1.0000000  0.1147565  -0.7788885
@@ -403,20 +389,20 @@ Profundidad -0.7788885 -0.6200923   1.0000000</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot3d</span>(aquifer, <span class="at">highlight.3d=</span><span class="cn">TRUE</span>, <span class="at">col.axis=</span><span class="st">"blue"</span>,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">col.grid=</span><span class="st">"lightblue"</span>, <span class="at">main=</span><span class="st">"Tendencia de Profundidad"</span>, <span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot3d</span>(aquifer, <span class="at">highlight.3d=</span><span class="cn">TRUE</span>, <span class="at">col.axis=</span><span class="st">"blue"</span>,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">col.grid=</span><span class="st">"lightblue"</span>, <span class="at">main=</span><span class="st">"Tendencia de Profundidad"</span>, <span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte, <span class="at">data =</span> aquifer)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>residuales1  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg1)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte, <span class="at">data =</span> aquifer)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>residuales1  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg1)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -440,7 +426,7 @@ F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -454,9 +440,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte, <span class="at">data =</span> aquifer)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>residuales2  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg2)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte, <span class="at">data =</span> aquifer)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>residuales2  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg2)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -481,7 +467,7 @@ F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -496,9 +482,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte<span class="sc">+</span><span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> aquifer)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>residuales3  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg3)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte<span class="sc">+</span><span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> aquifer)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>residuales3  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg3)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(reg3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -527,7 +513,7 @@ F-statistic: 147.2 on 6 and 78 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -545,15 +531,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">data.frame</span>(aquifer,<span class="at">resi=</span>residuales2)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>aquifer_points<span class="ot">=</span><span class="fu">point</span>(aquifer, <span class="at">x=</span><span class="st">"Este"</span>, <span class="at">y=</span><span class="st">"Norte"</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="ot">=</span><span class="fu">pair</span>(aquifer_points,<span class="at">num.lags=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">data.frame</span>(aquifer,<span class="at">resi=</span>residuales2)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>aquifer_points<span class="ot">=</span><span class="fu">point</span>(aquifer, <span class="at">x=</span><span class="st">"Este"</span>, <span class="at">y=</span><span class="st">"Norte"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>aquifer_pair<span class="ot">=</span><span class="fu">pair</span>(aquifer_points,<span class="at">num.lags=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>....................................................................................</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(aquifer_pair)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(aquifer_pair)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 5
  $ from: num [1:3570] 1 1 1 1 1 1 1 1 1 1 ...
@@ -566,37 +552,38 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>aquifer.v<span class="ot">&lt;-</span><span class="fu">est.variogram</span>(aquifer_points,aquifer_pair,<span class="st">'resi'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>aquifer.v<span class="ot">&lt;-</span><span class="fu">est.variogram</span>(aquifer_points,aquifer_pair,<span class="st">'resi'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>g4<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(resi, Este)) <span class="sc">+</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Este"</span>) <span class="sc">+</span> </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"residuales2"</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>g5<span class="ot">=</span><span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(resi, Norte)) <span class="sc">+</span> </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Norte"</span>) <span class="sc">+</span> </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"residuales2"</span>)</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g4,g5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(<span class="at">x =</span> Este, <span class="at">y =</span> resi)) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Este"</span>) <span class="sc">+</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"residuales2"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>g5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(<span class="at">x =</span> Norte, <span class="at">y =</span> resi)) <span class="sc">+</span> </span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Norte"</span>) <span class="sc">+</span> </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"residuales2"</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g4, g5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>aquifer_points<span class="ot">=</span><span class="fu">point</span>(aquifer, <span class="at">x=</span><span class="st">"Este"</span>, <span class="at">y=</span><span class="st">"Norte"</span>)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fit.trend</span>(aquifer_points,<span class="at">at=</span><span class="st">"Profundidad"</span>, <span class="at">np=</span><span class="dv">2</span>, <span class="at">plot.it=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>aquifer_points<span class="ot">=</span><span class="fu">point</span>(aquifer, <span class="at">x=</span><span class="st">"Este"</span>, <span class="at">y=</span><span class="st">"Norte"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fit.trend</span>(aquifer_points,<span class="at">at=</span><span class="st">"Profundidad"</span>, <span class="at">np=</span><span class="dv">2</span>, <span class="at">plot.it=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -681,42 +668,43 @@ attr(,"class")
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>g6<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(resi, Norte)) <span class="sc">+</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Norte"</span>) <span class="sc">+</span> </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"residuales2"</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>g6<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, classic)) <span class="sc">+</span> </span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span> </span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador clásico del variograma"</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>g7<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, robust)) <span class="sc">+</span> </span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span> </span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador robusto 1 del variograma"</span>)</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>g8<span class="ot">=</span><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, med)) <span class="sc">+</span> </span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span> </span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador robusto 2 del variograma"</span>)</span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g6,g7,g8,<span class="at">nrow=</span><span class="dv">1</span>,<span class="at">ncol=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>g_resi <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(<span class="at">x =</span> Norte, <span class="at">y =</span> resi)) <span class="sc">+</span>  </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Norte"</span>) <span class="sc">+</span>  </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"residuales2"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>g6 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(<span class="at">x =</span> bins, <span class="at">y =</span> classic)) <span class="sc">+</span>  </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span>  </span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador clásico del variograma"</span>)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>g7 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(<span class="at">x =</span> bins, <span class="at">y =</span> robust)) <span class="sc">+</span>  </span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span>  </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador robusto 1 del variograma"</span>)</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>g8 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(<span class="at">x =</span> bins, <span class="at">y =</span> med)) <span class="sc">+</span>  </span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  </span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span>  </span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador robusto 2 del variograma"</span>)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g6, g7, g8, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(1,3))</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(aquifer.v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#par(mfrow=c(1,3))</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(aquifer.v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   lags      bins   classic    robust       med   n
 1     1  13.55308  43779.20  44355.34  47948.45 285
@@ -732,7 +720,18 @@ attr(,"class")
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v<span class="sc">$</span>robust)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v<span class="sc">$</span>robust)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v<span class="sc">$</span>med,<span class="at">col=</span><span class="st">'blue'</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>robust,<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -742,25 +741,14 @@ attr(,"class")
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(aquifer.v<span class="sc">$</span>med,<span class="at">col=</span><span class="st">'blue'</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>robust,<span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">40000</span>,<span class="at">ae=</span><span class="dv">20</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">40000</span>,<span class="at">ae=</span><span class="dv">20</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initial parameter estimates:  0 40000 20 </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -774,7 +762,7 @@ rse.dif =  3232643827 (rse = 3232643827 )  ;  parm.dist =  977.1397 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -788,7 +776,7 @@ rse.dif =  -17644208 (rse = 3.215e+09 )  ;  parm.dist =  22493.46 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -802,7 +790,7 @@ rse.dif =  -3772568 (rse = 3211227051 )  ;  parm.dist =  15597.73 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -816,7 +804,7 @@ rse.dif =  3032851 (rse = 3214259902 )  ;  parm.dist =  16431.58 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-5.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -830,7 +818,7 @@ rse.dif =  -2468665 (rse = 3211791237 )  ;  parm.dist =  7053.019 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-6.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -844,7 +832,7 @@ rse.dif =  1486180 (rse = 3213277417 )  ;  parm.dist =  7097.539 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-7.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-7.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -858,7 +846,7 @@ rse.dif =  -951749.7 (rse = 3212325667 )  ;  parm.dist =  2758.919 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-8.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-8.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -872,7 +860,7 @@ rse.dif =  471370.4 (rse = 3212797038 )  ;  parm.dist =  1898.737 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-9.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-9.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -886,7 +874,7 @@ rse.dif =  -249219.6 (rse = 3212547818 )  ;  parm.dist =  838.0686 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-10.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-10.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -900,7 +888,7 @@ rse.dif =  121873.4 (rse = 3212669692 )  ;  parm.dist =  450.7265 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-11.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-11.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -914,7 +902,7 @@ rse.dif =  -61031.79 (rse = 3212608660 )  ;  parm.dist =  215.2624 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-12.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-12.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -928,7 +916,7 @@ rse.dif =  30077.83 (rse = 3212638738 )  ;  parm.dist =  108.6221 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-13.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-13.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -942,7 +930,7 @@ rse.dif =  -14922.96 (rse = 3212623815 )  ;  parm.dist =  53.26613 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-14.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-14.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -956,7 +944,7 @@ rse.dif =  7377.216 (rse = 3212631192 )  ;  parm.dist =  26.48517 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-15.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-15.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -970,7 +958,7 @@ rse.dif =  -3653.216 (rse = 3212627539 )  ;  parm.dist =  13.07801 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-16.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-16.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -984,7 +972,7 @@ rse.dif =  1807.514 (rse = 3212629346 )  ;  parm.dist =  6.479831 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-17.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-17.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -998,7 +986,7 @@ rse.dif =  -894.6895 (rse = 3212628451 )  ;  parm.dist =  3.20516 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-18.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-18.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1012,7 +1000,7 @@ rse.dif =  442.763 (rse = 3212628894 )  ;  parm.dist =  1.586717 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-19.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-19.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1026,7 +1014,7 @@ rse.dif =  -219.1369 (rse = 3212628675 )  ;  parm.dist =  0.7851797 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-20.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-20.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1040,7 +1028,7 @@ rse.dif =  108.4519 (rse = 3212628784 )  ;  parm.dist =  0.3886224 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-21.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-21.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1054,7 +1042,7 @@ rse.dif =  -53.67477 (rse = 3212628730 )  ;  parm.dist =  0.192328 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-22.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-22.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1068,7 +1056,7 @@ rse.dif =  26.56425 (rse = 3212628756 )  ;  parm.dist =  0.09518727 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-23.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-23.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1082,7 +1070,7 @@ rse.dif =  -13.14703 (rse = 3212628743 )  ;  parm.dist =  0.04710907 </code></pr
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-24.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-24.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1096,7 +1084,7 @@ rse.dif =  6.506634 (rse = 3212628750 )  ;  parm.dist =  0.023315 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-25.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-25.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1110,7 +1098,7 @@ rse.dif =  -3.220222 (rse = 3212628747 )  ;  parm.dist =  0.01153889 </code></pr
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-26.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-26.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1124,7 +1112,7 @@ rse.dif =  1.593734 (rse = 3212628748 )  ;  parm.dist =  0.005710764 </code></pr
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-27.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-27.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1138,7 +1126,7 @@ rse.dif =  -0.7887611 (rse = 3212628747 )  ;  parm.dist =  0.002826342 </code></
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-28.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-28.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1152,7 +1140,7 @@ rse.dif =  0.3903689 (rse = 3212628748 )  ;  parm.dist =  0.001398795 </code></p
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-29.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-29.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1166,7 +1154,7 @@ rse.dif =  -0.1932006 (rse = 3212628748 )  ;  parm.dist =  0.0006922812 </code><
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-30.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-30.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1180,7 +1168,7 @@ rse.dif =  0.09561825 (rse = 3212628748 )  ;  parm.dist =  0.000342624 </code></
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-22-31.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-21-31.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1189,14 +1177,14 @@ rse.dif =  0.09561825 (rse = 3212628748 )  ;  parm.dist =  0.000342624 </code></
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodGau<span class="ot">&lt;-</span><span class="fu">fit.gaussian</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cg=</span><span class="dv">50000</span>,<span class="at">ag=</span><span class="dv">50</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodGau<span class="ot">&lt;-</span><span class="fu">fit.gaussian</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cg=</span><span class="dv">50000</span>,<span class="at">ag=</span><span class="dv">50</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initial parameter estimates:  0 50000 50 </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1210,7 +1198,7 @@ rse.dif =  3299750048 (rse = 3299750048 )  ;  parm.dist =  38507.55 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1224,7 +1212,7 @@ rse.dif =  -66430135 (rse = 3233319913 )  ;  parm.dist =  2391.1 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1238,7 +1226,7 @@ rse.dif =  -24694350 (rse = 3208625564 )  ;  parm.dist =  4276.09 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1252,7 +1240,7 @@ rse.dif =  4004881 (rse = 3212630445 )  ;  parm.dist =  6107.884 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-5.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1266,7 +1254,7 @@ rse.dif =  -3703977 (rse = 3208926468 )  ;  parm.dist =  54.09555 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-6.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1280,7 +1268,7 @@ rse.dif =  588163 (rse = 3209514631 )  ;  parm.dist =  548.6666 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-7.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-7.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1294,7 +1282,7 @@ rse.dif =  -201438.9 (rse = 3209313192 )  ;  parm.dist =  40.09799 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-8.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-8.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1308,7 +1296,7 @@ rse.dif =  26607.8 (rse = 3209339800 )  ;  parm.dist =  9.082408 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-9.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-9.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1322,7 +1310,7 @@ rse.dif =  -4077.43 (rse = 3209335722 )  ;  parm.dist =  1.298161 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-10.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-10.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1336,7 +1324,7 @@ rse.dif =  605.1536 (rse = 3209336327 )  ;  parm.dist =  0.194743 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-11.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-11.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1350,7 +1338,7 @@ rse.dif =  -90.18701 (rse = 3209336237 )  ;  parm.dist =  0.02897682 </code></pr
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-12.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-12.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1364,7 +1352,7 @@ rse.dif =  13.43229 (rse = 3209336251 )  ;  parm.dist =  0.004316777 </code></pr
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-13.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-13.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1378,7 +1366,7 @@ rse.dif =  -2.000767 (rse = 3209336249 )  ;  parm.dist =  0.0006429701 </code></
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-14.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-14.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1392,7 +1380,7 @@ rse.dif =  0.2980142 (rse = 3209336249 )  ;  parm.dist =  9.577086e-05 </code></
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-15.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-15.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1406,7 +1394,7 @@ rse.dif =  -0.04438925 (rse = 3209336249 )  ;  parm.dist =  1.426508e-05 </code>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-16.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-16.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1420,7 +1408,7 @@ rse.dif =  0.006612301 (rse = 3209336249 )  ;  parm.dist =  2.124821e-06 </code>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-17.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-17.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1434,7 +1422,7 @@ rse.dif =  -0.0009851456 (rse = 3209336249 )  ;  parm.dist =  3.165152e-07 </cod
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-18.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-18.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1448,7 +1436,7 @@ rse.dif =  0.0001473427 (rse = 3209336249 )  ;  parm.dist =  4.713621e-08 </code
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-19.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-19.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1462,7 +1450,7 @@ rse.dif =  -2.193451e-05 (rse = 3209336249 )  ;  parm.dist =  7.007276e-09 </cod
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-20.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-20.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1476,7 +1464,7 @@ rse.dif =  2.861023e-06 (rse = 3209336249 )  ;  parm.dist =  1.042223e-09 </code
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-21.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-21.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1492,7 +1480,7 @@ Convergence achieved by sums of squares.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-23-22.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-22-22.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1501,14 +1489,14 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodWave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cw=</span><span class="dv">40000</span>,<span class="at">aw=</span><span class="dv">10</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodWave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cw=</span><span class="dv">40000</span>,<span class="at">aw=</span><span class="dv">10</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initial parameter estimates:  0 40000 10 </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1522,7 +1510,7 @@ rse.dif =  3409704989 (rse = 3409704989 )  ;  parm.dist =  28827.26 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1536,7 +1524,7 @@ rse.dif =  -289093760 (rse = 3120611230 )  ;  parm.dist =  1375.358 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1550,7 +1538,7 @@ rse.dif =  24044562 (rse = 3144655792 )  ;  parm.dist =  9873.851 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1564,7 +1552,7 @@ rse.dif =  -56767551 (rse = 3087888241 )  ;  parm.dist =  9889.639 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-5.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1578,7 +1566,7 @@ rse.dif =  175986924 (rse = 3263875165 )  ;  parm.dist =  13027.57 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-6.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1592,7 +1580,7 @@ rse.dif =  -196728543 (rse = 3067146622 )  ;  parm.dist =  16954.98 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-7.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-7.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1606,7 +1594,7 @@ rse.dif =  147278852 (rse = 3214425474 )  ;  parm.dist =  19979.87 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-8.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-8.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1620,7 +1608,7 @@ rse.dif =  -46983778 (rse = 3167441696 )  ;  parm.dist =  18178.84 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-9.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-9.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1634,7 +1622,7 @@ rse.dif =  -757940879 (rse = 2409500817 )  ;  parm.dist =  25153.13 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-10.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-10.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1648,7 +1636,7 @@ rse.dif =  1636307005 (rse = 4045807822 )  ;  parm.dist =  9682468 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-11.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-11.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1662,7 +1650,7 @@ rse.dif =  83628062 (rse = 4129435883 )  ;  parm.dist =  9688504 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-12.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-12.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1676,7 +1664,7 @@ rse.dif =  -628497356 (rse = 3500938527 )  ;  parm.dist =  11188.94 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-13.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-13.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1690,7 +1678,7 @@ rse.dif =  -192443200 (rse = 3308495327 )  ;  parm.dist =  4147.969 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-14.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-14.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1704,7 +1692,7 @@ rse.dif =  147479203 (rse = 3455974530 )  ;  parm.dist =  2800.25 </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-15.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-15.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1715,18 +1703,18 @@ New parameter estimates:  33497.3 9224.042 1e-06
 
 rse.dif =  -686128323 (rse = 2769846206 )  ;  parm.dist =  5253.728 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-23-16.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 16 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-16.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  -7188.309 -5.926894e-07 0 
@@ -1734,18 +1722,18 @@ New parameter estimates:  26308.99 9224.042 1e-06
 
 rse.dif =  686457465 (rse = 3456303671 )  ;  parm.dist =  7188.309 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-23-17.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 17 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-17.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  -5.339328e-06 -5.926894e-07 0 
@@ -1753,18 +1741,18 @@ New parameter estimates:  26308.99 9224.042 1e-06
 
 rse.dif =  0.4889331 (rse = 3456303672 )  ;  parm.dist =  5.372122e-06 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-23-18.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 18 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-18.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  5.926852e-07 -5.926894e-07 0 
@@ -1772,18 +1760,18 @@ New parameter estimates:  26308.99 9224.042 1e-06
 
 rse.dif =  1.907349e-06 (rse = 3456303672 )  ;  parm.dist =  8.381857e-07 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-23-19.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 19 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-19.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  5.926931e-07 -5.926894e-07 0 
@@ -1796,7 +1784,7 @@ Convergence achieved by sums of squares.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-24-20.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-23-20.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1805,9 +1793,20 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
-<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">200000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x<span class="sc">/</span><span class="dv">170</span>)),<span class="dv">0</span>,<span class="dv">300</span>)</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1817,8 +1816,9 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">200000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>x<span class="sc">/</span><span class="dv">170</span>)),<span class="dv">0</span>,<span class="dv">300</span>)</span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1828,26 +1828,14 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">65000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">14</span><span class="sc">/</span>x)<span class="sc">*</span><span class="fu">sin</span>(x<span class="sc">/</span><span class="dv">14</span>)),<span class="dv">0</span>,<span class="dv">300</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">200000</span>))</span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,<span class="at">col=</span><span class="dv">3</span>)</span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(aquifer.v<span class="sc">$</span>bins,aquifer.v<span class="sc">$</span>classic,aquifer.v<span class="sc">$</span>n,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">30</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Initial parameter estimates:  0 2e+05 170 </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1861,7 +1849,7 @@ rse.dif =  3826411368 (rse = 3826411368 )  ;  parm.dist =  200668.5 </code></pre
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-27-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1872,18 +1860,18 @@ New parameter estimates:  24102.91 16547.95 166070861318
 
 rse.dif =  -767474321 (rse = 3058937047 )  ;  parm.dist =  166070861252 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 3 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  3355.03 1.242479e+13 0 
@@ -1891,18 +1879,18 @@ New parameter estimates:  27457.94 1.242479e+13 166070861318
 
 rse.dif =  -120011141 (rse = 2938925906 )  ;  parm.dist =  1.242479e+13 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 4 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  423.3165 -663474885968 0 
@@ -1910,18 +1898,18 @@ New parameter estimates:  27881.25 1.176131e+13 166070861318
 
 rse.dif =  11801483 (rse = 2950727388 )  ;  parm.dist =  663474885968 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 5 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  3.873181 -6320523090 0 
@@ -1929,18 +1917,18 @@ New parameter estimates:  27885.12 1.175499e+13 166070861318
 
 rse.dif =  128956.4 (rse = 2950856345 )  ;  parm.dist =  6320523090 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 6 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-6.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  0.02266712 -36921321 0 
@@ -1948,18 +1936,18 @@ New parameter estimates:  27885.15 1.175495e+13 166070861318
 
 rse.dif =  752.3639 (rse = 2950857097 )  ;  parm.dist =  36921321 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 7 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-7.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  0.0001316946 -214507.3 0 
@@ -1967,18 +1955,18 @@ New parameter estimates:  27885.15 1.175495e+13 166070861318
 
 rse.dif =  4.371067 (rse = 2950857102 )  ;  parm.dist =  214507.3 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 8 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-8.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  7.650992e-07 -1246.212 0 
@@ -1986,18 +1974,18 @@ New parameter estimates:  27885.15 1.175495e+13 166070861318
 
 rse.dif =  0.02539396 (rse = 2950857102 )  ;  parm.dist =  1246.213 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 9 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-9.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  4.447233e-09 -7.24441 0 
@@ -2005,18 +1993,18 @@ New parameter estimates:  27885.15 1.175495e+13 166070861318
 
 rse.dif =  0.0001473427 (rse = 2950857102 )  ;  parm.dist =  7.244141 </code></pre>
 </div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-27-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Iteration: 10 </code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in lsfit(xmat, y, wt = w, intercept = FALSE): 'X' matrix was collinear</code></pre>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-10.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Gradient vector:  2.31966e-11 -0.03646515 0 
@@ -2029,7 +2017,7 @@ Convergence achieved by sums of squares.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-28-11.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-27-11.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2038,7 +2026,20 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href="#cb153-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Convergence not achieved!</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp_0<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2051,7 +2052,7 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href="#cb155-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodExp_0<span class="ot">&lt;-</span><span class="fu">fit.exponential</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">ce=</span><span class="dv">200000</span>,<span class="at">ae=</span><span class="dv">170</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave_0<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2064,7 +2065,7 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb157"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb157-1"><a href="#cb157-1" aria-hidden="true" tabindex="-1"></a>aquifer.vmodwave_0<span class="ot">&lt;-</span><span class="fu">fit.wave</span>(aquifer.v,<span class="at">c0=</span><span class="dv">4000</span>,<span class="at">cw=</span><span class="dv">30000</span>,<span class="at">aw=</span><span class="dv">15</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>aquifer.spherical<span class="ot">&lt;-</span><span class="fu">fit.spherical</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cs=</span><span class="dv">35000</span>,<span class="at">as=</span><span class="dv">70</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2077,31 +2078,18 @@ Convergence achieved by sums of squares.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb159"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb159-1"><a href="#cb159-1" aria-hidden="true" tabindex="-1"></a>aquifer.spherical<span class="ot">&lt;-</span><span class="fu">fit.spherical</span>(aquifer.v,<span class="at">c0=</span><span class="dv">0</span>,<span class="at">cs=</span><span class="dv">35000</span>,<span class="at">as=</span><span class="dv">70</span>,<span class="at">plot.it=</span><span class="cn">TRUE</span>,<span class="at">iterations=</span><span class="dv">0</span>,<span class="at">weighted=</span>T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Convergence not achieved!</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb161"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb161-1"><a href="#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, classic)) <span class="sc">+</span> </span>
-<span id="cb161-2"><a href="#cb161-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb161-3"><a href="#cb161-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb161-4"><a href="#cb161-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span> </span>
-<span id="cb161-5"><a href="#cb161-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador clásico del variograma"</span>)<span class="sc">+</span></span>
-<span id="cb161-6"><a href="#cb161-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">300</span>) <span class="sc">+</span></span>
-<span id="cb161-7"><a href="#cb161-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Exponencial"</span>),</span>
-<span id="cb161-8"><a href="#cb161-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span><span class="sc">~</span><span class="dv">4000</span><span class="sc">+</span><span class="dv">150000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>.x<span class="sc">/</span><span class="dv">100</span>)) </span>
-<span id="cb161-9"><a href="#cb161-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb161-10"><a href="#cb161-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Seno cardinal"</span>),</span>
-<span id="cb161-11"><a href="#cb161-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span><span class="sc">~</span><span class="dv">4000</span><span class="sc">+</span><span class="dv">30000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>((<span class="dv">15</span><span class="sc">/</span>.x)<span class="sc">*</span><span class="fu">sin</span>(.x<span class="sc">/</span><span class="dv">15</span>)))             </span>
-<span id="cb161-12"><a href="#cb161-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Rezago espacial"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Modelos teóricos de  semivariogramas"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(aquifer.v, <span class="fu">aes</span>(bins, classic)) <span class="sc">+</span> </span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb160-3"><a href="#cb160-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb160-4"><a href="#cb160-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Rezago espacial, h"</span>) <span class="sc">+</span> </span>
+<span id="cb160-5"><a href="#cb160-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimador clásico del variograma"</span>)<span class="sc">+</span></span>
+<span id="cb160-6"><a href="#cb160-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">300</span>) <span class="sc">+</span></span>
+<span id="cb160-7"><a href="#cb160-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Exponencial"</span>),</span>
+<span id="cb160-8"><a href="#cb160-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span><span class="sc">~</span><span class="dv">4000</span><span class="sc">+</span><span class="dv">150000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(<span class="sc">-</span>.x<span class="sc">/</span><span class="dv">100</span>)) </span>
+<span id="cb160-9"><a href="#cb160-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb160-10"><a href="#cb160-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="st">"Seno cardinal"</span>),</span>
+<span id="cb160-11"><a href="#cb160-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span><span class="sc">~</span><span class="dv">4000</span><span class="sc">+</span><span class="dv">30000</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>((<span class="dv">15</span><span class="sc">/</span>.x)<span class="sc">*</span><span class="fu">sin</span>(.x<span class="sc">/</span><span class="dv">15</span>)))             </span>
+<span id="cb160-12"><a href="#cb160-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Rezago espacial"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Modelos teóricos de  semivariogramas"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
 (`geom_function()`).</code></pre>
@@ -2109,14 +2097,14 @@ Convergence achieved by sums of squares.</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb163"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb163-1"><a href="#cb163-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">point</span>(<span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">x=</span><span class="dv">10</span>,<span class="at">y=</span><span class="dv">80</span>)))</span>
-<span id="cb163-2"><a href="#cb163-2" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">krige</span>(Kriging_aquifer, aquifer_points, <span class="st">'resi'</span>, aquifer.vmodExp_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">point</span>(<span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">x=</span><span class="dv">10</span>,<span class="at">y=</span><span class="dv">80</span>)))</span>
+<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">krige</span>(Kriging_aquifer, aquifer_points, <span class="st">'resi'</span>, aquifer.vmodExp_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Using all points.
@@ -2126,7 +2114,7 @@ Using all points.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Point object: x 
@@ -2142,14 +2130,14 @@ Point object: x
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb167"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb167-1"><a href="#cb167-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>sigma2hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>sigma2hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7010.452</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb169"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb169-1"><a href="#cb169-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">point</span>(<span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">x=</span><span class="dv">10</span>,<span class="at">y=</span><span class="dv">80</span>)))</span>
-<span id="cb169-2"><a href="#cb169-2" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">krige</span>(Kriging_aquifer, aquifer_points, <span class="st">'resi'</span>, aquifer.vmodwave_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">point</span>(<span class="fu">data.frame</span>(<span class="fu">list</span>(<span class="at">x=</span><span class="dv">10</span>,<span class="at">y=</span><span class="dv">80</span>)))</span>
+<span id="cb168-2"><a href="#cb168-2" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer <span class="ot">&lt;-</span> <span class="fu">krige</span>(Kriging_aquifer, aquifer_points, <span class="st">'resi'</span>, aquifer.vmodwave_0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Using all points.
@@ -2159,7 +2147,7 @@ Using all points.
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb171"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Point object: x 
@@ -2175,29 +2163,29 @@ Point object: x
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>zhat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>zhat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 196.2781</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb175"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb175-1"><a href="#cb175-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>sigma2hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>Kriging_aquifer<span class="sc">$</span>sigma2hat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5169.927</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb177"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb177-1"><a href="#cb177-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fu">min</span>(aquifer<span class="sc">$</span>Este),<span class="fu">max</span>(aquifer<span class="sc">$</span>Este),<span class="at">by=</span><span class="dv">20</span>),<span class="at">y=</span><span class="fu">seq</span>(<span class="fu">min</span>(aquifer<span class="sc">$</span>Norte),<span class="fu">max</span>(aquifer<span class="sc">$</span>Norte),<span class="at">by=</span><span class="dv">10</span>))</span>
-<span id="cb177-2"><a href="#cb177-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xr <span class="ot">&lt;-</span> <span class="fu">range</span>(grid<span class="sc">$</span>x)</span>
-<span id="cb177-3"><a href="#cb177-3" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xs <span class="ot">&lt;-</span> grid<span class="sc">$</span>xr[<span class="dv">2</span>] <span class="sc">-</span> grid<span class="sc">$</span>xr[<span class="dv">1</span>]</span>
-<span id="cb177-4"><a href="#cb177-4" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>yr <span class="ot">&lt;-</span> <span class="fu">range</span>(grid<span class="sc">$</span>y)</span>
-<span id="cb177-5"><a href="#cb177-5" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>ys <span class="ot">&lt;-</span> grid<span class="sc">$</span>yr[<span class="dv">2</span>] <span class="sc">-</span> grid<span class="sc">$</span>yr[<span class="dv">1</span>]</span>
-<span id="cb177-6"><a href="#cb177-6" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>max <span class="ot">&lt;-</span> <span class="fu">max</span>(grid<span class="sc">$</span>xs, grid<span class="sc">$</span>ys)</span>
-<span id="cb177-7"><a href="#cb177-7" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="fu">matrix</span>(grid<span class="sc">$</span>x, <span class="fu">length</span>(grid<span class="sc">$</span>x), <span class="fu">length</span>(grid<span class="sc">$</span>y))),</span>
-<span id="cb177-8"><a href="#cb177-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">matrix</span>(grid<span class="sc">$</span>y, <span class="fu">length</span>(grid<span class="sc">$</span>x), <span class="fu">length</span>(grid<span class="sc">$</span>y), <span class="at">byrow=</span><span class="cn">TRUE</span>))))</span>
-<span id="cb177-9"><a href="#cb177-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grid<span class="sc">$</span>xy) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)</span>
-<span id="cb177-10"><a href="#cb177-10" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>point <span class="ot">&lt;-</span> <span class="fu">point</span>(grid<span class="sc">$</span>xy)</span>
-<span id="cb177-11"><a href="#cb177-11" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>krige <span class="ot">&lt;-</span> <span class="fu">krige</span>(grid<span class="sc">$</span>point,aquifer_points,<span class="st">'resi'</span>,aquifer.vmodwave_0,<span class="at">maxdist=</span><span class="dv">180</span>,<span class="at">extrap=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fu">min</span>(aquifer<span class="sc">$</span>Este),<span class="fu">max</span>(aquifer<span class="sc">$</span>Este),<span class="at">by=</span><span class="dv">20</span>),<span class="at">y=</span><span class="fu">seq</span>(<span class="fu">min</span>(aquifer<span class="sc">$</span>Norte),<span class="fu">max</span>(aquifer<span class="sc">$</span>Norte),<span class="at">by=</span><span class="dv">10</span>))</span>
+<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xr <span class="ot">&lt;-</span> <span class="fu">range</span>(grid<span class="sc">$</span>x)</span>
+<span id="cb176-3"><a href="#cb176-3" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xs <span class="ot">&lt;-</span> grid<span class="sc">$</span>xr[<span class="dv">2</span>] <span class="sc">-</span> grid<span class="sc">$</span>xr[<span class="dv">1</span>]</span>
+<span id="cb176-4"><a href="#cb176-4" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>yr <span class="ot">&lt;-</span> <span class="fu">range</span>(grid<span class="sc">$</span>y)</span>
+<span id="cb176-5"><a href="#cb176-5" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>ys <span class="ot">&lt;-</span> grid<span class="sc">$</span>yr[<span class="dv">2</span>] <span class="sc">-</span> grid<span class="sc">$</span>yr[<span class="dv">1</span>]</span>
+<span id="cb176-6"><a href="#cb176-6" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>max <span class="ot">&lt;-</span> <span class="fu">max</span>(grid<span class="sc">$</span>xs, grid<span class="sc">$</span>ys)</span>
+<span id="cb176-7"><a href="#cb176-7" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>xy <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="fu">matrix</span>(grid<span class="sc">$</span>x, <span class="fu">length</span>(grid<span class="sc">$</span>x), <span class="fu">length</span>(grid<span class="sc">$</span>y))),</span>
+<span id="cb176-8"><a href="#cb176-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">matrix</span>(grid<span class="sc">$</span>y, <span class="fu">length</span>(grid<span class="sc">$</span>x), <span class="fu">length</span>(grid<span class="sc">$</span>y), <span class="at">byrow=</span><span class="cn">TRUE</span>))))</span>
+<span id="cb176-9"><a href="#cb176-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grid<span class="sc">$</span>xy) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>)</span>
+<span id="cb176-10"><a href="#cb176-10" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>point <span class="ot">&lt;-</span> <span class="fu">point</span>(grid<span class="sc">$</span>xy)</span>
+<span id="cb176-11"><a href="#cb176-11" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">$</span>krige <span class="ot">&lt;-</span> <span class="fu">krige</span>(grid<span class="sc">$</span>point,aquifer_points,<span class="st">'resi'</span>,aquifer.vmodwave_0,<span class="at">maxdist=</span><span class="dv">180</span>,<span class="at">extrap=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Using points within 180 units of prediction points.
@@ -2205,11 +2193,25 @@ Using points within 180 units of prediction points.
 </div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">"s"</span>)</span>
+<span id="cb178-3"><a href="#cb178-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid<span class="sc">$</span>xy, <span class="at">type=</span><span class="st">"n"</span>, <span class="at">xlim=</span><span class="fu">c</span>(grid<span class="sc">$</span>xr[<span class="dv">1</span>], grid<span class="sc">$</span>xr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max),<span class="at">ylim=</span><span class="fu">c</span>(grid<span class="sc">$</span>yr[<span class="dv">1</span>], grid<span class="sc">$</span>yr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max))</span>
+<span id="cb178-4"><a href="#cb178-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>zhat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb178-5"><a href="#cb178-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>zhat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb179"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb179-1"><a href="#cb179-1" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb179-2"><a href="#cb179-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">"s"</span>)</span>
 <span id="cb179-3"><a href="#cb179-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid<span class="sc">$</span>xy, <span class="at">type=</span><span class="st">"n"</span>, <span class="at">xlim=</span><span class="fu">c</span>(grid<span class="sc">$</span>xr[<span class="dv">1</span>], grid<span class="sc">$</span>xr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max),<span class="at">ylim=</span><span class="fu">c</span>(grid<span class="sc">$</span>yr[<span class="dv">1</span>], grid<span class="sc">$</span>yr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max))</span>
-<span id="cb179-4"><a href="#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>zhat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb179-5"><a href="#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>zhat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb179-4"><a href="#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>sigma2hat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)), <span class="at">add=</span><span class="cn">TRUE</span>)</span>
+<span id="cb179-5"><a href="#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>sigma2hat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2217,14 +2219,6 @@ Using points within 180 units of prediction points.
 </figure>
 </div>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">x11</span>()</span>
-<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb180-3"><a href="#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">pty=</span><span class="st">"s"</span>)</span>
-<span id="cb180-4"><a href="#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid<span class="sc">$</span>xy, <span class="at">type=</span><span class="st">"n"</span>, <span class="at">xlim=</span><span class="fu">c</span>(grid<span class="sc">$</span>xr[<span class="dv">1</span>], grid<span class="sc">$</span>xr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max),<span class="at">ylim=</span><span class="fu">c</span>(grid<span class="sc">$</span>yr[<span class="dv">1</span>], grid<span class="sc">$</span>yr[<span class="dv">1</span>]<span class="sc">+</span>grid<span class="sc">$</span>max))</span>
-<span id="cb180-5"><a href="#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>sigma2hat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)), <span class="at">add=</span><span class="cn">TRUE</span>)</span>
-<span id="cb180-6"><a href="#cb180-6" aria-hidden="true" tabindex="-1"></a><span class="fu">contour</span>(grid<span class="sc">$</span>x,grid<span class="sc">$</span>y,<span class="fu">matrix</span>(grid<span class="sc">$</span>krige<span class="sc">$</span>sigma2hat,<span class="fu">length</span>(grid<span class="sc">$</span>x),<span class="fu">length</span>(grid<span class="sc">$</span>y)),<span class="at">add=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

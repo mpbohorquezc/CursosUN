@@ -1,6 +1,6 @@
 ## Definición {.unnumbered}
 
-# [Estadística Espacial Funcional ]{style="color:#FF8000;"}
+# [Estadística Espacial Funcional]{style="color:#FF8000;"}
 
 ## Definición
 
