@@ -27,11 +27,13 @@ book:
         - text: "<span style='color: #728387 !important;'>Implementación de los Modelos </span>"
           file: 10.qmd
           
+    # --- SECCIÓN MODIFICADA ---
     - part: 1.qmd
       text: "<span style='color: #FF8000 !important;'>Estadística Espacial Funcional</span>"
-
-    - text: "<span style='color: #728387 !important;'>Paquete </span>"
-      file: 2.qmd
+      chapters: 
+        - text: "<span style='color: #728387 !important;'>Paquete </span>"
+          file: 2.qmd
+    # ---------------------------
           
     - part: "<span style='color: #FF8000 !important;'>Objetos </span>"
       chapters:

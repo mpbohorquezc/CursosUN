@@ -223,15 +223,22 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></span>
-  </li>
-        <li class="sidebar-item">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span style="color: #728387 !important;">Paquete </span></span></a>
   </div>
 </li>
+      </ul>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
@@ -705,12 +712,12 @@ Para evaluar la significancia de los resultados obtenidos con el índice Local G
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">"&gt;="</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.35664336 0.78921079 0.11588412 0.33866134 0.14085914 0.07992008
- [7] 0.73426573 0.40059940 0.52247752 0.19080919 0.02197802 0.16583417
-[13] 0.02297702 0.72227772 0.90209790 0.05994006 0.33866134 0.12387612
-[19] 0.44555445 0.29070929 0.13186813 0.64835165 0.42157842 0.60739261
-[25] 0.34865135 0.29970030 0.56643357         NA 0.74825175 0.98701299
-[31] 0.89010989 0.88411588</code></pre>
+<pre><code> [1] 0.39060939 0.76723277 0.11888112 0.32767233 0.14785215 0.06193806
+ [7] 0.71428571 0.39260739 0.52747253 0.17782218 0.02497502 0.13986014
+[13] 0.02797203 0.72727273 0.89010989 0.07592408 0.34765235 0.14685315
+[19] 0.40559441 0.29070929 0.11488511 0.64935065 0.40559441 0.61138861
+[25] 0.35464535 0.29170829 0.56943057         NA 0.74925075 0.98801199
+[31] 0.89810190 0.87712288</code></pre>
 </div>
 </div>
 <p>Los valores p calculados (mc.pvalor.G) indican la significancia estadística de los patrones espaciales observados. Un valor p bajo (generalmente menor que 0.05) sugiere que la autocorrelación espacial observada en un departamento es significativamente diferente de la aleatoriedad, lo que indica un clúster local de alta o baja concentración de valores. Los departamentos con valores p bajos pueden considerarse como áreas con patrones espaciales significativos, lo cual es útil para identificar zonas con características especiales en la variable de interés.</p>
