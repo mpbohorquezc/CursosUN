@@ -60,3 +60,9 @@ body {
 #quarto-content {
   background: transparent !important;
 }
+
+
+/* Esto pintará de naranja los enlaces de la barra lateral */
+.sidebar-navigation .sidebar-item-text {
+  color: #FF8000 !important;
+}

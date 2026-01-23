@@ -53,14 +53,11 @@ book:
           file: 11.qmd
           
     - part: 12.qmd
-      text: "<span style='color: #FF8000 !important;'>Kriging</span>"
-        
+      text: "Kriging"
     - part: 13.qmd
-      text: "<span style='color: #FF8000 !important;'>Cokriging</span>"
-      
+      text: "Cokriging"
     - part: 14.qmd
-      text: "<span style='color: #FF8000 !important;'>Diseño Óptimo</span>"
-          
+      text: "Diseño Óptimo"   
     
   
 bibliography: references.bib
