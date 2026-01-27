@@ -159,3 +159,34 @@ header#title-block-header.quarto-title-block.default .quarto-title .title {
 .navbar-nav .nav-link, .quarto-search-toggle {
   color: #FF8000 !important;
 }
+
+/* ============================================================
+   FUSIÓN TOTAL EN AZUL
+   ============================================================ */
+
+/* 1. Unificamos el fondo azul en todos los contenedores del encabezado */
+.navbar, 
+#quarto-header, 
+.quarto-secondary-nav {
+  background-color: #4A7EB5 !important; 
+  border-bottom: none !important;      /* Eliminamos la línea divisoria */
+  box-shadow: none !important;         /* Eliminamos la sombra que crea separación */
+}
+
+/* 2. Ajuste para la barra secundaria (breadcrumbs) */
+.quarto-secondary-nav {
+  border-top: none !important;         /* Eliminamos borde superior si existiera */
+  color: #FF8000 !important;           /* Mantenemos tus letras naranja sobre el azul */
+}
+
+/* 3. Aseguramos que el texto de la ruta (breadcrumbs) sea legible */
+.breadcrumb-item, 
+.breadcrumb-item a,
+.quarto-btn-toggle {
+  color: #FF8000 !important;
+}
+
+/* 4. Evitar que el separador de la ruta "/" sea gris */
+.breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(255, 128, 0, 0.5) !important; 
+}

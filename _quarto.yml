@@ -5,15 +5,13 @@ project:
 book:
   title: "Cuadernos de Estadística Espacial"
   subtitle: "Martha Patricia Bohorquez Castañeda"
-  
-  
-  
-# --- SECCIÓN DE GITHUB CORREGIDA ---
+  # Eliminamos el background naranja de aquí
   navbar:
+    background: "#4A7EB5"  # <--- Forzamos tu azul profundo aquí
     right:
       - icon: github
         href: https://github.com/mpbohorquezc/SpatFD-Functional-Geostatistics.git
-  # ---------------------------------
+
   
   sidebar:
     collapse-level: 1
@@ -23,7 +21,7 @@ book:
     - part: "<span style='color: #FF8000 !important;'>Análisis Exploratorio de Datos</span>"
       chapters: 
         - text: "Estadística descriptiva y Exploratoria"
-          file: 1.qmd
+          file: ejercicio.qmd
         - text: "Pruebas de bondad de ajuste"
           file: 2-Pruebas_de_Bondad_de_ajuste.qmd
        
@@ -120,7 +118,32 @@ format:
       - cosmo
       - brand
     toc: true
-    number-sections: true
     css: custom.css
+    include-after-body:
+      text: |
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // Cargamos el sonido
+          const audio = new Audio('water-drop-85731.mp3');
+          
+          // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+          // 0.4 es un volumen suave y elegante.
+          audio.volume = 0.4; 
 
+          // Seleccionamos los elementos del menú
+          const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+          
+          elementos.forEach(el => {
+            el.addEventListener('click', function() {
+              // Reproducir sonido
+              audio.currentTime = 0;
+              audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+              
+              // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+              // Ahora cada pestaña que abras se quedará abierta.
+            });
+          });
+        });
+        </script>
+        
 editor: visual

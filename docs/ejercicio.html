@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Datos TAD – Cuadernos de Estadística Espacial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./2-Pruebas_de_Bondad_de_ajuste.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ccc8c071838d302f8f4ee4e4dd772085.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Cuadernos de Estadística Espacial</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mpbohorquezc/SpatFD-Functional-Geostatistics.git"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ejercicio.html"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></a></li><li class="breadcrumb-item"><a href="./ejercicio.html">Estadística descriptiva y Exploratoria</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span style="color: #FF8000;">Introducción</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ejercicio.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Estadística descriptiva y Exploratoria</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-Pruebas_de_Bondad_de_ajuste.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pruebas de bondad de ajuste</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Geoestadística</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Geoestadística con Sgeostat</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Geoestadística Univariada con GeoR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Kriging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-Introduccion_proceso_espacial_bivariado.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Proceso espacial gaussiano bivariado</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Gstats_datos_de_méxico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ozono México</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Modelos de Regresión Espacial</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Aplicación de los Modelos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-redes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Redes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-Encuesta_Multipropoosito.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Encuesta Bogotá Multipropósito</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Estadística Espacial Funcional</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estadística Espacial Funcional</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paquete</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5-Análisis_de_datos_funcionales (ADF) - Modelos de regresión.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDA-Regresión funcional</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6-Análisis_de_datos_funcionales (ADF) - Modelos de regresión (Parte 2).html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDA-Regresión escalar</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7-Análisis de datos funcionales (ADF) - Análisis gráfico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDA-Regresión escalar</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-Análisis_de_datos_funcionales_(ADF) - Análisis exploratorio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDA – Análisis descriptivo</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Objetos </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SpatFD</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">gfdata</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Datasets </span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">AirQualityBogota</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Vowels</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CokMexico</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Kriging</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Teoría de Kriging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-Ilustración_del_kriging_simple_espacio_tiempo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ilustración del Kriging Simple</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Cokriging</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modelo de Cokriging</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-Cokriging.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ilustración del Cokriging</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text"><span style="color: #FF8000 !important;">Diseño Óptimo</span></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diseño Óptimo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-Pulimiento_de_medianas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pulimiento de Medianas</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link active" data-scroll-target="#ejercicios"><span style="color:#FF8000;">Ejercicios</span></a>
+  <ul class="collapse">
+  <li><a href="#medidas-de-resumen-univariadas" id="toc-medidas-de-resumen-univariadas" class="nav-link" data-scroll-target="#medidas-de-resumen-univariadas">Medidas de resumen univariadas</a>
+  <ul class="collapse">
+  <li><a href="#tendencia-central-y-su-variabilidad" id="toc-tendencia-central-y-su-variabilidad" class="nav-link" data-scroll-target="#tendencia-central-y-su-variabilidad">Tendencia central y su variabilidad</a></li>
+  </ul></li>
+  <li><a href="#diagrama-circular-sencillo" id="toc-diagrama-circular-sencillo" class="nav-link" data-scroll-target="#diagrama-circular-sencillo">Diagrama Circular Sencillo</a>
+  <ul class="collapse">
+  <li><a href="#diagrama-circular-3d-y-diagrama-de-barras" id="toc-diagrama-circular-3d-y-diagrama-de-barras" class="nav-link" data-scroll-target="#diagrama-circular-3d-y-diagrama-de-barras">Diagrama circular 3d y diagrama de barras</a></li>
+  </ul></li>
+  <li><a href="#diagrama-de-barras-y-diagrama-circular-con-leyenda" id="toc-diagrama-de-barras-y-diagrama-circular-con-leyenda" class="nav-link" data-scroll-target="#diagrama-de-barras-y-diagrama-circular-con-leyenda">Diagrama de barras y diagrama circular con leyenda</a></li>
+  <li><a href="#diagrama-de-tallo-y-hojas" id="toc-diagrama-de-tallo-y-hojas" class="nav-link" data-scroll-target="#diagrama-de-tallo-y-hojas">Diagrama de tallo y hojas</a></li>
+  <li><a href="#histograma-frecuencias-absolutas-sin-y-con-titulo" id="toc-histograma-frecuencias-absolutas-sin-y-con-titulo" class="nav-link" data-scroll-target="#histograma-frecuencias-absolutas-sin-y-con-titulo">Histograma frecuencias absolutas sin y con titulo</a></li>
+  <li><a href="#diagrama-de-caja-general-por-grupos-y-puntos-superpuestos." id="toc-diagrama-de-caja-general-por-grupos-y-puntos-superpuestos." class="nav-link" data-scroll-target="#diagrama-de-caja-general-por-grupos-y-puntos-superpuestos.">Diagrama de Caja General, por grupos y puntos superpuestos.</a></li>
+  <li><a href="#tablas-de-contingencia-conteos-proporción-porcentajes-con-respecto-al-total-porcentajes-por-fila-y-porcentajes-por-columna-diagramas-de-barras-bivariados" id="toc-tablas-de-contingencia-conteos-proporción-porcentajes-con-respecto-al-total-porcentajes-por-fila-y-porcentajes-por-columna-diagramas-de-barras-bivariados" class="nav-link" data-scroll-target="#tablas-de-contingencia-conteos-proporción-porcentajes-con-respecto-al-total-porcentajes-por-fila-y-porcentajes-por-columna-diagramas-de-barras-bivariados">Tablas de contingencia, conteos, proporción, porcentajes con respecto al total, porcentajes por fila y porcentajes por columna, diagramas de barras bivariados</a></li>
+  <li><a href="#diagramas-de-dispersión-generales-y-por-grupos" id="toc-diagramas-de-dispersión-generales-y-por-grupos" class="nav-link" data-scroll-target="#diagramas-de-dispersión-generales-y-por-grupos">Diagramas de dispersión generales y por grupos</a></li>
+  <li><a href="#matrices-de-diagramas-de-dispersión-generales-y-por-grupos.-diferentes-gráficos-en-la-diagonal-diagramas-de-caja-histogramas-densidades." id="toc-matrices-de-diagramas-de-dispersión-generales-y-por-grupos.-diferentes-gráficos-en-la-diagonal-diagramas-de-caja-histogramas-densidades." class="nav-link" data-scroll-target="#matrices-de-diagramas-de-dispersión-generales-y-por-grupos.-diferentes-gráficos-en-la-diagonal-diagramas-de-caja-histogramas-densidades.">Matrices de diagramas de dispersión generales y por grupos. Diferentes gráficos en la diagonal, diagramas de caja, histogramas, densidades.</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ejercicio.html"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></a></li><li class="breadcrumb-item"><a href="./ejercicio.html">Estadística descriptiva y Exploratoria</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Datos TAD</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="ejercicios" class="level1 unnumbered">
+<h1 class="unnumbered"><span style="color:#FF8000;">Ejercicios</span></h1>
+<p>El conjunto de datos TAD corresponde a información clinica básica de un grupo de individuos, recolectada con el objetivo de analizar variables asociadas a la salud cardiovascular.</p>
+<p>Incluye carácterísticas demógraficas, antropométricas y biomédicas, tales como la edad, el nivel de colesterol, el índice de masa corporal y la tensión arterial.</p>
+<p>Para la lectura y manipulación del conjunto de datos se utiliza la librería readxl, la cual permite importar archivos en formato Excel directamente en R.</p>
+<p>Posteriormente, mediante la función read_excel(), se carga el archivo <code>TAD.xlsx</code>, ubicado en la carpeta data. En este paso se especifica el tipo de cada columna, indicando cuáles corresponden a variables numéricas y cuáles a variables de tipo texto, con el fin de garantizar un tratamiento adecuado de la información durante el análisis estadístico.</p>
+<section id="paso-1-leer-la-tabla-de-datos-que-provienen-de-excel" class="level5">
+<h5 class="anchored" data-anchor-id="paso-1-leer-la-tabla-de-datos-que-provienen-de-excel"><u>Paso 1 : Leer la tabla de datos que provienen de Excel</u></h5>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>TAD <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data/TAD.xlsx"</span>, <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">"numeric"</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"text"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="st">"text"</span>))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(TAD)<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Edad"</span>,<span class="st">"Colesterol"</span>,<span class="st">"IMC"</span>,<span class="st">"TADias"</span>,<span class="st">"GEN"</span>,<span class="st">"EST"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(TAD) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>De esta manera, mediante las funciones <code>head(TAD)</code> y <code>tail(TAD)</code>, es posible visualizar los seis primeros y los seis últimos registros del conjunto de datos, respectivamente. Esto permite obtener una visión general de la información disponible y comprender, a grandes rasgos, la estructura y el tipo de datos con los que se trabajará.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(TAD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>str()</code> muestra un resumen de los valores contenidos en cada variable, lo que facilita la verificación de que los datos hayan sido importados correctamente y que cada variable tenga el formato adecuado para el análisis estadístico.</p>
+</section>
+<section id="medidas-de-resumen-univariadas" class="level2">
+<h2 class="anchored" data-anchor-id="medidas-de-resumen-univariadas">Medidas de resumen univariadas</h2>
+<section id="tendencia-central-y-su-variabilidad" class="level3">
+<h3 class="anchored" data-anchor-id="tendencia-central-y-su-variabilidad">Tendencia central y su variabilidad</h3>
+<p>En este análisis, se han seleccionado medidas de tendencia central, como el promedio y la mediana, para identificar el centro de la distribución del colesterol, y medidas de variabilidad (o dispersión), como la varianza, la desviación estándar y el MAD, para entender qué tan dispersos o agrupados se encuentran los datos respecto a ese centro. Estas métricas son fundamentales para diagnosticar la homogeneidad del grupo de estudio y detectar posibles valores atípicos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Cálculos base</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>media_col    <span class="ot">&lt;-</span> <span class="fu">mean</span>(TAD<span class="sc">$</span>Colesterol)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sd_col       <span class="ot">&lt;-</span> <span class="fu">sd</span>(TAD<span class="sc">$</span>Colesterol)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mediana_col  <span class="ot">&lt;-</span> <span class="fu">median</span>(TAD<span class="sc">$</span>Colesterol)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>mad_col      <span class="ot">&lt;-</span> <span class="fu">mad</span>(TAD<span class="sc">$</span>Colesterol)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Creación del Data Frame de resumen</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Valor =</span> <span class="fu">c</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    media_col,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">var</span>(TAD<span class="sc">$</span>Colesterol),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    sd_col,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    (sd_col <span class="sc">/</span> media_col) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    mediana_col,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    mad_col,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    (mad_col <span class="sc">/</span> mediana_col) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Asignación de nombres</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(resumen) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Promedio"</span>, <span class="st">"Varianza"</span>, <span class="st">"Desv. Estándar"</span>, <span class="st">"CV (Media) %"</span>, </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"Mediana"</span>, <span class="st">"MAD"</span>, <span class="st">"CV (Mediana) %"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar resultado</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(resumen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Complementando este análisis detallado, se utiliza la función summary(TAD$Colesterol) con el objetivo de obtener una visión integral y rápida del comportamiento de la variable. Mientras que los cálculos anteriores nos dan precisión sobre la dispersión, esta función nos devuelve los cinco números resumen (mínimo, primer cuartil, mediana, tercer cuartil y máximo) junto con el promedio. Esto permite identificar de un vistazo el rango total de los datos y la simetría de la distribución mediante la comparación de los cuartiles, sirviendo como una herramienta de validación para los estadísticos calculados previamente.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(TAD<span class="sc">$</span>Colesterol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con el fin de identificar los valores mínimo y máximo de la variable tensión arterial diastólica (TADias), se utilizan las funciones min() y max(), respectivamente. Estas permiten determinar los límites inferior y superior observados en el conjunto de datos, lo cual resulta útil para comprender el rango de variación de la variable y evaluar, de manera preliminar, su comportamiento general dentro del análisis exploratorio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>min_TAD <span class="ot">&lt;-</span> <span class="fu">min</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>min_TAD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>max_TAD <span class="ot">&lt;-</span> <span class="fu">max</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>max_TAD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Luego se usa la función range(), la cual permite identificar simultáneamente ambos extremos de la variable tensión arterial diastólica (TADias). Esto facilita la determinación del intervalo en el que se encuentran los datos y contribuye a una mejor comprensión de la variabilidad presente en la variable durante el análisis exploratorio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(TAD<span class="sc">$</span>TADias)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con el fin de analizar la dispersión y la distribución de la variable tensión arterial diastólica (TADias), se calcula el rango, definido como la diferencia entre el valor máximo y el valor mínimo observados. Esta medida permite cuantificar la amplitud total de los datos.</p>
+<p>Adicionalmente, se obtienen los cuartiles mediante la función quantile(), los cuales dividen el conjunto de datos en cuatro partes iguales. El análisis de los cuartiles facilita la identificación de la posición de los valores dentro de la distribución, así como la evaluación de la concentración y variabilidad de la información en distintos intervalos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rango_TAD<span class="ot">=</span><span class="fu">max</span>(TAD<span class="sc">$</span>TADias)<span class="sc">-</span><span class="fu">min</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>cuartiles_TAD <span class="ot">&lt;-</span> <span class="fu">quantile</span>(TAD<span class="sc">$</span>TADias,<span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">by=</span><span class="fl">0.25</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cuartiles_TAD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con el objetivo de analizar la dispersión central de la variable tensión arterial diastólica (TADias), se calcula el rango intercuartílico (IQR) mediante la función IQR(). Esta medida corresponde a la diferencia entre el tercer cuartil (Q3) y el primer cuartil (Q1), y representa el intervalo donde se concentra el 50 % central de los datos.</p>
+<p>El rango intercuartílico es especialmente útil en el análisis exploratorio, ya que permite evaluar la variabilidad de la variable sin verse afectado por valores extremos, proporcionando una medida más robusta de dispersión.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cuartil 3 - Cuartil !</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rango_intercuartil_TAD<span class="ot">&lt;-</span> <span class="fu">IQR</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>rango_intercuartil_TAD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Medidas de posición de la TAD diastólica</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>min_TAD  <span class="ot">&lt;-</span> <span class="fu">min</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>max_TAD  <span class="ot">&lt;-</span> <span class="fu">max</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>rango_TAD <span class="ot">&lt;-</span> max_TAD <span class="sc">-</span> min_TAD</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>cuartiles_TAD <span class="ot">&lt;-</span> <span class="fu">quantile</span>(TAD<span class="sc">$</span>TADias, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.25</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>iqr_TAD <span class="ot">&lt;-</span> <span class="fu">IQR</span>(TAD<span class="sc">$</span>TADias)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>Medidas_Posic <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Medidas de posición"</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    min_TAD,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    max_TAD,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    rango_TAD,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    cuartiles_TAD,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    iqr_TAD</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(Medidas_Posic) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mínimo"</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Máximo"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rango"</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cuartil 0 (mínimo)"</span>,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cuartil 1"</span>,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cuartil 2 (mediana)"</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cuartil 3"</span>,</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Cuartil 4 (máximo)"</span>,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rango intercuartílico (IQR)"</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>Medidas_Posic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Con el fin de sintetizar la información obtenida previamente, se agrupan las principales medidas de posición de la variable tensión arterial diastólica (TADias) en una sola tabla. Esta incluye el valor mínimo, máximo, rango, cuartiles y rango intercuartílico, permitiendo una visión integral de la distribución de los datos.</p>
+</section>
+</section>
+<section id="diagrama-circular-sencillo" class="level2">
+<h2 class="anchored" data-anchor-id="diagrama-circular-sencillo">Diagrama Circular Sencillo</h2>
+<p>Complementando el análisis descriptivo, se procede a realizar un análisis de frecuencias para las variables cualitativas, en este caso, el estado civil o estrato de los individuos (EST). El uso de la función table() permite tabular el conteo exacto de sujetos en cada categoría, mientras que la función pie() genera un gráfico de sectores (o de torta).</p>
+<p>El objetivo de esta visualización es representar de forma gráfica la proporción y composición del conjunto de datos, permitiendo identificar rápidamente si existe una categoría dominante o si la muestra se encuentra distribuida de manera equitativa entre los diferentes grupos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>conteoEST<span class="ot">=</span><span class="fu">table</span>(TAD<span class="sc">$</span>EST)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(conteoEST,<span class="at">col=</span><span class="st">"#D02090"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Asimismo, se aplica el mismo procedimiento para la variable GEN, con el propósito de determinar la distribución por género dentro del grupo de estudio. Al generar el conteo con table() y representarlo mediante un gráfico de sectores, se busca evaluar el balance de la muestra. Esta exploración es crucial en estudios cardiovasculares, ya que permite verificar si existe una representación equitativa entre hombres y mujeres o si, por el contrario, los resultados del análisis podrían estar influenciados por una mayoría de algún género en particular.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>conteoGEN<span class="ot">=</span><span class="fu">table</span>(TAD<span class="sc">$</span>GEN)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(conteoGEN,<span class="at">col=</span><span class="st">"#FFC1C1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="diagrama-circular-3d-y-diagrama-de-barras" class="level3">
+<h3 class="anchored" data-anchor-id="diagrama-circular-3d-y-diagrama-de-barras">Diagrama circular 3d y diagrama de barras</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotrix)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pie3D</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>GEN), <span class="at">radius=</span><span class="fl">0.9</span>,<span class="at">main=</span><span class="st">"Numero de personas de cada género"</span>,<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"Mujeres"</span>,<span class="st">"Hombres"</span>),<span class="at">explode=</span><span class="fl">0.1</span>,<span class="at">col =</span> <span class="fu">topo.colors</span>(<span class="fu">length</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>GEN))), <span class="at">border =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="diagrama-de-barras-y-diagrama-circular-con-leyenda" class="level2">
+<h2 class="anchored" data-anchor-id="diagrama-de-barras-y-diagrama-circular-con-leyenda">Diagrama de barras y diagrama circular con leyenda</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#r_color &lt;- colors()</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#head(r_color, 50)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>GEN),<span class="at">col=</span><span class="st">"thistle3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>EST),<span class="at">col=</span><span class="st">"#D02090"</span>,<span class="at">main=</span><span class="st">"Frecuencias de la variable estrato socioeconómico"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#vcreacion del grafico, título, leyenda</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>leyenda <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Mujeres"</span>,<span class="st">"Hombres"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>GEN), <span class="at">main=</span><span class="st">"Numero de personas de cada género"</span>, <span class="at">col =</span> <span class="fu">heat.colors</span>(<span class="fu">length</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>GEN))))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, leyenda, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">fill =</span> <span class="fu">heat.colors</span>(<span class="fu">length</span>(leyenda)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pie</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>EST), <span class="at">main=</span><span class="st">"Numero de personas de cada género"</span>, <span class="at">col =</span> <span class="fu">terrain.colors</span>(<span class="fu">length</span>(<span class="fu">table</span>(TAD<span class="sc">$</span>EST))))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>leyenda <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>,<span class="st">"5"</span>,<span class="st">"6"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, leyenda, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">fill =</span> <span class="fu">terrain.colors</span>(<span class="fu">length</span>(leyenda)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="diagrama-de-tallo-y-hojas" class="level2">
+<h2 class="anchored" data-anchor-id="diagrama-de-tallo-y-hojas">Diagrama de tallo y hojas</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(TAD<span class="sc">$</span>Colesterol, <span class="at">scale =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="histograma-frecuencias-absolutas-sin-y-con-titulo" class="level2">
+<h2 class="anchored" data-anchor-id="histograma-frecuencias-absolutas-sin-y-con-titulo">Histograma frecuencias absolutas sin y con titulo</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(TAD<span class="sc">$</span>Colesterol,<span class="at">col=</span><span class="st">"purple"</span>,<span class="at">freq=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(TAD<span class="sc">$</span>Colesterol,<span class="at">col=</span><span class="st">"#98F5FF"</span>,<span class="at">freq=</span>F,<span class="at">main=</span><span class="st">"Distribución de frecuencias de los niveles de colesterol"</span>,<span class="at">xlab=</span><span class="st">"Colesterol"</span>,<span class="at">ylab=</span><span class="st">"Frecuencias"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(TAD<span class="sc">$</span>Colesterol,<span class="at">col=</span><span class="st">"#98F5FF"</span>,<span class="at">freq=</span>F,<span class="at">main=</span><span class="st">"Distribución de frecuencias de los niveles de colesterol"</span>,<span class="at">xlab=</span><span class="st">"Colesterol"</span>,<span class="at">ylab=</span><span class="st">"Frecuencias"</span>,<span class="at">plot=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="diagrama-de-caja-general-por-grupos-y-puntos-superpuestos." class="level2">
+<h2 class="anchored" data-anchor-id="diagrama-de-caja-general-por-grupos-y-puntos-superpuestos.">Diagrama de Caja General, por grupos y puntos superpuestos.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TAD<span class="sc">$</span>Colesterol,<span class="at">col=</span><span class="st">"green"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TAD<span class="sc">$</span>Colesterol,<span class="at">col=</span><span class="st">"#66CDAA"</span>,<span class="at">ylab=</span><span class="st">"Colesterol"</span>,<span class="at">main=</span><span class="st">"Diagrama de caja de Colesterol"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TAD<span class="sc">$</span>Colesterol,<span class="at">col=</span><span class="st">"burlywood1"</span>,<span class="at">ylab=</span><span class="st">"Colesterol"</span>,<span class="at">main=</span><span class="st">"Diagrama de caja de Colesterol"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TAD<span class="sc">$</span>IMC,<span class="at">col=</span><span class="st">"#F0FFFF"</span>,<span class="at">ylab=</span><span class="st">"Colesterol"</span>,<span class="at">main=</span><span class="st">"Diagrama de caja de Colesterol"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(TAD<span class="sc">$</span>IMC, <span class="at">method =</span> <span class="st">"jitter"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">vertical =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TAD<span class="sc">$</span>Colesterol<span class="sc">~</span> TAD<span class="sc">$</span>GEN,<span class="at">col=</span><span class="st">"#FFE4E1"</span>,<span class="at">ylab=</span><span class="st">"Colesterol"</span>,<span class="at">main=</span><span class="st">"Diagrama de caja de Colesterol"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(TAD<span class="sc">$</span>Colesterol<span class="sc">~</span> TAD<span class="sc">$</span>GEN, <span class="at">method =</span> <span class="st">"jitter"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"#CD8162"</span>, <span class="at">vertical =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(TAD<span class="sc">$</span>TADias<span class="sc">~</span> TAD<span class="sc">$</span>GEN,<span class="at">col=</span><span class="st">"#FFE4E1"</span>,<span class="at">ylab=</span><span class="st">"Colesterol"</span>,<span class="at">main=</span><span class="st">"Diagrama de caja de Colesterol"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stripchart</span>(TAD<span class="sc">$</span>TADias<span class="sc">~</span> TAD<span class="sc">$</span>EST, <span class="at">method =</span> <span class="st">"jitter"</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"#6A5ACD"</span>, <span class="at">vertical =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tablas-de-contingencia-conteos-proporción-porcentajes-con-respecto-al-total-porcentajes-por-fila-y-porcentajes-por-columna-diagramas-de-barras-bivariados" class="level2">
+<h2 class="anchored" data-anchor-id="tablas-de-contingencia-conteos-proporción-porcentajes-con-respecto-al-total-porcentajes-por-fila-y-porcentajes-por-columna-diagramas-de-barras-bivariados">Tablas de contingencia, conteos, proporción, porcentajes con respecto al total, porcentajes por fila y porcentajes por columna, diagramas de barras bivariados</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>TablaCruzada <span class="ot">&lt;-</span> <span class="fu">table</span>(TAD<span class="sc">$</span>GEN,TAD<span class="sc">$</span>EST)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>TablaCruzada</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>TablaCruzada_propFilas<span class="ot">=</span><span class="fu">prop.table</span>(TablaCruzada, <span class="at">margin =</span> <span class="dv">1</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>TablaCruzada_propColumnas<span class="ot">=</span><span class="fu">prop.table</span>(TablaCruzada, <span class="at">margin =</span> <span class="dv">2</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>TablaCruzada100 <span class="ot">&lt;-</span> <span class="fu">addmargins</span>(TablaCruzada <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>colores2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#A020F0"</span>, <span class="st">"#FFBBFF"</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(TablaCruzada, <span class="at">col =</span> colores2)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(TablaCruzada_propFilas, <span class="at">col =</span> colores2, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Femenino"</span>, <span class="st">"Masculino"</span>), <span class="at">fill =</span> colores2)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>colores6 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"salmon"</span>, <span class="st">"salmon1"</span>,<span class="st">"salmon2"</span>,<span class="st">"salmon3"</span>,<span class="st">"salmon4"</span>,<span class="st">"tan1"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(TablaCruzada_propColumnas, <span class="at">col =</span> colores6, <span class="at">beside =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(TablaCruzada, <span class="at">cex =</span> <span class="fl">1.1</span>, <span class="at">col =</span> colores6)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mosaicplot</span>(TablaCruzada_propFilas, <span class="at">col =</span> colores2)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Si"</span>), <span class="at">fill =</span> colores6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(TablaCruzada_propColumnas, <span class="at">col =</span> colores6)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="diagramas-de-dispersión-generales-y-por-grupos" class="level2">
+<h2 class="anchored" data-anchor-id="diagramas-de-dispersión-generales-y-por-grupos">Diagramas de dispersión generales y por grupos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(TAD<span class="sc">$</span>Colesterol,TAD<span class="sc">$</span>IMC,<span class="at">main=</span><span class="st">"Diagrama de dispersión, Colesterol Vs. Índice de masa corporal"</span>,<span class="at">xlab=</span><span class="st">"Colesterol"</span>,<span class="at">ylab=</span><span class="st">"Índice de masa corporal"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(TAD<span class="sc">$</span>Colesterol,TAD<span class="sc">$</span>IMC,<span class="at">col=</span><span class="fu">rainbow</span>(<span class="fu">length</span>(<span class="fu">levels</span>(<span class="fu">factor</span>(TAD<span class="sc">$</span>GEN)))),<span class="at">main=</span><span class="st">"Diagrama de dispersión, Colesterol Vs. Índice de masa corporal por género"</span>,<span class="at">xlab=</span><span class="st">"Colesterol"</span>,<span class="at">ylab=</span><span class="st">"Índice de masa corporal"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>leyenda<span class="ot">=</span><span class="fu">c</span>(<span class="st">"Mujeres"</span>,<span class="st">"Hombres"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, leyenda, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">fill =</span> <span class="fu">rainbow</span>(<span class="fu">length</span>(leyenda)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="matrices-de-diagramas-de-dispersión-generales-y-por-grupos.-diferentes-gráficos-en-la-diagonal-diagramas-de-caja-histogramas-densidades." class="level2">
+<h2 class="anchored" data-anchor-id="matrices-de-diagramas-de-dispersión-generales-y-por-grupos.-diferentes-gráficos-en-la-diagonal-diagramas-de-caja-histogramas-densidades.">Matrices de diagramas de dispersión generales y por grupos. Diferentes gráficos en la diagonal, diagramas de caja, histogramas, densidades.</h2>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="[Introducción]{style=&quot;color: #FF8000;&quot;}">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span style="color: #FF8000;">Introducción</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./2-Pruebas_de_Bondad_de_ajuste.html" class="pagination-link" aria-label="Pruebas de bondad de ajuste">
+        <span class="nav-page-text">Pruebas de bondad de ajuste</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cargamos el sonido
+  const audio = new Audio('water-drop-85731.mp3');
+  
+  // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+  // 0.4 es un volumen suave y elegante.
+  audio.volume = 0.4; 
+
+  // Seleccionamos los elementos del menú
+  const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+  
+  elementos.forEach(el => {
+    el.addEventListener('click', function() {
+      // Reproducir sonido
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+      
+      // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+      // Ahora cada pestaña que abras se quedará abierta.
+    });
+  });
+});
+</script>
+
+
+
+
+</body></html>

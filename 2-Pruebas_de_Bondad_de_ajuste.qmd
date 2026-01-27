@@ -8,7 +8,15 @@ execute:
 
 # [Pruebas de bondad de ajuste]{style="color:#FF8000;"}
 
-## Cargar Paquetes y Leer datos
+El análisis de bondad y ajuste es una técnica estadística fundamental que se utiliza para determinar si un conjunto de datos se ajusta a una distribución de probabilidad determinada. En la práctica, muchas herramientas estadísticas asumen que los datos siguen una distribución específica; por lo tanto, realizar estas pruebas garantiza la validez y la precisión de las inferencias o modelos predictivos que se construyan posteriormente.
+
+## Preparación de los datos
+
+Antes de realizar el análisis estadístico, es fundamental llevar a cabo una adecuada preparación del entorno de trabajo. Esta etapa permite garantizar la correcta ejecución de los procedimientos posteriores y asegurar la reproducibilidad de los resultados.
+
+### Cargar Paquetes
+
+Para el desarrollo del análisis, se requiere la carga de diversas librerías especializadas que facilitan el cálculo de medidas estadísticas y la aplicación de pruebas inferenciales. En particular, se utiliza la librería moments, la cual permite obtener medidas descriptivas de orden superior, como la asimetría y la curtosis, fundamentales para evaluar la forma de la distribución de los datos
 
 ```{r}
 #install.packages("moments")
@@ -17,10 +25,14 @@ library(moments)
 library(ecostats)
 ```
 
+Adicionalmente, se emplea la librería nortest, que proporciona diferentes pruebas de normalidad ampliamente utilizadas en el análisis estadístico. Estas pruebas permiten evaluar si los datos pueden considerarse provenientes de una distribución normal, supuesto clave en numerosos métodos paramétrico
+
 ```{r}
 library(nortest)
 library(vcd)
 ```
+
+Asimismo, se incorporan las librerías `vcd` y `ecostats`, las cuales ofrecen herramientas complementarias para el análisis descriptivo y exploratorio de los datos, facilitando la interpretación gráfica y estadística de los resultados.
 
 ```{r}
 #| eval: false
@@ -30,7 +42,11 @@ library(Rgof)
 datos=read.table("Datos1.txt")
 ```
 
+Finalmente, se utiliza la librería **`Rgof`**, que permite realizar pruebas de bondad de ajuste, útiles para contrastar la adecuación de los datos frente a distribuciones teóricas específicas.
+
 ## **Gráficos exploratorios, mirar simetría, apuntamiento, datos atípicos**
+
+Antes de aplicar medidas numéricas y pruebas estadísticas, es recomendable realizar un análisis exploratorio gráfico de los datos. Entre las herramientas más utilizadas para este propósito se encuentra el histograma, el cual proporciona una representación visual de la frecuencia de los valores observados.
 
 ```{r}
 #| eval: false
@@ -38,11 +54,24 @@ datos=read.table("Datos1.txt")
 hist(datos$x)
 ```
 
+A partir del histograma se observa que la distribución de la variable presenta una forma aproximadamente unimodal, con una concentración mayor de observaciones en el intervalo central. La distribución muestra una ligera asimetría hacia la derecha, evidenciada por la presencia de algunos valores más elevados en comparación con el extremo inferior. No se identifican datos atípicos extremos de manera evidente, aunque sí se observa una dispersión moderada en los valores superiores. En general, la forma del histograma sugiere un comportamiento cercano a una distribución normal, lo cual será posteriormente contrastado mediante pruebas formales de normalidad.
+
+### Box-plot
+
+Como parte del análisis exploratorio, se emplea el diagrama de caja (*boxplot*), el cual permite resumir la distribución de los datos mediante medidas robustas como la mediana y los cuartiles. Este tipo de gráfico es especialmente útil para identificar la dispersión de los datos, evaluar posibles asimetrías y detectar la presencia de valores atípicos de manera visual.
+
 ```{r}
 #| eval: false
 #| echo: true
 boxplot(datos$x)
 ```
+
+Este gráfico muestra una distribución de datos bastante equilibrada, donde la **mediana** , se ubica aproximadamente en **87**, dividiendo al grupo exactamente a la mitad. La mayor parte de la información (el 50% central) se concentra dentro de la caja gris, moviéndose entre los valores de **79 y 92**. Los "bigotes" o líneas punteadas nos indican que los valores considerados normales se extienden desde el **61 hasta el 108**; sin embargo, las "bolitas" en los extremos representan **valores atípicos** o excepcionales que rompen el patrón general: hay dos valores inusualmente altos por encima de **110** y tres valores inusualmente bajos que caen por debajo de **60**.\
+Por lo tanto se puede interpretar que tenemos una población muy consistente en el centro, pero con pequeñas excepciones en ambos extremos de la escala.
+
+### Diagrama tallo y hojas
+
+El diagrama de tallo y hojas es una herramienta fundamental en el análisis exploratorio de datos porque permite visualizar la **forma de la distribución** sin perder la identidad de los valores individuales. A diferencia de un histograma común, donde los números se agrupan en barras y se vuelven anónimos, este método organiza los datos de manera que puedes ver simultáneamente la frecuencia (qué tan larga es la fila) y los **datos exactos** que la componen. Es especialmente útil para detectar rápidamente la presencia de valores repetidos, la simetría de la muestra y aquellos valores extremos que se desvían del comportamiento grupal, sirviendo como un puente perfecto entre una lista de números desordenada y un gráfico estadístico avanzado.
 
 ```{r}
 #| eval: false
@@ -50,7 +79,13 @@ boxplot(datos$x)
 stem(datos$x)
 ```
 
+Con nuestros datos el diagrama revela una distribución concentrada principalmente entre los valores de **80 y 99**, con su punto más alto (la moda) en el rango de los **85 a 89**, lo que coincide con la mediana de **87** que vimos en el gráfico de caja anterior. La estructura muestra una forma de "campana" ligeramente estirada, donde la mayoría de las observaciones se agrupan en el centro y disminuyen gradualmente hacia los extremos. En las orillas se confirman numéricamente los valores atípicos: en la parte inferior hay valores muy bajos como **55, 57 y 58**, mientras que en la parte superior destacan valores altos como **112, 113 y 114**. Esta visualización permite ver que, aunque hay mucha variabilidad, los datos son muy consistentes en el bloque de los 80 y 90, con pocos casos aislados en los extremos de los 50 y los 110.
+
 ## **Medidas de resumen**
+
+-   `Summary()`
+
+    Es una de las funciones más completas para un análisis rápido. Proporciona las **estadísticas descriptivas básicas** (mínimo, primer cuartil, mediana, media, tercer cuartil y máximo)
 
 ```{r}
 #| eval: false
@@ -58,11 +93,19 @@ stem(datos$x)
 summary(datos$x)
 ```
 
+En este caso nuestros números nos confirman que el valor más bajo es **55.10** y el más alto es **113.67**. La **mediana (86.77)** y la **media (85.92)** están muy cerca entre sí, lo que refuerza la idea de que los datos son bastante simétricos. Y podemos decir que el 50% de los datos está contenido estrictamente entre **79.22 (Q1)** y **92.04 (Q3)**.
+
+-   `mean( )`. Promedio aritmético
+
 ```{r}
 #| eval: false
 #| echo: true
 mean(datos$x)
 ```
+
+En nuestro caso nuestro centro de gravedad de nuestros datos esta ubicado en 85.91785
+
+-   `median()`. Valor que ocupa el lugar de todos los datos ordenados.
 
 ```{r}
 #| eval: false
@@ -70,17 +113,31 @@ mean(datos$x)
 median(datos$x)
 ```
 
+En nuestro caso, es de 86,77045 . Este valor separa al 50% superior del 50% inferior. Al ser la media ligeramente menor que la mediana, existe un sesgo negativo muy leve, probablemente influenciado por los valores atípicos inferiores (los que están cerca de 55).
+
+-   Función `skewness()`
+
+    Se encarga de medir la asimetria de la distribución. Indicará hacia qué lado se inclina la "cola" del gráfico.
+
 ```{r}
 #| eval: false
 #| echo: true
 #skewness(datos$x)
 ```
 
+En nuestro ejemplo, el resultado es de -0.27 lo cual indicará una asimetría negativa leve. Esto nos dice que la cola de la distribución es un poco más arga hacia la izquierda (hacia los valores bajos). En términos prácticos, este valor esta muy cercano a 0 por lo tanto se peude considerar que la distribución es mayormente simétrica.
+
+-   Función `kurtosis()`
+
+    Es para identificar que tan plana es la distriución y que tan pesadas son las colas, es decir, la cantidad de datos en los extremos.
+
 ```{r}
 #| eval: false
 #| echo: true
 kurtosis(datos$x)
 ```
+
+En este caso 3.48 nos indica una distribución leptocúrtica, es decir los datos estan un poco más concentrados alrededor de la media y tienen colas ligeramente más gruesas de lo normal.
 
 ## **Histogramas de frecuencia relativa, densidad, ajuste a la distribución de probabilidad teórica**
 
@@ -94,6 +151,8 @@ curve(dgamma(x, shape = 71.444, scale=1.212),60,130,col="chocolate",add=T,lwd=3)
 legend("topright",col=c("#BF3EFF","midnightblue","chocolate"),c("Densidad","Normal teórica","Gamma teórica"),lty=1,lwd=3)
 ```
 
+El conjunto de datos presenta una estructura notablemente estable y centrada, con una mediana de 86.77 y una media de 85.92, lo que refleja una distribución mayormente simétrica a pesar de una asimetría negativa leve (-0.27) provocada por valores bajos aislados. El 50% de las observaciones se concentra en un rango estrecho de aproximadamente 13 unidades (entre 79.22 y 92.04), mientras que el gráfico de densidad y la curtosis de 3.48 confirman que la distribución es algo más "puntiaguda" que una normal perfecta, presentando colas que se extienden hasta valores extremos de 55.10 y 113.67.
+
 ```{r}
 #| eval: false
 #| echo: true
@@ -101,6 +160,8 @@ hist(datos$x,freq=F,ylab="Densidad",col="whitesmoke",ylim=c(0,0.045))
 lines(density(datos$x),col="midnightblue",lwd=3)
 curve(dgamma(x, shape = 71.444, scale=1.212),60,130,col="chocolate",add=T,lwd=3)
 ```
+
+El conjunto de datos presenta una estructura notablemente estable y centrada, con una **mediana de 86.77** y una **media de 85.92**, lo que refleja una distribución mayormente simétrica a pesar de una **asimetría negativa leve (-0.27)**. El 50% de las observaciones se concentra en un rango estrecho de aproximadamente 13 unidades (entre **79.22 y 92.04**), mientras que el gráfico de densidad y la **curtosis de 3.48** confirman que la distribución es algo más "puntiaguda" que una normal estándar, presentando colas que se extienden hasta valores extremos de **55.10 y 113.67**
 
 ## **Verificación de porcentajes a k desviaciones estándar de la media para la distribución normal**
 
@@ -111,13 +172,19 @@ Intervalos=c(mean(datos$x)-4*sd(datos$x),mean(datos$x)-3*sd(datos$x),mean(datos$
 hist(datos$x,freq=F,ylab="Densidad",breaks=Intervalos,col="whitesmoke",ylim=c(0,0.045))
 ```
 
+El conjunto de datos presenta una tendencia central muy sólida, donde la **mediana de 86.77** y la **media de 85.92** son prácticamente iguales, lo que sugiere una distribución equilibrada y casi simétrica. El 50% de tus observaciones se concentra en un rango intermedio que va desde **79.22 hasta 92.04**. Sin embargo, los datos se extienden desde un **mínimo de 55.10 hasta un máximo de 113.67**, cubriendo un rango total de casi 59 unidades. Estadísticamente, el valor de **asimetría (skewness) de -0.27** confirma una inclinación negativa muy leve hacia los valores bajos, mientras que la **curtosis de 3.48** indica que la distribución es algo más "puntiaguda" que una normal estándar, lo que explica por qué hay valores en los extremos que se alejan del grupo principal.
+
 ```{r}
 #| eval: false
 #| echo: true
 hist(datos$x,breaks=Intervalos,plot=F)
 ```
 
+En la tabla de Medidas de resumen, podemos evidenciar que el conjunto de datos posee una estabilidad notable. La mediana (86.77) y la media (85.92) son prácticamente iguales, lo que nos indica que la distribución es sumamente equilibrada y se comporta de manera predecible. El eje de los datos se encuentra entre 79.22 y 92.04 (el primer y tercer cuartil), lo que significa que el 50% de todas tus observaciones están concentradas en ese rango de apenas 13 unidades.
+
 ## Gráfico de cuantiles teóricos vs cuantiles muestrales, envolvente
+
+El gráfico Q–Q muestra que los datos presentan una adecuada aproximación a la normalidad, ya que la mayoría de los puntos se alinean con la recta teórica. Sin embargo, se observan ligeras desviaciones en las colas, lo que sugiere pequeñas discrepancias respecto a la normalidad perfecta.
 
 ```{r}
 #| eval: false
@@ -125,11 +192,15 @@ hist(datos$x,breaks=Intervalos,plot=F)
 qqnorm(datos$x)
 ```
 
+El gráfico Q–Q con banda de confianza muestra que la mayoría de los datos se alinean adecuadamente con la distribución normal teórica. Aunque se observan ligeras desviaciones en las colas, estas no son significativas, por lo que se puede asumir normalidad aproximada.
+
 ```{r}
 qqenvelope(datos$x)
 ```
 
 ## Comparación de los datos de la muestra, con una muestra simulada de la distribución normal teórica propuesta
+
+El gráfico de dispersión de los valores ordenados muestra una tendencia creciente continua, sin presencia de saltos abruptos ni valores atípicos evidentes, lo que sugiere una distribución relativamente homogénea de los datos
 
 ```{r}
 #| eval: false
@@ -140,7 +211,9 @@ yy=rnorm(276,mu,desvest)
 qqplot(datos$x,yy)
 ```
 
-#### Comparación de los datos de la muestra, con una muestra simulada de la distribución teórica Gamma propuesta
+### Comparación de los datos de la muestra, con una muestra simulada de la distribución teórica Gamma propuesta
+
+El siguiente gráfico muestra que cuando `datos$x` aumenta, `ygram` también aumenta. Es así como los puntos siguen casi una línea recta, lo que indica que las dos variables están muy relacionadas. En especial, no hay puntos raros ni saltos bruscos, así que el comportamiento es bastante regular.
 
 ```{r}
 #| eval: false
@@ -150,6 +223,8 @@ qqplot(datos$x,yygam,col=2)
 ```
 
 ## Prueba de hipótesis de Kolmogorov Smirnov
+
+El resultado de la prueba de Kolmogorov–Smirnov de una muestra indica que no hay evidencia estadística para rechazar la hipótesis nula. En particular, el valor *p* = 0.3837 es mayor que un nivel de significancia típico (por ejemplo, 0.05), lo que sugiere que la distribución de `datos$x` no difiere de manera significativa de la distribución teórica contra la cual se está comparando. Por tanto, los datos son compatibles con la distribución asumida y no se detectan desviaciones importantes en términos de forma, ubicación o dispersión.
 
 ```{r}
 #| eval: false
@@ -163,7 +238,17 @@ ks.test(datos$x, "pnorm", mean=86, sd=10)
 ks.test(datos$x, "pgamma",shape=71.444, scale=10)
 ```
 
-## Pruebas de hipótesis de normalidad del paquete nortest. Ejercicio consultar los estadísticos de todas las pruebas ejecutadas a continuación
+Sin embargo, al repetir la prueba utilizando una distribución teórica distinta (con parámetros que no representan adecuadamente a los datos), el resultado cambia de forma drástica. En este caso, el estadístico D=1 indica una diferencia máxima entre la distribución empírica y la distribución teórica, y el valor *p* menor que 2.2×10−16 muestra evidencia muy fuerte para rechazar la hipótesis nula. Esto indica que los datos no siguen la distribución asumida, por lo que el supuesto de normalidad no se cumple bajo esta especificación.
+
+## Pruebas de hipótesis de normalidad del paquete `nortest`.
+
+[Ejercicio consultar e interpretar los resultados de los estadísticos de todas las pruebas ejecutadas a continuación]{style="color:red"}.
+
+A continuación, se aplican distintas pruebas de normalidad al conjunto de datos `datos$x`, con el fin de evaluar si estos pueden considerarse provenientes de una distribución normal. Cada prueba contrasta la hipótesis nula de normalidad frente a la alternativa de no normalidad, utilizando diferentes estadísticos y criterios de sensibilidad.
+
+##### ***Prueba de Kolmogorov–Smirnov con parámetros especificados***
+
+Esta prueba compara la distribución empírica de los datos con una distribución normal con media 86 y desviación estándar 10. El resultado indica que no hay evidencia suficiente para rechazar la hipótesis nula de normalidad bajo estos parámetros.
 
 ```{r}
 #| eval: false
@@ -171,11 +256,19 @@ ks.test(datos$x, "pgamma",shape=71.444, scale=10)
 ks.test(datos$x, "pnorm", mean=86, sd=10)
 ```
 
+##### ***Prueba de Shapiro–Wilk***
+
+La prueba de Shapiro–Wilk es una de las más utilizadas para evaluar normalidad, especialmente en muestras pequeñas y medianas. En este caso, el valor *p* obtenido es menor que 0.05, lo que sugiere rechazar la hipótesis nula de normalidad.
+
 ```{r}
 #| eval: false
 #| echo: true
 shapiro.test(datos$x)
 ```
+
+##### ***Prueba de Anderson–Darling***
+
+Esta prueba da mayor peso a las colas de la distribución. El resultado indica evidencia estadísticamente significativa contra la normalidad, lo que sugiere que los datos presentan desviaciones respecto a una distribución normal.
 
 ```{r}
 #| eval: false
@@ -183,11 +276,19 @@ shapiro.test(datos$x)
 ad.test(datos$x)
 ```
 
+##### ***Prueba de Cramér–von Mises***
+
+La prueba de Cramér–von Mises evalúa la distancia global entre la distribución empírica y la teórica. El valor *p* obtenido es menor al nivel de significancia del 5 %, indicando rechazo de la hipótesis nula de normalidad.
+
 ```{r}
 #| eval: false
 #| echo: true
 cvm.test(datos$x)
 ```
+
+##### ***Prueba de Lilliefors***
+
+La prueba de Lilliefors es una modificación del test de Kolmogorov–Smirnov cuando los parámetros de la normal no son conocidos y se estiman a partir de los datos. El resultado muestra evidencia suficiente para rechazar la normalidad.
 
 ```{r}
 #| eval: false
@@ -195,14 +296,29 @@ cvm.test(datos$x)
 lillie.test(datos$x)
 ```
 
+En este caso, el estadístico obtenido es $D= 0.054862$ y el valor $p=0.04351$ , por lo tanto el valor $p$ es menor que 0.05, así que se rechaza la hipotesis nula, lo que indica que la variable `datos$x` presenta desviaciones estadísticamente significativas respecto a una distribución normal según esta prueba.
+
+##### ***Prueba de normalidad Chi-cuadrado de Pearson***
+
+Esta prueba se basa en la comparación de frecuencias observadas y esperadas bajo normalidad.
+
 ```{r}
 #| eval: false
 #| echo: true
 pearson.test(datos$x)
 ```
 
+Esta prueba contrasta la hipótesis nula de que los datos provienen de una distribución normal. En este caso, el estadístico obtenido es $P = 16.159$ y el valor $p = 0.4419$. Y dado que este valor p es mayor que el nivel de significancia común de 0.05, no se rechaza la hipótesis nula. Por lo tanto, no se encuentra evidencia estadística suficiente para afirmar que la distribución de datos `datos$x` difiere de una distribución normal.
+
+##### ***Prueba de Shapiro–Francia***
+
+La prueba de Shapiro–Francia es una variante de Shapiro–Wilk, adecuada para muestras más grandes. En este caso, el estadístico obtenido es $W = 0.98913$ y el valor $p= 0.03678$.
+
 ```{r}
 #| eval: false
 #| echo: true
 sf.test(datos$x)
 ```
+
+Dado que este valor $p$ es meor que el nivel de significancia usual de 0.05, se rechaza la hipótesis nula de normalidad.\
+Esto indica que la variable datos\$x presenta desviaciones estadísticamente sigificativas respecto a una distribución normal, por lo que no puede asumirse normalidad bajo esta prueba.

@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ccc8c071838d302f8f4ee4e4dd772085.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
+  <a href="./ejercicio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Estadística descriptiva y Exploratoria</span></a>
   </div>
 </li>
@@ -537,32 +537,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>As 'model' is a single variogramModel it will be used for all the harmonics.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>initial  value -1120.446788 
-final  value -1120.446788 
+<pre><code>initial  value -1120.446827 
+final  value -1120.446827 
 converged</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultados</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>OSD<span class="sc">$</span>new_stations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>         x          y
- 0.8965517 0.72413793
- 0.4137931 0.13793103
- 0.4827586 0.65517241
- 1.5862069 0.44827586
- 1.7241379 0.89655172
- 1.5172414 0.86206897
- 0.6896552 0.72413793
- 1.5172414 0.75862069
- 1.7241379 0.68965517
- 0.1379310 0.06896552</code></pre>
+<pre><code>         x         y
+ 1.0344828 0.2758621
+ 1.6551724 0.1034483
+ 0.2758621 0.0000000
+ 1.7241379 0.2068966
+ 0.6896552 0.7586207
+ 1.2413793 0.7931034
+ 1.4482759 0.2068966
+ 0.3448276 0.2068966
+ 1.8620690 0.1034483
+ 0.4827586 0.5172414</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>OSD<span class="sc">$</span>fixed_stations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            V1        V2
-[1,] 0.4159358 0.6438082
-[2,] 0.9407346 0.6207637
-[3,] 0.7717525 0.1410932
-[4,] 1.5574174 0.4560027</code></pre>
+[1,] 1.3576592 0.5513676
+[2,] 0.1993382 0.2688788
+[3,] 1.3225396 0.8774755
+[4,] 1.7836127 0.1610441</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>OSD<span class="sc">$</span>plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1039,6 +1039,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cargamos el sonido
+  const audio = new Audio('water-drop-85731.mp3');
+  
+  // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+  // 0.4 es un volumen suave y elegante.
+  audio.volume = 0.4; 
+
+  // Seleccionamos los elementos del menú
+  const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+  
+  elementos.forEach(el => {
+    el.addEventListener('click', function() {
+      // Reproducir sonido
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+      
+      // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+      // Ahora cada pestaña que abras se quedará abierta.
+    });
+  });
+});
+</script>
 
 
 

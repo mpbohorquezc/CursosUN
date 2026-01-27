@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ccc8c071838d302f8f4ee4e4dd772085.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
+  <a href="./ejercicio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Estadística descriptiva y Exploratoria</span></a>
   </div>
 </li>
@@ -602,31 +602,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>datos1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     x y t  z((x,y),t)
-1  0.0 1 1  0.03559238
-2  1.5 1 1  0.15412076
-3  3.0 1 1  0.06299807
-4  0.0 6 1  0.09082268
-5  1.5 6 1  0.21025208
-6  3.0 6 1 -0.08878222
-7  0.0 1 2  0.04128364
-8  1.5 1 2  0.19472414
-9  3.0 1 2 -0.16783973
-10 0.0 6 2 -0.01193785
-11 1.5 6 2 -0.02347434
-12 3.0 6 2 -0.26173061
-13 0.0 1 3  0.36437297
-14 1.5 1 3  0.06057969
-15 3.0 1 3  0.01772417
-16 0.0 6 3 -0.11954534
-17 1.5 6 3 -0.10694327
-18 3.0 6 3 -0.24952849
-19 0.0 1 4 -0.17861062
-20 1.5 1 4 -0.20507631
-21 3.0 1 4 -0.30692457
-22 0.0 6 4 -0.03612890
-23 1.5 6 4  0.05568877
-24 3.0 6 4 -0.14029394</code></pre>
+<pre><code>     x y t   z((x,y),t)
+1  0.0 1 1  0.240714122
+2  1.5 1 1  0.051724841
+3  3.0 1 1  0.114706294
+4  0.0 6 1  0.169993821
+5  1.5 6 1 -0.069231553
+6  3.0 6 1 -0.047727423
+7  0.0 1 2  0.089889782
+8  1.5 1 2  0.222346824
+9  3.0 1 2  0.120981274
+10 0.0 6 2 -0.161058912
+11 1.5 6 2  0.003179543
+12 3.0 6 2 -0.180784653
+13 0.0 1 3  0.154305231
+14 1.5 1 3  0.411850045
+15 3.0 1 3  0.229016708
+16 0.0 6 3  0.065864532
+17 1.5 6 3 -0.072648082
+18 3.0 6 3 -0.245829615
+19 0.0 1 4  0.136841951
+20 1.5 1 4  0.243315698
+21 3.0 1 4  0.052851243
+22 0.0 6 4  0.363338190
+23 1.5 6 4 -0.134221950
+24 3.0 6 4  0.309306107</code></pre>
 </div>
 </div>
 <p>Se requiere predecir predecir en el tiempo t=2.3 y en el lugar s0=(1.5,2.7).Nótese que tanto el dominio espacial como el dominio temporal con continuos y fijos. A continuación se presenta el procedimiento para llevar a cabo Kriging simple con su respectiva varianza de error de predicción estimada</p>
@@ -806,7 +806,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>z_pred0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            [,1]
-[1,] -0.01353017</code></pre>
+[1,] 0.009047171</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1317,6 +1317,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cargamos el sonido
+  const audio = new Audio('water-drop-85731.mp3');
+  
+  // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+  // 0.4 es un volumen suave y elegante.
+  audio.volume = 0.4; 
+
+  // Seleccionamos los elementos del menú
+  const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+  
+  elementos.forEach(el => {
+    el.addEventListener('click', function() {
+      // Reproducir sonido
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+      
+      // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+      // Ahora cada pestaña que abras se quedará abierta.
+    });
+  });
+});
+</script>
 
 
 

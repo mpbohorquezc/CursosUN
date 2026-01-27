@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ccc8c071838d302f8f4ee4e4dd772085.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -198,7 +198,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
+  <a href="./ejercicio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Estadística descriptiva y Exploratoria</span></a>
   </div>
 </li>
@@ -844,12 +844,12 @@ Para evaluar la significancia de los resultados obtenidos con el índice Local G
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">"&gt;="</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.40359640 0.78921079 0.11788212 0.36363636 0.14385614 0.07392607
- [7] 0.74125874 0.42957043 0.49850150 0.20879121 0.02197802 0.17282717
-[13] 0.02897103 0.72727273 0.88811189 0.06493506 0.31768232 0.12687313
-[19] 0.44455544 0.33266733 0.11288711 0.66933067 0.39460539 0.63236763
-[25] 0.32367632 0.28571429 0.56843157         NA 0.76223776 0.99000999
-[31] 0.89110889 0.88711289</code></pre>
+<pre><code> [1] 0.38861139 0.77622378 0.11388611 0.37262737 0.14485514 0.07092907
+ [7] 0.74525475 0.42557443 0.51548452 0.19580420 0.01998002 0.16583417
+[13] 0.02097902 0.69230769 0.88311688 0.06393606 0.35864136 0.13086913
+[19] 0.43456543 0.30869131 0.10989011 0.66433566 0.42957043 0.62237762
+[25] 0.32567433 0.28371628 0.55744256         NA 0.74325674 0.98501499
+[31] 0.90709291 0.89510490</code></pre>
 </div>
 </div>
 <p>Los valores p calculados (mc.pvalor.G) indican la significancia estadística de los patrones espaciales observados. Un valor p bajo (generalmente menor que 0.05) sugiere que la autocorrelación espacial observada en un departamento es significativamente diferente de la aleatoriedad, lo que indica un clúster local de alta o baja concentración de valores. Los departamentos con valores p bajos pueden considerarse como áreas con patrones espaciales significativos, lo cual es útil para identificar zonas con características especiales en la variable de interés.</p>
@@ -1935,6 +1935,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cargamos el sonido
+  const audio = new Audio('water-drop-85731.mp3');
+  
+  // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+  // 0.4 es un volumen suave y elegante.
+  audio.volume = 0.4; 
+
+  // Seleccionamos los elementos del menú
+  const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+  
+  elementos.forEach(el => {
+    el.addEventListener('click', function() {
+      // Reproducir sonido
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+      
+      // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+      // Ahora cada pestaña que abras se quedará abierta.
+    });
+  });
+});
+</script>
 
 
 

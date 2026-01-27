@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ccc8c071838d302f8f4ee4e4dd772085.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -169,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
+  <a href="./ejercicio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Estadística descriptiva y Exploratoria</span></a>
   </div>
 </li>
@@ -944,6 +944,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cargamos el sonido
+  const audio = new Audio('water-drop-85731.mp3');
+  
+  // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+  // 0.4 es un volumen suave y elegante.
+  audio.volume = 0.4; 
+
+  // Seleccionamos los elementos del menú
+  const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+  
+  elementos.forEach(el => {
+    el.addEventListener('click', function() {
+      // Reproducir sonido
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+      
+      // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+      // Ahora cada pestaña que abras se quedará abierta.
+    });
+  });
+});
+</script>
 
 
 

@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./2.html" rel="next">
-<link href="./1.html" rel="prev">
+<link href="./1.html" rel="next">
+<link href="./ejercicio.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ccc8c071838d302f8f4ee4e4dd772085.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -140,7 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1.html"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></a></li><li class="breadcrumb-item"><a href="./2-Pruebas_de_Bondad_de_ajuste.html">Pruebas de bondad de ajuste</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ejercicio.html"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></a></li><li class="breadcrumb-item"><a href="./2-Pruebas_de_Bondad_de_ajuste.html">Pruebas de bondad de ajuste</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -169,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1.html" class="sidebar-item-text sidebar-link">
+  <a href="./ejercicio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Estadística descriptiva y Exploratoria</span></a>
   </div>
 </li>
@@ -431,15 +460,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#pruebas-de-bondad-de-ajuste" id="toc-pruebas-de-bondad-de-ajuste" class="nav-link active" data-scroll-target="#pruebas-de-bondad-de-ajuste"><span style="color:#FF8000;">Pruebas de bondad de ajuste</span></a>
   <ul class="collapse">
-  <li><a href="#cargar-paquetes-y-leer-datos" id="toc-cargar-paquetes-y-leer-datos" class="nav-link" data-scroll-target="#cargar-paquetes-y-leer-datos">Cargar Paquetes y Leer datos</a></li>
-  <li><a href="#gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos" id="toc-gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos" class="nav-link" data-scroll-target="#gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos"><strong>Gráficos exploratorios, mirar simetría, apuntamiento, datos atípicos</strong></a></li>
+  <li><a href="#preparación-de-los-datos" id="toc-preparación-de-los-datos" class="nav-link" data-scroll-target="#preparación-de-los-datos">Preparación de los datos</a>
+  <ul class="collapse">
+  <li><a href="#cargar-paquetes" id="toc-cargar-paquetes" class="nav-link" data-scroll-target="#cargar-paquetes">Cargar Paquetes</a></li>
+  </ul></li>
+  <li><a href="#gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos" id="toc-gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos" class="nav-link" data-scroll-target="#gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos"><strong>Gráficos exploratorios, mirar simetría, apuntamiento, datos atípicos</strong></a>
+  <ul class="collapse">
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot">Box-plot</a></li>
+  <li><a href="#diagrama-tallo-y-hojas" id="toc-diagrama-tallo-y-hojas" class="nav-link" data-scroll-target="#diagrama-tallo-y-hojas">Diagrama tallo y hojas</a></li>
+  </ul></li>
   <li><a href="#medidas-de-resumen" id="toc-medidas-de-resumen" class="nav-link" data-scroll-target="#medidas-de-resumen"><strong>Medidas de resumen</strong></a></li>
   <li><a href="#histogramas-de-frecuencia-relativa-densidad-ajuste-a-la-distribución-de-probabilidad-teórica" id="toc-histogramas-de-frecuencia-relativa-densidad-ajuste-a-la-distribución-de-probabilidad-teórica" class="nav-link" data-scroll-target="#histogramas-de-frecuencia-relativa-densidad-ajuste-a-la-distribución-de-probabilidad-teórica"><strong>Histogramas de frecuencia relativa, densidad, ajuste a la distribución de probabilidad teórica</strong></a></li>
   <li><a href="#verificación-de-porcentajes-a-k-desviaciones-estándar-de-la-media-para-la-distribución-normal" id="toc-verificación-de-porcentajes-a-k-desviaciones-estándar-de-la-media-para-la-distribución-normal" class="nav-link" data-scroll-target="#verificación-de-porcentajes-a-k-desviaciones-estándar-de-la-media-para-la-distribución-normal"><strong>Verificación de porcentajes a k desviaciones estándar de la media para la distribución normal</strong></a></li>
   <li><a href="#gráfico-de-cuantiles-teóricos-vs-cuantiles-muestrales-envolvente" id="toc-gráfico-de-cuantiles-teóricos-vs-cuantiles-muestrales-envolvente" class="nav-link" data-scroll-target="#gráfico-de-cuantiles-teóricos-vs-cuantiles-muestrales-envolvente">Gráfico de cuantiles teóricos vs cuantiles muestrales, envolvente</a></li>
-  <li><a href="#comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta" id="toc-comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta" class="nav-link" data-scroll-target="#comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta">Comparación de los datos de la muestra, con una muestra simulada de la distribución normal teórica propuesta</a></li>
+  <li><a href="#comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta" id="toc-comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta" class="nav-link" data-scroll-target="#comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta">Comparación de los datos de la muestra, con una muestra simulada de la distribución normal teórica propuesta</a>
+  <ul class="collapse">
+  <li><a href="#comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta" id="toc-comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta" class="nav-link" data-scroll-target="#comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta">Comparación de los datos de la muestra, con una muestra simulada de la distribución teórica Gamma propuesta</a></li>
+  </ul></li>
   <li><a href="#prueba-de-hipótesis-de-kolmogorov-smirnov" id="toc-prueba-de-hipótesis-de-kolmogorov-smirnov" class="nav-link" data-scroll-target="#prueba-de-hipótesis-de-kolmogorov-smirnov">Prueba de hipótesis de Kolmogorov Smirnov</a></li>
-  <li><a href="#pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.-ejercicio-consultar-los-estadísticos-de-todas-las-pruebas-ejecutadas-a-continuación" id="toc-pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.-ejercicio-consultar-los-estadísticos-de-todas-las-pruebas-ejecutadas-a-continuación" class="nav-link" data-scroll-target="#pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.-ejercicio-consultar-los-estadísticos-de-todas-las-pruebas-ejecutadas-a-continuación">Pruebas de hipótesis de normalidad del paquete nortest. Ejercicio consultar los estadísticos de todas las pruebas ejecutadas a continuación</a></li>
+  <li><a href="#pruebas-de-hipótesis-de-normalidad-del-paquete-nortest." id="toc-pruebas-de-hipótesis-de-normalidad-del-paquete-nortest." class="nav-link" data-scroll-target="#pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.">Pruebas de hipótesis de normalidad del paquete <code>nortest</code>.</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -447,7 +486,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1.html"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></a></li><li class="breadcrumb-item"><a href="./2-Pruebas_de_Bondad_de_ajuste.html">Pruebas de bondad de ajuste</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ejercicio.html"><span style="color: #FF8000 !important;">Análisis Exploratorio de Datos</span></a></li><li class="breadcrumb-item"><a href="./2-Pruebas_de_Bondad_de_ajuste.html">Pruebas de bondad de ajuste</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Pruebas de bondad de ajuste</h1>
 </div>
@@ -468,53 +507,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="pruebas-de-bondad-de-ajuste" class="level1">
 <h1><span style="color:#FF8000;">Pruebas de bondad de ajuste</span></h1>
-<section id="cargar-paquetes-y-leer-datos" class="level2">
-<h2 class="anchored" data-anchor-id="cargar-paquetes-y-leer-datos">Cargar Paquetes y Leer datos</h2>
+<p>El análisis de bondad y ajuste es una técnica estadística fundamental que se utiliza para determinar si un conjunto de datos se ajusta a una distribución de probabilidad determinada. En la práctica, muchas herramientas estadísticas asumen que los datos siguen una distribución específica; por lo tanto, realizar estas pruebas garantiza la validez y la precisión de las inferencias o modelos predictivos que se construyan posteriormente.</p>
+<section id="preparación-de-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="preparación-de-los-datos">Preparación de los datos</h2>
+<p>Antes de realizar el análisis estadístico, es fundamental llevar a cabo una adecuada preparación del entorno de trabajo. Esta etapa permite garantizar la correcta ejecución de los procedimientos posteriores y asegurar la reproducibilidad de los resultados.</p>
+<section id="cargar-paquetes" class="level3">
+<h3 class="anchored" data-anchor-id="cargar-paquetes">Cargar Paquetes</h3>
+<p>Para el desarrollo del análisis, se requiere la carga de diversas librerías especializadas que facilitan el cálculo de medidas estadísticas y la aplicación de pruebas inferenciales. En particular, se utiliza la librería moments, la cual permite obtener medidas descriptivas de orden superior, como la asimetría y la curtosis, fundamentales para evaluar la forma de la distribución de los datos</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("moments")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("ecostats")</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ecostats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Adicionalmente, se emplea la librería nortest, que proporciona diferentes pruebas de normalidad ampliamente utilizadas en el análisis estadístico. Estas pruebas permiten evaluar si los datos pueden considerarse provenientes de una distribución normal, supuesto clave en numerosos métodos paramétrico</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nortest)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vcd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Asimismo, se incorporan las librerías <code>vcd</code> y <code>ecostats</code>, las cuales ofrecen herramientas complementarias para el análisis descriptivo y exploratorio de los datos, facilitando la interpretación gráfica y estadística de los resultados.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("Rgof")</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rgof)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>datos<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"Datos1.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Finalmente, se utiliza la librería <strong><code>Rgof</code></strong>, que permite realizar pruebas de bondad de ajuste, útiles para contrastar la adecuación de los datos frente a distribuciones teóricas específicas.</p>
+</section>
 </section>
 <section id="gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos" class="level2">
 <h2 class="anchored" data-anchor-id="gráficos-exploratorios-mirar-simetría-apuntamiento-datos-atípicos"><strong>Gráficos exploratorios, mirar simetría, apuntamiento, datos atípicos</strong></h2>
+<p>Antes de aplicar medidas numéricas y pruebas estadísticas, es recomendable realizar un análisis exploratorio gráfico de los datos. Entre las herramientas más utilizadas para este propósito se encuentra el histograma, el cual proporciona una representación visual de la frecuencia de los valores observados.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>A partir del histograma se observa que la distribución de la variable presenta una forma aproximadamente unimodal, con una concentración mayor de observaciones en el intervalo central. La distribución muestra una ligera asimetría hacia la derecha, evidenciada por la presencia de algunos valores más elevados en comparación con el extremo inferior. No se identifican datos atípicos extremos de manera evidente, aunque sí se observa una dispersión moderada en los valores superiores. En general, la forma del histograma sugiere un comportamiento cercano a una distribución normal, lo cual será posteriormente contrastado mediante pruebas formales de normalidad.</p>
+<section id="box-plot" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot">Box-plot</h3>
+<p>Como parte del análisis exploratorio, se emplea el diagrama de caja (<em>boxplot</em>), el cual permite resumir la distribución de los datos mediante medidas robustas como la mediana y los cuartiles. Este tipo de gráfico es especialmente útil para identificar la dispersión de los datos, evaluar posibles asimetrías y detectar la presencia de valores atípicos de manera visual.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Este gráfico muestra una distribución de datos bastante equilibrada, donde la <strong>mediana</strong> , se ubica aproximadamente en <strong>87</strong>, dividiendo al grupo exactamente a la mitad. La mayor parte de la información (el 50% central) se concentra dentro de la caja gris, moviéndose entre los valores de <strong>79 y 92</strong>. Los “bigotes” o líneas punteadas nos indican que los valores considerados normales se extienden desde el <strong>61 hasta el 108</strong>; sin embargo, las “bolitas” en los extremos representan <strong>valores atípicos</strong> o excepcionales que rompen el patrón general: hay dos valores inusualmente altos por encima de <strong>110</strong> y tres valores inusualmente bajos que caen por debajo de <strong>60</strong>.<br>
+Por lo tanto se puede interpretar que tenemos una población muy consistente en el centro, pero con pequeñas excepciones en ambos extremos de la escala.</p>
+</section>
+<section id="diagrama-tallo-y-hojas" class="level3">
+<h3 class="anchored" data-anchor-id="diagrama-tallo-y-hojas">Diagrama tallo y hojas</h3>
+<p>El diagrama de tallo y hojas es una herramienta fundamental en el análisis exploratorio de datos porque permite visualizar la <strong>forma de la distribución</strong> sin perder la identidad de los valores individuales. A diferencia de un histograma común, donde los números se agrupan en barras y se vuelven anónimos, este método organiza los datos de manera que puedes ver simultáneamente la frecuencia (qué tan larga es la fila) y los <strong>datos exactos</strong> que la componen. Es especialmente útil para detectar rápidamente la presencia de valores repetidos, la simetría de la muestra y aquellos valores extremos que se desvían del comportamiento grupal, sirviendo como un puente perfecto entre una lista de números desordenada y un gráfico estadístico avanzado.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">stem</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Con nuestros datos el diagrama revela una distribución concentrada principalmente entre los valores de <strong>80 y 99</strong>, con su punto más alto (la moda) en el rango de los <strong>85 a 89</strong>, lo que coincide con la mediana de <strong>87</strong> que vimos en el gráfico de caja anterior. La estructura muestra una forma de “campana” ligeramente estirada, donde la mayoría de las observaciones se agrupan en el centro y disminuyen gradualmente hacia los extremos. En las orillas se confirman numéricamente los valores atípicos: en la parte inferior hay valores muy bajos como <strong>55, 57 y 58</strong>, mientras que en la parte superior destacan valores altos como <strong>112, 113 y 114</strong>. Esta visualización permite ver que, aunque hay mucha variabilidad, los datos son muy consistentes en el bloque de los 80 y 90, con pocos casos aislados en los extremos de los 50 y los 110.</p>
+</section>
 </section>
 <section id="medidas-de-resumen" class="level2">
 <h2 class="anchored" data-anchor-id="medidas-de-resumen"><strong>Medidas de resumen</strong></h2>
+<ul>
+<li><p><code>Summary()</code></p>
+<p>Es una de las funciones más completas para un análisis rápido. Proporciona las <strong>estadísticas descriptivas básicas</strong> (mínimo, primer cuartil, mediana, media, tercer cuartil y máximo)</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En este caso nuestros números nos confirman que el valor más bajo es <strong>55.10</strong> y el más alto es <strong>113.67</strong>. La <strong>mediana (86.77)</strong> y la <strong>media (85.92)</strong> están muy cerca entre sí, lo que refuerza la idea de que los datos son bastante simétricos. Y podemos decir que el 50% de los datos está contenido estrictamente entre <strong>79.22 (Q1)</strong> y <strong>92.04 (Q3)</strong>.</p>
+<ul>
+<li><code>mean( )</code>. Promedio aritmético</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En nuestro caso nuestro centro de gravedad de nuestros datos esta ubicado en 85.91785</p>
+<ul>
+<li><code>median()</code>. Valor que ocupa el lugar de todos los datos ordenados.</li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En nuestro caso, es de 86,77045 . Este valor separa al 50% superior del 50% inferior. Al ser la media ligeramente menor que la mediana, existe un sesgo negativo muy leve, probablemente influenciado por los valores atípicos inferiores (los que están cerca de 55).</p>
+<ul>
+<li><p>Función <code>skewness()</code></p>
+<p>Se encarga de medir la asimetria de la distribución. Indicará hacia qué lado se inclina la “cola” del gráfico.</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#skewness(datos$x)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En nuestro ejemplo, el resultado es de -0.27 lo cual indicará una asimetría negativa leve. Esto nos dice que la cola de la distribución es un poco más arga hacia la izquierda (hacia los valores bajos). En términos prácticos, este valor esta muy cercano a 0 por lo tanto se peude considerar que la distribución es mayormente simétrica.</p>
+<ul>
+<li><p>Función <code>kurtosis()</code></p>
+<p>Es para identificar que tan plana es la distriución y que tan pesadas son las colas, es decir, la cantidad de datos en los extremos.</p></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En este caso 3.48 nos indica una distribución leptocúrtica, es decir los datos estan un poco más concentrados alrededor de la media y tienen colas ligeramente más gruesas de lo normal.</p>
 </section>
 <section id="histogramas-de-frecuencia-relativa-densidad-ajuste-a-la-distribución-de-probabilidad-teórica" class="level2">
 <h2 class="anchored" data-anchor-id="histogramas-de-frecuencia-relativa-densidad-ajuste-a-la-distribución-de-probabilidad-teórica"><strong>Histogramas de frecuencia relativa, densidad, ajuste a la distribución de probabilidad teórica</strong></h2>
@@ -525,11 +609,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dgamma</span>(x, <span class="at">shape =</span> <span class="fl">71.444</span>, <span class="at">scale=</span><span class="fl">1.212</span>),<span class="dv">60</span>,<span class="dv">130</span>,<span class="at">col=</span><span class="st">"chocolate"</span>,<span class="at">add=</span>T,<span class="at">lwd=</span><span class="dv">3</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,<span class="at">col=</span><span class="fu">c</span>(<span class="st">"#BF3EFF"</span>,<span class="st">"midnightblue"</span>,<span class="st">"chocolate"</span>),<span class="fu">c</span>(<span class="st">"Densidad"</span>,<span class="st">"Normal teórica"</span>,<span class="st">"Gamma teórica"</span>),<span class="at">lty=</span><span class="dv">1</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>El conjunto de datos presenta una estructura notablemente estable y centrada, con una mediana de 86.77 y una media de 85.92, lo que refleja una distribución mayormente simétrica a pesar de una asimetría negativa leve (-0.27) provocada por valores bajos aislados. El 50% de las observaciones se concentra en un rango estrecho de aproximadamente 13 unidades (entre 79.22 y 92.04), mientras que el gráfico de densidad y la curtosis de 3.48 confirman que la distribución es algo más “puntiaguda” que una normal perfecta, presentando colas que se extienden hasta valores extremos de 55.10 y 113.67.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(datos<span class="sc">$</span>x,<span class="at">freq=</span>F,<span class="at">ylab=</span><span class="st">"Densidad"</span>,<span class="at">col=</span><span class="st">"whitesmoke"</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.045</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(datos<span class="sc">$</span>x),<span class="at">col=</span><span class="st">"midnightblue"</span>,<span class="at">lwd=</span><span class="dv">3</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dgamma</span>(x, <span class="at">shape =</span> <span class="fl">71.444</span>, <span class="at">scale=</span><span class="fl">1.212</span>),<span class="dv">60</span>,<span class="dv">130</span>,<span class="at">col=</span><span class="st">"chocolate"</span>,<span class="at">add=</span>T,<span class="at">lwd=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>El conjunto de datos presenta una estructura notablemente estable y centrada, con una <strong>mediana de 86.77</strong> y una <strong>media de 85.92</strong>, lo que refleja una distribución mayormente simétrica a pesar de una <strong>asimetría negativa leve (-0.27)</strong>. El 50% de las observaciones se concentra en un rango estrecho de aproximadamente 13 unidades (entre <strong>79.22 y 92.04</strong>), mientras que el gráfico de densidad y la <strong>curtosis de 3.48</strong> confirman que la distribución es algo más “puntiaguda” que una normal estándar, presentando colas que se extienden hasta valores extremos de <strong>55.10 y 113.67</strong></p>
 </section>
 <section id="verificación-de-porcentajes-a-k-desviaciones-estándar-de-la-media-para-la-distribución-normal" class="level2">
 <h2 class="anchored" data-anchor-id="verificación-de-porcentajes-a-k-desviaciones-estándar-de-la-media-para-la-distribución-normal"><strong>Verificación de porcentajes a k desviaciones estándar de la media para la distribución normal</strong></h2>
@@ -537,29 +623,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>Intervalos<span class="ot">=</span><span class="fu">c</span>(<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">-</span><span class="dv">4</span><span class="sc">*</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">-</span><span class="dv">3</span><span class="sc">*</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">-</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),                 <span class="fu">mean</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">+</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">+</span><span class="dv">3</span><span class="sc">*</span><span class="fu">sd</span>(datos<span class="sc">$</span>x),<span class="fu">mean</span>(datos<span class="sc">$</span>x)<span class="sc">+</span><span class="dv">4</span><span class="sc">*</span><span class="fu">sd</span>(datos<span class="sc">$</span>x))</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(datos<span class="sc">$</span>x,<span class="at">freq=</span>F,<span class="at">ylab=</span><span class="st">"Densidad"</span>,<span class="at">breaks=</span>Intervalos,<span class="at">col=</span><span class="st">"whitesmoke"</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.045</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>El conjunto de datos presenta una tendencia central muy sólida, donde la <strong>mediana de 86.77</strong> y la <strong>media de 85.92</strong> son prácticamente iguales, lo que sugiere una distribución equilibrada y casi simétrica. El 50% de tus observaciones se concentra en un rango intermedio que va desde <strong>79.22 hasta 92.04</strong>. Sin embargo, los datos se extienden desde un <strong>mínimo de 55.10 hasta un máximo de 113.67</strong>, cubriendo un rango total de casi 59 unidades. Estadísticamente, el valor de <strong>asimetría (skewness) de -0.27</strong> confirma una inclinación negativa muy leve hacia los valores bajos, mientras que la <strong>curtosis de 3.48</strong> indica que la distribución es algo más “puntiaguda” que una normal estándar, lo que explica por qué hay valores en los extremos que se alejan del grupo principal.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(datos<span class="sc">$</span>x,<span class="at">breaks=</span>Intervalos,<span class="at">plot=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En la tabla de Medidas de resumen, podemos evidenciar que el conjunto de datos posee una estabilidad notable. La mediana (86.77) y la media (85.92) son prácticamente iguales, lo que nos indica que la distribución es sumamente equilibrada y se comporta de manera predecible. El eje de los datos se encuentra entre 79.22 y 92.04 (el primer y tercer cuartil), lo que significa que el 50% de todas tus observaciones están concentradas en ese rango de apenas 13 unidades.</p>
 </section>
 <section id="gráfico-de-cuantiles-teóricos-vs-cuantiles-muestrales-envolvente" class="level2">
 <h2 class="anchored" data-anchor-id="gráfico-de-cuantiles-teóricos-vs-cuantiles-muestrales-envolvente">Gráfico de cuantiles teóricos vs cuantiles muestrales, envolvente</h2>
+<p>El gráfico Q–Q muestra que los datos presentan una adecuada aproximación a la normalidad, ya que la mayoría de los puntos se alinean con la recta teórica. Sin embargo, se observan ligeras desviaciones en las colas, lo que sugiere pequeñas discrepancias respecto a la normalidad perfecta.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>El gráfico Q–Q con banda de confianza muestra que la mayoría de los datos se alinean adecuadamente con la distribución normal teórica. Aunque se observan ligeras desviaciones en las colas, estas no son significativas, por lo que se puede asumir normalidad aproximada.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqenvelope</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta" class="level2">
 <h2 class="anchored" data-anchor-id="comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-normal-teórica-propuesta">Comparación de los datos de la muestra, con una muestra simulada de la distribución normal teórica propuesta</h2>
+<p>El gráfico de dispersión de los valores ordenados muestra una tendencia creciente continua, sin presencia de saltos abruptos ni valores atípicos evidentes, lo que sugiere una distribución relativamente homogénea de los datos</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mu<span class="ot">=</span><span class="fu">mean</span>(datos<span class="sc">$</span>x)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>desvest<span class="ot">=</span><span class="fu">sd</span>(datos<span class="sc">$</span>x)</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>yy<span class="ot">=</span><span class="fu">rnorm</span>(<span class="dv">276</span>,mu,desvest)</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqplot</span>(datos<span class="sc">$</span>x,yy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta" class="level4">
-<h4 class="anchored" data-anchor-id="comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta">Comparación de los datos de la muestra, con una muestra simulada de la distribución teórica Gamma propuesta</h4>
+<section id="comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta" class="level3">
+<h3 class="anchored" data-anchor-id="comparación-de-los-datos-de-la-muestra-con-una-muestra-simulada-de-la-distribución-teórica-gamma-propuesta">Comparación de los datos de la muestra, con una muestra simulada de la distribución teórica Gamma propuesta</h3>
+<p>El siguiente gráfico muestra que cuando <code>datos$x</code> aumenta, <code>ygram</code> también aumenta. Es así como los puntos siguen casi una línea recta, lo que indica que las dos variables están muy relacionadas. En especial, no hay puntos raros ni saltos bruscos, así que el comportamiento es bastante regular.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>yygam<span class="ot">=</span><span class="fu">rgamma</span>(<span class="dv">276</span>,<span class="at">shape=</span><span class="dv">72</span>,<span class="at">scale=</span><span class="fl">1.2</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqplot</span>(datos<span class="sc">$</span>x,yygam,<span class="at">col=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -568,38 +660,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="prueba-de-hipótesis-de-kolmogorov-smirnov" class="level2">
 <h2 class="anchored" data-anchor-id="prueba-de-hipótesis-de-kolmogorov-smirnov">Prueba de hipótesis de Kolmogorov Smirnov</h2>
+<p>El resultado de la prueba de Kolmogorov–Smirnov de una muestra indica que no hay evidencia estadística para rechazar la hipótesis nula. En particular, el valor <em>p</em> = 0.3837 es mayor que un nivel de significancia típico (por ejemplo, 0.05), lo que sugiere que la distribución de <code>datos$x</code> no difiere de manera significativa de la distribución teórica contra la cual se está comparando. Por tanto, los datos son compatibles con la distribución asumida y no se detectan desviaciones importantes en términos de forma, ubicación o dispersión.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(datos<span class="sc">$</span>x, <span class="st">"pnorm"</span>, <span class="at">mean=</span><span class="dv">86</span>, <span class="at">sd=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(datos<span class="sc">$</span>x, <span class="st">"pgamma"</span>,<span class="at">shape=</span><span class="fl">71.444</span>, <span class="at">scale=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Sin embargo, al repetir la prueba utilizando una distribución teórica distinta (con parámetros que no representan adecuadamente a los datos), el resultado cambia de forma drástica. En este caso, el estadístico D=1 indica una diferencia máxima entre la distribución empírica y la distribución teórica, y el valor <em>p</em> menor que 2.2×10−16 muestra evidencia muy fuerte para rechazar la hipótesis nula. Esto indica que los datos no siguen la distribución asumida, por lo que el supuesto de normalidad no se cumple bajo esta especificación.</p>
 </section>
-<section id="pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.-ejercicio-consultar-los-estadísticos-de-todas-las-pruebas-ejecutadas-a-continuación" class="level2">
-<h2 class="anchored" data-anchor-id="pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.-ejercicio-consultar-los-estadísticos-de-todas-las-pruebas-ejecutadas-a-continuación">Pruebas de hipótesis de normalidad del paquete nortest. Ejercicio consultar los estadísticos de todas las pruebas ejecutadas a continuación</h2>
+<section id="pruebas-de-hipótesis-de-normalidad-del-paquete-nortest." class="level2">
+<h2 class="anchored" data-anchor-id="pruebas-de-hipótesis-de-normalidad-del-paquete-nortest.">Pruebas de hipótesis de normalidad del paquete <code>nortest</code>.</h2>
+<p><span style="color:red">Ejercicio consultar e interpretar los resultados de los estadísticos de todas las pruebas ejecutadas a continuación</span>.</p>
+<p>A continuación, se aplican distintas pruebas de normalidad al conjunto de datos <code>datos$x</code>, con el fin de evaluar si estos pueden considerarse provenientes de una distribución normal. Cada prueba contrasta la hipótesis nula de normalidad frente a la alternativa de no normalidad, utilizando diferentes estadísticos y criterios de sensibilidad.</p>
+<section id="prueba-de-kolmogorovsmirnov-con-parámetros-especificados" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-kolmogorovsmirnov-con-parámetros-especificados"><strong><em>Prueba de Kolmogorov–Smirnov con parámetros especificados</em></strong></h5>
+<p>Esta prueba compara la distribución empírica de los datos con una distribución normal con media 86 y desviación estándar 10. El resultado indica que no hay evidencia suficiente para rechazar la hipótesis nula de normalidad bajo estos parámetros.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(datos<span class="sc">$</span>x, <span class="st">"pnorm"</span>, <span class="at">mean=</span><span class="dv">86</span>, <span class="at">sd=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="prueba-de-shapirowilk" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-shapirowilk"><strong><em>Prueba de Shapiro–Wilk</em></strong></h5>
+<p>La prueba de Shapiro–Wilk es una de las más utilizadas para evaluar normalidad, especialmente en muestras pequeñas y medianas. En este caso, el valor <em>p</em> obtenido es menor que 0.05, lo que sugiere rechazar la hipótesis nula de normalidad.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="prueba-de-andersondarling" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-andersondarling"><strong><em>Prueba de Anderson–Darling</em></strong></h5>
+<p>Esta prueba da mayor peso a las colas de la distribución. El resultado indica evidencia estadísticamente significativa contra la normalidad, lo que sugiere que los datos presentan desviaciones respecto a una distribución normal.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ad.test</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="prueba-de-cramérvon-mises" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-cramérvon-mises"><strong><em>Prueba de Cramér–von Mises</em></strong></h5>
+<p>La prueba de Cramér–von Mises evalúa la distancia global entre la distribución empírica y la teórica. El valor <em>p</em> obtenido es menor al nivel de significancia del 5 %, indicando rechazo de la hipótesis nula de normalidad.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cvm.test</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="prueba-de-lilliefors" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-lilliefors"><strong><em>Prueba de Lilliefors</em></strong></h5>
+<p>La prueba de Lilliefors es una modificación del test de Kolmogorov–Smirnov cuando los parámetros de la normal no son conocidos y se estiman a partir de los datos. El resultado muestra evidencia suficiente para rechazar la normalidad.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lillie.test</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>En este caso, el estadístico obtenido es <span class="math inline">\(D= 0.054862\)</span> y el valor <span class="math inline">\(p=0.04351\)</span> , por lo tanto el valor <span class="math inline">\(p\)</span> es menor que 0.05, así que se rechaza la hipotesis nula, lo que indica que la variable <code>datos$x</code> presenta desviaciones estadísticamente significativas respecto a una distribución normal según esta prueba.</p>
+</section>
+<section id="prueba-de-normalidad-chi-cuadrado-de-pearson" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-normalidad-chi-cuadrado-de-pearson"><strong><em>Prueba de normalidad Chi-cuadrado de Pearson</em></strong></h5>
+<p>Esta prueba se basa en la comparación de frecuencias observadas y esperadas bajo normalidad.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pearson.test</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Esta prueba contrasta la hipótesis nula de que los datos provienen de una distribución normal. En este caso, el estadístico obtenido es <span class="math inline">\(P = 16.159\)</span> y el valor <span class="math inline">\(p = 0.4419\)</span>. Y dado que este valor p es mayor que el nivel de significancia común de 0.05, no se rechaza la hipótesis nula. Por lo tanto, no se encuentra evidencia estadística suficiente para afirmar que la distribución de datos <code>datos$x</code> difiere de una distribución normal.</p>
+</section>
+<section id="prueba-de-shapirofrancia" class="level5">
+<h5 class="anchored" data-anchor-id="prueba-de-shapirofrancia"><strong><em>Prueba de Shapiro–Francia</em></strong></h5>
+<p>La prueba de Shapiro–Francia es una variante de Shapiro–Wilk, adecuada para muestras más grandes. En este caso, el estadístico obtenido es <span class="math inline">\(W = 0.98913\)</span> y el valor <span class="math inline">\(p= 0.03678\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sf.test</span>(datos<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Dado que este valor <span class="math inline">\(p\)</span> es meor que el nivel de significancia usual de 0.05, se rechaza la hipótesis nula de normalidad.<br>
+Esto indica que la variable datos$x presenta desviaciones estadísticamente sigificativas respecto a una distribución normal, por lo que no puede asumirse normalidad bajo esta prueba.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -1023,17 +1151,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./1.html" class="pagination-link" aria-label="Estadística descriptiva y Exploratoria">
+      <a href="./ejercicio.html" class="pagination-link" aria-label="Estadística descriptiva y Exploratoria">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Estadística descriptiva y Exploratoria</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2.html" class="pagination-link" aria-label="Geoestadística Univariada con GeoR">
-        <span class="nav-page-text">Geoestadística Univariada con GeoR</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./1.html" class="pagination-link" aria-label="Geoestadística con Sgeostat">
+        <span class="nav-page-text">Geoestadística con Sgeostat</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Cargamos el sonido
+  const audio = new Audio('water-drop-85731.mp3');
+  
+  // AJUSTE DE VOLUMEN: 0.0 es silencio, 1.0 es máximo. 
+  // 0.4 es un volumen suave y elegante.
+  audio.volume = 0.4; 
+
+  // Seleccionamos los elementos del menú
+  const elementos = document.querySelectorAll('.sidebar-item-text, .sidebar-link, .sidebar-section-title');
+  
+  elementos.forEach(el => {
+    el.addEventListener('click', function() {
+      // Reproducir sonido
+      audio.currentTime = 0;
+      audio.play().catch(e => console.log("Clickea la página primero para el audio"));
+      
+      // HEMOS QUITADO LA LÓGICA DE CERRAR PESTAÑAS
+      // Ahora cada pestaña que abras se quedará abierta.
+    });
+  });
+});
+</script>
 
 
 

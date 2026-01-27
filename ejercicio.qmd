@@ -1,6 +1,13 @@
-## [Ejercicio]{style="color:#FF8000;"} {.unnumbered}
+---
+execute:
+  eval: false
+  echo: true
+---
 
-<br>
+## Datos TAD {.unnumbered}
+
+# [Ejercicios]{style="color:#FF8000;"}  {.unnumbered}
+
 
 El conjunto de datos TAD corresponde a información clinica básica de un grupo de individuos, recolectada con el objetivo de analizar variables asociadas a la salud cardiovascular.
 
