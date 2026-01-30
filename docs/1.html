@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -431,7 +460,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#geoestadística-con-sgeostat" id="toc-geoestadística-con-sgeostat" class="nav-link active" data-scroll-target="#geoestadística-con-sgeostat"><span style="color:#FF8000;">Geoestadística con sgeostat</span></a>
   <ul class="collapse">
-  <li><a href="#carga-de-los-datos" id="toc-carga-de-los-datos" class="nav-link" data-scroll-target="#carga-de-los-datos">Carga de los datos</a></li>
   <li><a href="#librerias" id="toc-librerias" class="nav-link" data-scroll-target="#librerias">Librerias</a></li>
   <li><a href="#gráficos" id="toc-gráficos" class="nav-link" data-scroll-target="#gráficos">Gráficos</a></li>
   </ul></li>
@@ -462,12 +490,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="geoestadística-con-sgeostat" class="level1">
 <h1><span style="color:#FF8000;">Geoestadística con sgeostat</span></h1>
-<section id="carga-de-los-datos" class="level2">
-<h2 class="anchored" data-anchor-id="carga-de-los-datos">Carga de los datos</h2>
+<p>El análisis inicia con la etapa fundamental de preparación y carga de los datos en el entorno estadístico R, haciendo uso del paquete especializado <code>sgeostat</code>. En esta fase se limpia el espacio de trabajo y se importa el conjunto de datos denominado <em>aquifer</em>, el cual contiene información geoespacial relevante, específicamente las coordenadas Este y Norte, junto con la variable de interés, la Profundidad. Esta base de datos constituye el insumo principal para los análisis posteriores, como el estudio de la autocorrelación espacial y el modelado de superficies, mediante técnicas de estimación espacial como el kriging.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"data/aquifer.txt"</span>,<span class="at">head=</span>T,<span class="at">dec=</span><span class="st">","</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aquifer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sgeostat)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>aquifer<span class="ot">=</span><span class="fu">read.table</span>(<span class="st">"data/aquifer.txt"</span>,<span class="at">head=</span>T,<span class="at">dec=</span><span class="st">","</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(aquifer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Este     Norte Profundidad
 1  42.78275 127.62282        1464
@@ -478,9 +506,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6 108.56243  82.92325        1702</code></pre>
 </div>
 </div>
-</section>
 <section id="librerias" class="level2">
 <h2 class="anchored" data-anchor-id="librerias">Librerias</h2>
+<p>Para el desarrollo del análisis, se procede con la carga de librerías especializadas en geoprocesamiento. Estas herramientas facilitan la gestión de datos georreferenciados, el modelado de la autocorrelación espacial y la ejecución de algoritmos de interpolación óptima, como el kriging</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -490,6 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="gráficos" class="level2">
 <h2 class="anchored" data-anchor-id="gráficos">Gráficos</h2>
+<p>Con el fin de explorar la relación entre la variable de interés, Profundidad, y las coordenadas espaciales, se realiza un análisis gráfico preliminar. En esta etapa se construyen diagramas de dispersión que permiten evaluar posibles tendencias o patrones de dependencia entre la profundidad y las coordenadas Este y Norte, así como su interacción. Estas visualizaciones son útiles para detectar comportamientos no aleatorios, gradientes espaciales o estructuras sistemáticas que puedan indicar la presencia de autocorrelación espacial y orientar los análisis geoestadísticos posteriores.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(aquifer, <span class="fu">aes</span>(<span class="at">x =</span> Este, <span class="at">y =</span> Profundidad)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -527,6 +556,7 @@ Norte        0.1147565  1.0000000  -0.6200923
 Profundidad -0.7788885 -0.6200923   1.0000000</code></pre>
 </div>
 </div>
+<p>El cálculo de la matriz de correlación permite identificar la estructura de dependencia lineal entre las variables. Destaca la alta correlación negativa entre el <strong>Este</strong> y la <strong>Profundidad</strong> (<span class="math inline">\(-0.778\)</span>), lo cual indica que la variable respuesta no es independiente de su ubicación geográfica. Este hallazgo justifica el uso de métodos geoestadísticos, ya que confirma la existencia de una deriva o tendencia espacial en los datos analizados.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot3d</span>(aquifer, <span class="at">highlight.3d=</span><span class="cn">TRUE</span>, <span class="at">col.axis=</span><span class="st">"blue"</span>,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">col.grid=</span><span class="st">"lightblue"</span>, <span class="at">main=</span><span class="st">"Tendencia de Profundidad"</span>, <span class="at">pch=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,6 +568,7 @@ Profundidad -0.7788885 -0.6200923   1.0000000</code></pre>
 </div>
 </div>
 </div>
+<p>Se presenta un diagrama de dispersión en tres dimensiones (3D Scatterplot) para visualizar la <strong>Tendencia de Profundidad</strong> en función de las coordenadas geográficas. La inclinación de la nube de puntos confirma la estructura de dependencia lineal detectada previamente: existe una deriva espacial evidente donde la profundidad disminuye sistemáticamente hacia los valores positivos del eje <strong>Este</strong>. Esta visualización es clave para el diagnóstico geoestadístico, ya que permite identificar a simple vista que el fenómeno no es estacionario, requisito fundamental para decidir si se debe aplicar una remoción de tendencia antes de modelar el semivariograma.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este <span class="sc">+</span> Norte, <span class="at">data =</span> aquifer)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>residuales1  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg1)</span>
@@ -564,6 +595,7 @@ Multiple R-squared:  0.8921,    Adjusted R-squared:  0.8894
 F-statistic: 338.9 on 2 and 82 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+<p>Con el objetivo de modelar formalmente la deriva espacial observada, se ajusta un modelo de regresión lineal múltiple donde la <strong>Profundidad</strong> actúa como variable respuesta frente a las coordenadas <strong>Este</strong> y <strong>Norte</strong>. Los resultados del modelo (<code>reg1</code>) confirman una tendencia altamente significativa (<span class="math inline">\(p\text{-value} &lt; 2.2 \times 10^{-16}\)</span>), donde ambos coeficientes espaciales presentan una relación negativa. El coeficiente de determinación ajustado (<span class="math inline">\(R^2 = 0.8894\)</span>) indica que aproximadamente el <span class="math inline">\(89\%\)</span> de la variabilidad de la profundidad se explica por la ubicación geográfica. Este alto grado de ajuste valida la necesidad de extraer estos residuales (<code>residuales1</code>) para proceder con un análisis de geoestadística de residuales, garantizando así el cumplimiento del supuesto de estacionariedad en el estudio posterior del semivariograma.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -578,6 +610,7 @@ Residuals 82  3388069    41318
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<p>Se realiza el Análisis de Varianza (ANOVA) para evaluar la contribución individual de las coordenadas geográficas en la explicación de la variabilidad de la <strong>Profundidad</strong>. Los resultados muestran que tanto la componente <strong>Este</strong> (<span class="math inline">\(F = 460.95\)</span>) como la componente <strong>Norte</strong> (<span class="math inline">\(F = 216.86\)</span>) son estadísticamente significativas con niveles de confianza superiores al <span class="math inline">\(99\%\)</span> (<span class="math inline">\(p\text{-value} &lt; 2.2 \times 10^{-16}\)</span>). La magnitud de las sumas de cuadrados (Sum Sq) revela que la coordenada <strong>Este</strong> posee un peso preponderante en la estructura de la deriva, explicando una porción mayor de la varianza total en comparación con el eje <strong>Norte</strong>. La significancia global de estos términos confirma que el fenómeno hidrológico presenta una tendencia determinística marcada, validando el procedimiento de remoción de tendencia para aislar los residuales y asegurar la estacionariedad de segundo orden requerida en la etapa de modelamiento estocástico</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte, <span class="at">data =</span> aquifer)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>residuales2  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg2)</span>
@@ -605,6 +638,7 @@ Multiple R-squared:  0.905, Adjusted R-squared:  0.9014
 F-statistic: 257.1 on 3 and 81 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
+<p>Con el propósito de refinar la estimación de la superficie de tendencia, se ajusta un segundo modelo de regresión lineal (<code>reg2</code>) que incorpora un término de interacción entre las coordenadas (<strong>Este * Norte</strong>). Los resultados muestran que el término de interacción es estadísticamente significativo (<span class="math inline">\(p\text{-value} = 0.00138\)</span>), lo que sugiere que la tasa de variación de la <strong>Profundidad</strong> no es constante en todo el plano, sino que cambia de manera conjunta según la posición geográfica. Al incluir esta interacción, el coeficiente de determinación ajustado asciende a <span class="math inline">\(R^2 = 0.9014\)</span>, incrementando la capacidad explicativa del modelo y reduciendo el error estándar residual a <span class="math inline">\(191.9\)</span>. Esta mejora en el ajuste indica que el modelo de superficie de respuesta de primer orden con interacción captura con mayor precisión la complejidad de la deriva regional, proporcionando unos residuales (<code>residuales2</code>) más robustos para el análisis de la variabilidad estocástica local.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(reg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -620,6 +654,7 @@ Residuals  81  2983621    36835
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<p>Se realiza el Análisis de Varianza (ANOVA) para el modelo refinado (<code>reg2</code>), con el fin de descomponer la variabilidad de la <strong>Profundidad</strong> bajo la influencia de la interacción entre coordenadas. Los resultados confirman que el término de interacción <strong>Este:Norte</strong> es significativo (<span class="math inline">\(F = 10.98\)</span>, <span class="math inline">\(p\text{-value} = 0.001379\)</span>), lo que demuestra que la superficie de tendencia no es un plano simple, sino que presenta una curvatura o torsión geográfica relevante. Al comparar con el modelo inicial, se observa una reducción en la suma de cuadrados de los residuales (de <span class="math inline">\(3,388,069\)</span> a <span class="math inline">\(2,983,621\)</span>), indicando que la inclusión de la interacción captura una porción adicional de la varianza que antes se consideraba error aleatorio. Este análisis fortalece la validez de los residuales resultantes para las fases posteriores de kriging, asegurando que la mayor parte de la tendencia determinística ha sido correctamente modelada y extraída.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Profundidad <span class="sc">~</span> Este<span class="sc">*</span>Norte<span class="sc">+</span><span class="fu">I</span>(Este<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span><span class="fu">I</span>(Norte<span class="sc">^</span><span class="dv">2</span>), <span class="at">data =</span> aquifer)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>residuales3  <span class="ot">&lt;-</span>  <span class="fu">residuals</span>(reg3)</span>

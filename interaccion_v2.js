@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   // 1. Cargamos tu sonido divertido
   // Asegúrate de que el archivo se llame exactamente así en la carpeta
-  const audio = new Audio('swoosh-023-454830.mp3'); 
+  const audio = new Audio('water-drop-85731.mp3'); 
   audio.volume = 0.6; // Volumen al 60% para que no asuste
 
   // 2. Seleccionamos los elementos del menú (títulos y enlaces)

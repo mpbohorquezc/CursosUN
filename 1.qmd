@@ -2,15 +2,18 @@
 
 # [Geoestadística con sgeostat]{style="color:#FF8000;"}
 
-## Carga de los datos
+El análisis inicia con la etapa fundamental de preparación y carga de los datos en el entorno estadístico R, haciendo uso del paquete especializado `sgeostat`. En esta fase se limpia el espacio de trabajo y se importa el conjunto de datos denominado *aquifer*, el cual contiene información geoespacial relevante, específicamente las coordenadas Este y Norte, junto con la variable de interés, la Profundidad. Esta base de datos constituye el insumo principal para los análisis posteriores, como el estudio de la autocorrelación espacial y el modelado de superficies, mediante técnicas de estimación espacial como el kriging.
 
 ```{r}
+library(sgeostat)
 rm(list=ls())
 aquifer=read.table("data/aquifer.txt",head=T,dec=",")
 head(aquifer)
 ```
 
 ## Librerias
+
+Para el desarrollo del análisis, se procede con la carga de librerías especializadas en geoprocesamiento. Estas herramientas facilitan la gestión de datos georreferenciados, el modelado de la autocorrelación espacial y la ejecución de algoritmos de interpolación óptima, como el kriging
 
 ```{r}
 #| warning: false
@@ -21,6 +24,8 @@ library(sgeostat)
 ```
 
 ## Gráficos
+
+Con el fin de explorar la relación entre la variable de interés, Profundidad, y las coordenadas espaciales, se realiza un análisis gráfico preliminar. En esta etapa se construyen diagramas de dispersión que permiten evaluar posibles tendencias o patrones de dependencia entre la profundidad y las coordenadas Este y Norte, así como su interacción. Estas visualizaciones son útiles para detectar comportamientos no aleatorios, gradientes espaciales o estructuras sistemáticas que puedan indicar la presencia de autocorrelación espacial y orientar los análisis geoestadísticos posteriores.
 
 ```{r}
 
@@ -50,10 +55,14 @@ plot_grid(g1,g2,g3)
 cor(aquifer)
 ```
 
+El cálculo de la matriz de correlación permite identificar la estructura de dependencia lineal entre las variables. Destaca la alta correlación negativa entre el **Este** y la **Profundidad** ($-0.778$), lo cual indica que la variable respuesta no es independiente de su ubicación geográfica. Este hallazgo justifica el uso de métodos geoestadísticos, ya que confirma la existencia de una deriva o tendencia espacial en los datos analizados.
+
 ```{r}
 scatterplot3d(aquifer, highlight.3d=TRUE, col.axis="blue",
 col.grid="lightblue", main="Tendencia de Profundidad", pch=20)
 ```
+
+Se presenta un diagrama de dispersión en tres dimensiones (3D Scatterplot) para visualizar la **Tendencia de Profundidad** en función de las coordenadas geográficas. La inclinación de la nube de puntos confirma la estructura de dependencia lineal detectada previamente: existe una deriva espacial evidente donde la profundidad disminuye sistemáticamente hacia los valores positivos del eje **Este**. Esta visualización es clave para el diagnóstico geoestadístico, ya que permite identificar a simple vista que el fenómeno no es estacionario, requisito fundamental para decidir si se debe aplicar una remoción de tendencia antes de modelar el semivariograma.
 
 ```{r}
 reg1 <- lm(Profundidad ~ Este + Norte, data = aquifer)
@@ -61,9 +70,13 @@ residuales1  <-  residuals(reg1)
 summary(reg1)
 ```
 
+Con el objetivo de modelar formalmente la deriva espacial observada, se ajusta un modelo de regresión lineal múltiple donde la **Profundidad** actúa como variable respuesta frente a las coordenadas **Este** y **Norte**. Los resultados del modelo (`reg1`) confirman una tendencia altamente significativa ($p\text{-value} < 2.2 \times 10^{-16}$), donde ambos coeficientes espaciales presentan una relación negativa. El coeficiente de determinación ajustado ($R^2 = 0.8894$) indica que aproximadamente el $89\%$ de la variabilidad de la profundidad se explica por la ubicación geográfica. Este alto grado de ajuste valida la necesidad de extraer estos residuales (`residuales1`) para proceder con un análisis de geoestadística de residuales, garantizando así el cumplimiento del supuesto de estacionariedad en el estudio posterior del semivariograma.
+
 ```{r}
 anova(reg1)
 ```
+
+Se realiza el Análisis de Varianza (ANOVA) para evaluar la contribución individual de las coordenadas geográficas en la explicación de la variabilidad de la **Profundidad**. Los resultados muestran que tanto la componente **Este** ($F = 460.95$) como la componente **Norte** ($F = 216.86$) son estadísticamente significativas con niveles de confianza superiores al $99\%$ ($p\text{-value} < 2.2 \times 10^{-16}$). La magnitud de las sumas de cuadrados (Sum Sq) revela que la coordenada **Este** posee un peso preponderante en la estructura de la deriva, explicando una porción mayor de la varianza total en comparación con el eje **Norte**. La significancia global de estos términos confirma que el fenómeno hidrológico presenta una tendencia determinística marcada, validando el procedimiento de remoción de tendencia para aislar los residuales y asegurar la estacionariedad de segundo orden requerida en la etapa de modelamiento estocástico
 
 ```{r}
 reg2 <- lm(Profundidad ~ Este*Norte, data = aquifer)
@@ -71,9 +84,13 @@ residuales2  <-  residuals(reg2)
 summary(reg2)
 ```
 
+Con el propósito de refinar la estimación de la superficie de tendencia, se ajusta un segundo modelo de regresión lineal (`reg2`) que incorpora un término de interacción entre las coordenadas (**Este \* Norte**). Los resultados muestran que el término de interacción es estadísticamente significativo ($p\text{-value} = 0.00138$), lo que sugiere que la tasa de variación de la **Profundidad** no es constante en todo el plano, sino que cambia de manera conjunta según la posición geográfica. Al incluir esta interacción, el coeficiente de determinación ajustado asciende a $R^2 = 0.9014$, incrementando la capacidad explicativa del modelo y reduciendo el error estándar residual a $191.9$. Esta mejora en el ajuste indica que el modelo de superficie de respuesta de primer orden con interacción captura con mayor precisión la complejidad de la deriva regional, proporcionando unos residuales (`residuales2`) más robustos para el análisis de la variabilidad estocástica local.
+
 ```{r}
 anova(reg2)
 ```
+
+Se realiza el Análisis de Varianza (ANOVA) para el modelo refinado (`reg2`), con el fin de descomponer la variabilidad de la **Profundidad** bajo la influencia de la interacción entre coordenadas. Los resultados confirman que el término de interacción **Este:Norte** es significativo ($F = 10.98$, $p\text{-value} = 0.001379$), lo que demuestra que la superficie de tendencia no es un plano simple, sino que presenta una curvatura o torsión geográfica relevante. Al comparar con el modelo inicial, se observa una reducción en la suma de cuadrados de los residuales (de $3,388,069$ a $2,983,621$), indicando que la inclusión de la interacción captura una porción adicional de la varianza que antes se consideraba error aleatorio. Este análisis fortalece la validez de los residuales resultantes para las fases posteriores de kriging, asegurando que la mayor parte de la tendencia determinística ha sido correctamente modelada y extraída.
 
 ```{r}
 reg3 <- lm(Profundidad ~ Este*Norte+I(Este^2)*I(Norte^2), data = aquifer)
@@ -81,9 +98,18 @@ residuales3  <-  residuals(reg3)
 summary(reg3)
 ```
 
+En este caso, el modelo de regresión lineal intenta explicar la profudidad del acuífero (Profundidad) basándose en coordenadas geográficas (Este y Norte) y sus interacciones. A primera vista, el modelo es sólido, ya que explica aproximadamente el 91.2% de la variabilidad de los datos. Sin embargo, al observar los coeficientes individuales, vemos que, mientras que la ubicación hacia el Este tiene un impacto negativo muy significativo y directo en la profundidad, el efecto del Norte no es estadísticamente significativo por si solo. Lo más llamativo es que los términos cuadráticos y de interacción compleja $Norte^2$ y $Este^2:Norte^2$ si muestran significancia , lo que nos sugiere que la superficie del acuífero no es un plano inclinado simple, sino que presenta una curvatura o pendiente compleja que cambia dependiendo de la zona específica donde se mida.
+
 ```{r}
 anova(reg3)
+
 ```
+
+Para integrar ambos análisis, lo que estamos viendo es un modelo de superficie de tendencia de segundo grado el cual nos ayudará a mapear la topografía del acuífero. Y aunque el modelo global es muy robusto ($R^2$ ajustado de 0.9126), la tabla ANOVA revela que el peso en que recae la predicción proviene de las coordenadas lineales (Este y Norte), las cuales explican la mayor parte de la variabilidad con una significancia estadística muy alta. Sin embargo, la pesencia de una interacción sigificativa entre las coordenadas y la curvatura en el eje Norte indica que el acuífero no es una superficie plana; existe una torsión geométrica en el terreno.
+
+Esto sugiere que para obtener predicciones precisas no basta con saber qué tan al Este estemos, sino que este impacto depende de que tan al norte estemos ubicados. De esta forma se revela que es una estructura subterránea compleja no uniforme.
+
+La importancia de el siguiente código radica en que marca la transición de una estadística descriptiva básica a un análisis de dependencia espacial, permitiéndo evaluar si los errores de un modelo tienen una estructura geográfica que aún puede ser aprovechada.
 
 ```{r}
 aquifer=data.frame(aquifer,resi=residuales2)
@@ -91,13 +117,22 @@ aquifer_points=point(aquifer, x="Este", y="Norte")
 aquifer_pair=pair(aquifer_points,num.lags=10)
 ```
 
+Es así, como estamos preparamos los datos para pasar de una estadística de tablas a una estadística de mapas, analizando si la ubicación de los pozos influye en el error de las predicciones.
+
+Ahora empleamos la función `str()`sobre el objeto aquifer_pair con el objetivo de realizar una inspeccón diagnóstica de su arquitectura interna, garantizando la integridad de los datos antes de proceder con el análisis geoestadístico.
+
 ```{r}
 str(aquifer_pair)
+
 ```
+
+Una vez definida la estructura de vecindad, se procede a hacer la estimación del variograma experimental mediante la función `est.variogram.`
 
 ```{r}
 aquifer.v<-est.variogram(aquifer_points,aquifer_pair,'resi')
 ```
+
+Este proceso es crucial para la caracterización hidrogeológica, ya que permite modelar la autocorrelación espacial de los residuos. Ademas al calcular la semivarianza para cada intervalo de distancia definido en `aquifer_pair`. Se obtiene una medida cuantitativa de la continuidad espacial, lo cual es el requisito indispensable para realizar posteriormente una interpolación mediante Kriging o para identificar heterogeneidades en el comportamiento del acuífero.
 
 ```{r}
 

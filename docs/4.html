@@ -844,12 +844,12 @@ Para evaluar la significancia de los resultados obtenidos con el índice Local G
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G <span class="ot">=</span> (<span class="fu">colSums</span>(<span class="fu">sweep</span>(sim.G,<span class="dv">2</span>,localG,<span class="st">"&gt;="</span>))<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(sim.G)<span class="sc">+</span><span class="dv">1</span>)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>mc.pvalor.G</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.38861139 0.77622378 0.11388611 0.37262737 0.14485514 0.07092907
- [7] 0.74525475 0.42557443 0.51548452 0.19580420 0.01998002 0.16583417
-[13] 0.02097902 0.69230769 0.88311688 0.06393606 0.35864136 0.13086913
-[19] 0.43456543 0.30869131 0.10989011 0.66433566 0.42957043 0.62237762
-[25] 0.32567433 0.28371628 0.55744256         NA 0.74325674 0.98501499
-[31] 0.90709291 0.89510490</code></pre>
+<pre><code> [1] 0.35964036 0.77722278 0.12787213 0.34965035 0.13686314 0.08091908
+ [7] 0.74025974 0.43656344 0.51248751 0.17882118 0.02297702 0.15384615
+[13] 0.02497502 0.72827173 0.88811189 0.06993007 0.32067932 0.12587413
+[19] 0.46153846 0.31768232 0.11388611 0.65034965 0.42257742 0.65434565
+[25] 0.30469530 0.28671329 0.54445554         NA 0.75624376 0.97102897
+[31] 0.89610390 0.90009990</code></pre>
 </div>
 </div>
 <p>Los valores p calculados (mc.pvalor.G) indican la significancia estadística de los patrones espaciales observados. Un valor p bajo (generalmente menor que 0.05) sugiere que la autocorrelación espacial observada en un departamento es significativamente diferente de la aleatoriedad, lo que indica un clúster local de alta o baja concentración de valores. Los departamentos con valores p bajos pueden considerarse como áreas con patrones espaciales significativos, lo cual es útil para identificar zonas con características especiales en la variable de interés.</p>

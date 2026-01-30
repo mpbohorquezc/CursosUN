@@ -602,31 +602,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>datos1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     x y t   z((x,y),t)
-1  0.0 1 1  0.240714122
-2  1.5 1 1  0.051724841
-3  3.0 1 1  0.114706294
-4  0.0 6 1  0.169993821
-5  1.5 6 1 -0.069231553
-6  3.0 6 1 -0.047727423
-7  0.0 1 2  0.089889782
-8  1.5 1 2  0.222346824
-9  3.0 1 2  0.120981274
-10 0.0 6 2 -0.161058912
-11 1.5 6 2  0.003179543
-12 3.0 6 2 -0.180784653
-13 0.0 1 3  0.154305231
-14 1.5 1 3  0.411850045
-15 3.0 1 3  0.229016708
-16 0.0 6 3  0.065864532
-17 1.5 6 3 -0.072648082
-18 3.0 6 3 -0.245829615
-19 0.0 1 4  0.136841951
-20 1.5 1 4  0.243315698
-21 3.0 1 4  0.052851243
-22 0.0 6 4  0.363338190
-23 1.5 6 4 -0.134221950
-24 3.0 6 4  0.309306107</code></pre>
+<pre><code>     x y t  z((x,y),t)
+1  0.0 1 1 -0.09471391
+2  1.5 1 1 -0.01732646
+3  3.0 1 1  0.07472885
+4  0.0 6 1 -0.13463746
+5  1.5 6 1  0.01091911
+6  3.0 6 1  0.17083796
+7  0.0 1 2 -0.04437408
+8  1.5 1 2 -0.02533461
+9  3.0 1 2 -0.05810060
+10 0.0 6 2 -0.15321263
+11 1.5 6 2 -0.14735562
+12 3.0 6 2  0.25539174
+13 0.0 1 3  0.16433119
+14 1.5 1 3  0.06062777
+15 3.0 1 3 -0.07975601
+16 0.0 6 3 -0.01556884
+17 1.5 6 3 -0.15561571
+18 3.0 6 3  0.18383420
+19 0.0 1 4  0.11501362
+20 1.5 1 4  0.04355750
+21 3.0 1 4  0.25347107
+22 0.0 6 4 -0.05094466
+23 1.5 6 4  0.04785413
+24 3.0 6 4  0.21260571</code></pre>
 </div>
 </div>
 <p>Se requiere predecir predecir en el tiempo t=2.3 y en el lugar s0=(1.5,2.7).Nótese que tanto el dominio espacial como el dominio temporal con continuos y fijos. A continuación se presenta el procedimiento para llevar a cabo Kriging simple con su respectiva varianza de error de predicción estimada</p>
@@ -806,7 +806,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>z_pred0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            [,1]
-[1,] 0.009047171</code></pre>
+[1,] 0.006929227</code></pre>
 </div>
 </div>
 <div class="cell">
