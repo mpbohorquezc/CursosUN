@@ -29,7 +29,11 @@ library(sgeostat)
 
 ## Gráficos
 
-Con el fin de explorar la relación entre la variable de interés, Profundidad, y las coordenadas espaciales, se realiza un análisis gráfico preliminar. En esta etapa se construyen diagramas de dispersión que permiten evaluar posibles tendencias o patrones de dependencia entre la profundidad y las coordenadas Este y Norte, así como su interacción. Estas visualizaciones son útiles para detectar comportamientos no aleatorios, gradientes espaciales o estructuras sistemáticas que puedan indicar la presencia de autocorrelación espacial y orientar los análisis geoestadísticos posteriores.
+Con el fin de explorar la relación entre la variable de interés, Profundidad, y las coordenadas espaciales, se realiza un análisis gráfico preliminar.
+
+En esta etapa se construyen diagramas de dispersión que permiten evaluar posibles tendencias o patrones de dependencia entre la profundidad y las coordenadas Este y Norte, así como su interacción.
+
+Estas visualizaciones son útiles para detectar comportamientos no aleatorios, gradientes espaciales o estructuras sistemáticas que puedan indicar la presencia de autocorrelación espacial y orientar los análisis geoestadísticos posteriores.
 
 ```{r}
 
@@ -66,7 +70,11 @@ scatterplot3d(aquifer, highlight.3d=TRUE, col.axis="blue",
 col.grid="lightblue", main="Tendencia de Profundidad", pch=20)
 ```
 
-Se presenta un diagrama de dispersión en tres dimensiones (3D Scatterplot) para visualizar la **Tendencia de Profundidad** en función de las coordenadas geográficas. La inclinación de la nube de puntos confirma la estructura de dependencia lineal detectada previamente: existe una deriva espacial evidente donde la profundidad disminuye sistemáticamente hacia los valores positivos del eje **Este**. Esta visualización es clave para el diagnóstico geoestadístico, ya que permite identificar a simple vista que el fenómeno no es estacionario, requisito fundamental para decidir si se debe aplicar una remoción de tendencia antes de modelar el semivariograma.
+Se presenta un diagrama de dispersión en tres dimensiones (3D Scatterplot) para visualizar la **Tendencia de Profundidad** en función de las coordenadas geográficas.
+
+La inclinación de la nube de puntos confirma la estructura de dependencia lineal detectada previamente: existe una deriva espacial evidente donde la profundidad disminuye sistemáticamente hacia los valores positivos del eje **Este**.
+
+Esta visualización es clave para el diagnóstico geoestadístico, ya que permite identificar a simple vista que el fenómeno no es estacionario, requisito fundamental para decidir si se debe aplicar una remoción de tendencia antes de modelar el semivariograma.
 
 ```{r}
 reg1 <- lm(Profundidad ~ Este + Norte, data = aquifer)
@@ -74,13 +82,21 @@ residuales1  <-  residuals(reg1)
 summary(reg1)
 ```
 
-Con el objetivo de modelar formalmente la deriva espacial observada, se ajusta un modelo de regresión lineal múltiple donde la **Profundidad** actúa como variable respuesta frente a las coordenadas **Este** y **Norte**. Los resultados del modelo (`reg1`) confirman una tendencia altamente significativa ($p\text{-value} < 2.2 \times 10^{-16}$), donde ambos coeficientes espaciales presentan una relación negativa. El coeficiente de determinación ajustado ($R^2 = 0.8894$) indica que aproximadamente el $89\%$ de la variabilidad de la profundidad se explica por la ubicación geográfica. Este alto grado de ajuste valida la necesidad de extraer estos residuales (`residuales1`) para proceder con un análisis de geoestadística de residuales, garantizando así el cumplimiento del supuesto de estacionariedad en el estudio posterior del semivariograma.
+Con el objetivo de modelar formalmente la deriva espacial observada, se ajusta un modelo de regresión lineal múltiple donde la **Profundidad** actúa como variable respuesta frente a las coordenadas **Este** y **Norte**.
+
+Los resultados del modelo (`reg1`) confirman una tendencia altamente significativa ($p\text{-value} < 2.2 \times 10^{-16}$), donde ambos coeficientes espaciales presentan una relación negativa. El coeficiente de determinación ajustado ($R^2 = 0.8894$) indica que aproximadamente el $89\%$ de la variabilidad de la profundidad se explica por la ubicación geográfica.
+
+Este alto grado de ajuste valida la necesidad de extraer estos residuales (`residuales1`) para proceder con un análisis de geoestadística de residuales, garantizando así el cumplimiento del supuesto de estacionariedad en el estudio posterior del semivariograma.
 
 ```{r}
 anova(reg1)
 ```
 
-Se realiza el Análisis de Varianza (ANOVA) para evaluar la contribución individual de las coordenadas geográficas en la explicación de la variabilidad de la **Profundidad**. Los resultados muestran que tanto la componente **Este** ($F = 460.95$) como la componente **Norte** ($F = 216.86$) son estadísticamente significativas con niveles de confianza superiores al $99\%$ ($p\text{-value} < 2.2 \times 10^{-16}$). La magnitud de las sumas de cuadrados (Sum Sq) revela que la coordenada **Este** posee un peso preponderante en la estructura de la deriva, explicando una porción mayor de la varianza total en comparación con el eje **Norte**. La significancia global de estos términos confirma que el fenómeno hidrológico presenta una tendencia determinística marcada, validando el procedimiento de remoción de tendencia para aislar los residuales y asegurar la estacionariedad de segundo orden requerida en la etapa de modelamiento estocástico
+Se realiza el Análisis de Varianza (ANOVA) para evaluar la contribución individual de las coordenadas geográficas en la explicación de la variabilidad de la **Profundidad**.
+
+Los resultados muestran que tanto la componente **Este** ($F = 460.95$) como la componente **Norte** ($F = 216.86$) son estadísticamente significativas con niveles de confianza superiores al $99\%$ ($p\text{-value} < 2.2 \times 10^{-16}$).
+
+La magnitud de las sumas de cuadrados (Sum Sq) revela que la coordenada **Este** posee un peso preponderante en la estructura de la deriva, explicando una porción mayor de la varianza total en comparación con el eje **Norte**. La significancia global de estos términos confirma que el fenómeno hidrológico presenta una tendencia determinística marcada, validando el procedimiento de remoción de tendencia para aislar los residuales y asegurar la estacionariedad de segundo orden requerida en la etapa de modelamiento estocástico
 
 ```{r}
 reg2 <- lm(Profundidad ~ Este*Norte, data = aquifer)
@@ -88,7 +104,11 @@ residuales2  <-  residuals(reg2)
 summary(reg2)
 ```
 
-Con el propósito de refinar la estimación de la superficie de tendencia, se ajusta un segundo modelo de regresión lineal (`reg2`) que incorpora un término de interacción entre las coordenadas (**Este \* Norte**). Los resultados muestran que el término de interacción es estadísticamente significativo ($p\text{-value} = 0.00138$), lo que sugiere que la tasa de variación de la **Profundidad** no es constante en todo el plano, sino que cambia de manera conjunta según la posición geográfica. Al incluir esta interacción, el coeficiente de determinación ajustado asciende a $R^2 = 0.9014$, incrementando la capacidad explicativa del modelo y reduciendo el error estándar residual a $191.9$. Esta mejora en el ajuste indica que el modelo de superficie de respuesta de primer orden con interacción captura con mayor precisión la complejidad de la deriva regional, proporcionando unos residuales (`residuales2`) más robustos para el análisis de la variabilidad estocástica local.
+Con el propósito de refinar la estimación de la superficie de tendencia, se ajusta un segundo modelo de regresión lineal (`reg2`) que incorpora un término de interacción entre las coordenadas (**Este \* Norte**).
+
+Los resultados muestran que el término de interacción es estadísticamente significativo ($p\text{-value} = 0.00138$), lo que sugiere que la tasa de variación de la **Profundidad** no es constante en todo el plano, sino que cambia de manera conjunta según la posición geográfica. Al incluir esta interacción, el coeficiente de determinación ajustado asciende a $R^2 = 0.9014$, incrementando la capacidad explicativa del modelo y reduciendo el error estándar residual a $191.9$.
+
+Esta mejora en el ajuste indica que el modelo de superficie de respuesta de primer orden con interacción captura con mayor precisión la complejidad de la deriva regional, proporcionando unos residuales (`residuales2`) más robustos para el análisis de la variabilidad estocástica local.
 
 ```{r}
 anova(reg2)
